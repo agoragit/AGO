@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AdvertisementService/AdvertisementService.iml" filepath="$PROJECT_DIR$/AdvertisementService/AdvertisementService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AgoraService.iml" filepath="$PROJECT_DIR$/AgoraService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AgoraUtils/AgoraUtils.iml" filepath="$PROJECT_DIR$/AgoraUtils/AgoraUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SicurityService/SicurityService.iml" filepath="$PROJECT_DIR$/SicurityService/SicurityService.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_agoraservice" default="compile.module.agoraservice">
+    <dirname property="module.agoraservice.basedir" file="${ant.file.module_agoraservice}"/>
+
+    <property name="module.jdk.home.agoraservice" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.agoraservice" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.agoraservice" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.agoraservice" value="-encoding UTF-8 -source 7 -target 1.7 ${compiler.args}"/>
+
+    <property name="agoraservice.output.dir" value="${module.agoraservice.basedir}/target/classes"/>
+    <property name="agoraservice.testoutput.dir" value="${module.agoraservice.basedir}/target/test-classes"/>
+
+    <path id="agoraservice.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="agoraservice.module.production.classpath">
+        <path refid="${module.jdk.classpath.agoraservice}"/>
+        <path refid="library.maven:_asm:asm:3.3.1.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-bundle:1.19.4.classpath"/>
+        <path refid="library.maven:_javax.ws.rs:jsr311-api:1.1.1.classpath"/>
+        <path refid="library.maven:_org.json:json:20170516.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-server:1.19.4.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-core:1.19.4.classpath"/>
+    </path>
+
+    <path id="agoraservice.runtime.production.module.classpath">
+        <pathelement location="${agoraservice.output.dir}"/>
+        <path refid="library.maven:_asm:asm:3.3.1.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-bundle:1.19.4.classpath"/>
+        <path refid="library.maven:_javax.ws.rs:jsr311-api:1.1.1.classpath"/>
+        <path refid="library.maven:_org.json:json:20170516.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-server:1.19.4.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-core:1.19.4.classpath"/>
+    </path>
+
+    <path id="agoraservice.module.classpath">
+        <pathelement location="${agoraservice.output.dir}"/>
+        <path refid="${module.jdk.classpath.agoraservice}"/>
+        <path refid="library.maven:_asm:asm:3.3.1.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-bundle:1.19.4.classpath"/>
+        <path refid="library.maven:_javax.ws.rs:jsr311-api:1.1.1.classpath"/>
+        <path refid="library.maven:_org.json:json:20170516.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-server:1.19.4.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-core:1.19.4.classpath"/>
+    </path>
+
+    <path id="agoraservice.runtime.module.classpath">
+        <pathelement location="${agoraservice.testoutput.dir}"/>
+        <pathelement location="${agoraservice.output.dir}"/>
+        <path refid="library.maven:_asm:asm:3.3.1.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-bundle:1.19.4.classpath"/>
+        <path refid="library.maven:_javax.ws.rs:jsr311-api:1.1.1.classpath"/>
+        <path refid="library.maven:_org.json:json:20170516.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-server:1.19.4.classpath"/>
+        <path refid="library.maven:_com.sun.jersey:jersey-core:1.19.4.classpath"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.agoraservice">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.agoraservice">
+        <patternset refid="excluded.from.module.agoraservice"/>
+    </patternset>
+
+    <path id="agoraservice.module.sourcepath">
+        <dirset dir="${module.agoraservice.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.agoraservice" depends="compile.module.agoraservice.production,compile.module.agoraservice.tests" description="Compile module AgoraService"/>
+
+    <target name="compile.module.agoraservice.production" depends="register.custom.compilers" description="Compile module AgoraService; production classes">
+        <mkdir dir="${agoraservice.output.dir}"/>
+        <javac2 destdir="${agoraservice.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.agoraservice}/javac">
+            <compilerarg line="${compiler.args.agoraservice}"/>
+            <bootclasspath refid="agoraservice.module.bootclasspath"/>
+            <classpath refid="agoraservice.module.production.classpath"/>
+            <src refid="agoraservice.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.agoraservice"/>
+        </javac2>
+
+        <copy todir="${agoraservice.output.dir}">
+            <fileset dir="${module.agoraservice.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.agoraservice.tests" depends="register.custom.compilers,compile.module.agoraservice.production" description="compile module AgoraService; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.agoraservice" description="cleanup module">
+        <delete dir="${agoraservice.output.dir}"/>
+        <delete dir="${agoraservice.testoutput.dir}"/>
+    </target>
+</project>

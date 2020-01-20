@@ -1,0 +1,9 @@
+it\ago\utils\SystemConstance.class
+it\ago\utils\MySqlConnection.class
+it\ago\utils\db\Savable.class
+it\ago\AgoSession.class
+it\ago\AgoSessionCache.class
+it\ago\UriInfoUtils.class
+it\ago\utils\DBConnection.class
+it\ago\utils\SystemPropertyCache.class
+it\ago\AgoError.class

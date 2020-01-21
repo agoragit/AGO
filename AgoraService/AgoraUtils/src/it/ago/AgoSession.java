@@ -1,16 +1,18 @@
 package it.ago;
 
+import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
 import java.sql.*;
 import java.util.Calendar;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class AgoSession
 {
 	public static final String SESSION_TYPE_USER = "USR";
-	private static final String sessionLoadQ = "SELECT * FROM AGO_SESSION WHERE SESSION_ID = ?";
+	private static final String sessionLoadQ = "SELECT * FROM AGO_SESSION WHERE SESSION_ID = ? AND CREATE_TIME >= ? AND VALID = '1' ";
 	private String sessionId;
 	private long userId;
 	private boolean valid;
@@ -77,6 +79,7 @@ public class AgoSession
 			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
 			ps = con.prepareStatement( sessionLoadQ );
 			ps.setString( 1, sessionId );
+			ps.setTimestamp( 2, new Timestamp( System.currentTimeMillis() - TimeUnit.MINUTES.toMillis( SystemConfig.AGO_SESSION_TIME_OUT )) );
 			rs = ps.executeQuery();
 			if ( rs.next() )
 			{

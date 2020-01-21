@@ -1,4 +1,4 @@
-package it.ago;
+package it.ago.system;
 
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
@@ -15,6 +15,7 @@ public class SystemConfiguration extends Savable
 	private String configCode;
 	private String value;
 	private String description;
+	private int service;
 	private int status;
 
 	public SystemConfiguration()
@@ -78,12 +79,13 @@ public class SystemConfiguration extends Savable
 		String str = "INSERT INTO SYSTEM_CONFIGURATION ( "
 				+ "CONFIG_CODE, "
 				+ "VALUE, "
-				+ "DESCRIPTION )VALUES(?,?,? )";
+				+ "DESCRIPTION, SERVICE )VALUES(?,?,?,? )";
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setString( ++count, this.configCode );
 		ps.setString( ++count, this.value );
 		ps.setString( ++count, this.description );
+		ps.setInt( ++count, this.service );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -94,11 +96,12 @@ public class SystemConfiguration extends Savable
 	public void delete( Connection con ) throws SQLException
 	{
 		String str = "DELETE FROM SYSTEM_CONFIGURATION WHERE "
-				+ "CONFIG_CODE = ? ";
+				+ "CONFIG_CODE = ? AND SERVICE = ? ";
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setString( ++count, this.configCode );
+		ps.setInt( ++count, this.service );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -110,13 +113,14 @@ public class SystemConfiguration extends Savable
 	{
 		String str = "UPDATE SYSTEM_CONFIGURATION SET "
 				+ "VALUE = ?, "
-				+ "DESCRIPTION = ? WHERE "
+				+ "DESCRIPTION = ?, SERVICE = ?  WHERE "
 				+ "CONFIG_CODE = ? ";
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setString( ++count, this.value );
 		ps.setString( ++count, this.description );
+		ps.setInt( ++count, this.service );
 		ps.setString( ++count, this.configCode );
 		ps.execute();
 		DBConnection.close( ps );
@@ -174,4 +178,13 @@ public class SystemConfiguration extends Savable
 		this.status = status;
 	}
 
+	public int getService()
+	{
+		return service;
+	}
+
+	public void setService( int service )
+	{
+		this.service = service;
+	}
 }

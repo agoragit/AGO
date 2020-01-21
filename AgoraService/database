@@ -1,0 +1,518 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 21, 2020 at 09:38 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `agora`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adv_image`
+--
+
+CREATE TABLE `adv_image` (
+  `IMAGE_ID` int(20) NOT NULL,
+  `ADV_ID` bigint(20) NOT NULL,
+  `IMAGE_URL` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ago_advertisement`
+--
+
+CREATE TABLE `ago_advertisement` (
+  `ADV_ID` bigint(20) NOT NULL,
+  `VALID_FROM` timestamp NULL DEFAULT current_timestamp(),
+  `VALID_TO` timestamp NULL DEFAULT current_timestamp(),
+  `ACTIVE` char(1) DEFAULT NULL,
+  `CREATED_DATE` timestamp NULL DEFAULT current_timestamp(),
+  `LAST_MODIFIED` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `PRODUCT_CODE` varchar(20) DEFAULT NULL,
+  `OWNER_ID` bigint(20) DEFAULT NULL,
+  `LONGTUTE` varchar(30) DEFAULT NULL,
+  `LATITUDE` varchar(30) DEFAULT NULL,
+  `CITY_CODE` varchar(30) DEFAULT NULL,
+  `PRICE` double UNSIGNED ZEROFILL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ago_advertisement`
+--
+
+INSERT INTO `ago_advertisement` (`ADV_ID`, `VALID_FROM`, `VALID_TO`, `ACTIVE`, `CREATED_DATE`, `LAST_MODIFIED`, `PRODUCT_CODE`, `OWNER_ID`, `LONGTUTE`, `LATITUDE`, `CITY_CODE`, `PRICE`) VALUES
+(10000, '2019-12-25 06:29:27', '2020-01-31 06:29:36', '1', '2019-12-26 06:29:50', '2019-12-26 06:29:53', 'VEHI', 10000, '23.45454', '33.12232', 'DIYATALAWA', 0000000000000000005456),
+(10001, NULL, NULL, '1', '2020-01-20 07:25:45', '2020-01-20 07:25:45', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10002, NULL, NULL, '1', '2020-01-20 07:26:21', '2020-01-20 07:26:21', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10003, NULL, NULL, '1', '2020-01-20 07:28:48', '2020-01-20 07:28:48', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10004, NULL, NULL, '1', '2020-01-20 07:29:47', '2020-01-20 07:29:47', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10005, NULL, NULL, '1', '2020-01-20 07:33:51', '2020-01-20 07:33:51', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10006, NULL, NULL, '1', '2020-01-20 07:37:52', '2020-01-20 07:37:52', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10007, NULL, NULL, '1', '2020-01-20 07:38:08', '2020-01-20 07:38:08', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10008, NULL, NULL, '1', '2020-01-20 07:40:26', '2020-01-20 07:40:26', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10009, NULL, NULL, '1', '2020-01-20 07:41:22', '2020-01-20 07:41:22', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100),
+(10010, NULL, NULL, '1', '2020-01-20 08:30:37', '2020-01-20 08:30:37', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543),
+(10011, NULL, NULL, '1', '2020-01-20 08:31:05', '2020-01-20 08:31:05', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000005435),
+(10012, NULL, NULL, '1', '2020-01-20 08:33:41', '2020-01-20 08:33:41', NULL, 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000005435),
+(10013, NULL, NULL, '1', '2020-01-20 08:37:42', '2020-01-20 08:37:42', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10014, NULL, NULL, '1', '2020-01-21 02:23:50', '2020-01-21 02:23:50', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10015, NULL, NULL, '1', '2020-01-21 02:24:22', '2020-01-21 02:24:22', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10016, NULL, NULL, '1', '2020-01-21 02:24:23', '2020-01-21 02:24:23', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10017, NULL, NULL, '1', '2020-01-21 02:24:23', '2020-01-21 02:24:23', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10018, NULL, NULL, '1', '2020-01-21 02:24:24', '2020-01-21 02:24:24', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10019, NULL, NULL, '1', '2020-01-21 02:24:24', '2020-01-21 02:24:24', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10020, NULL, NULL, '1', '2020-01-21 02:31:37', '2020-01-21 02:31:37', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10021, NULL, NULL, '1', '2020-01-21 02:38:20', '2020-01-21 02:38:20', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10022, NULL, NULL, '1', '2020-01-21 02:40:32', '2020-01-21 02:40:32', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10023, NULL, NULL, '1', '2020-01-21 02:41:59', '2020-01-21 02:41:59', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10024, NULL, NULL, '1', '2020-01-21 02:42:43', '2020-01-21 02:42:43', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10025, NULL, NULL, '1', '2020-01-21 02:47:48', '2020-01-21 02:47:48', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10026, NULL, NULL, '1', '2020-01-21 03:02:43', '2020-01-21 03:02:43', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543),
+(10027, NULL, NULL, '1', '2020-01-21 03:04:04', '2020-01-21 03:04:04', NULL, 10000, NULL, NULL, NULL, 0000000000000000000543);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ago_session`
+--
+
+CREATE TABLE `ago_session` (
+  `USER_ID` bigint(20) NOT NULL,
+  `VALID` char(1) NOT NULL DEFAULT '0',
+  `TYPE` varchar(5) NOT NULL,
+  `CREATE_TIME` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `SESSION_ID` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ago_session`
+--
+
+INSERT INTO `ago_session` (`USER_ID`, `VALID`, `TYPE`, `CREATE_TIME`, `SESSION_ID`) VALUES
+(10000, '1', 'USR', '2020-01-18 23:58:03', 'b7bfef87-75c7-3ad8-ad25-866e99a3b0ac'),
+(10000, '1', 'USR', '2020-01-18 23:58:04', '489425f2-22da-39c8-aaf5-39a98b81ac0d'),
+(10000, '1', 'USR', '2020-01-19 00:00:08', 'a129c96f-ec18-3f0c-9540-c8b6342c6cae'),
+(10000, '1', 'USR', '2020-01-19 00:13:50', '4cc8fd0f-3175-31a7-891b-87d8d91cf109'),
+(10000, '1', 'USR', '2020-01-19 00:26:17', '59fdedf6-2a23-34eb-97cc-6d243dd55c56'),
+(10000, '1', 'USR', '2020-01-19 00:26:53', '442b4767-09a3-3313-af52-ee10d5905295'),
+(10000, '1', 'USR', '2020-01-19 00:27:57', '1fc83017-449d-37df-8a1b-57feb7984a92'),
+(10000, '1', 'USR', '2020-01-19 00:29:46', '3d8d4452-c368-3dd9-82b0-4827b23c1029'),
+(10000, '1', 'USR', '2020-01-19 00:33:31', '182f55e8-e444-30fb-aa06-8287f29595c8'),
+(10000, '1', 'USR', '2020-01-19 00:34:54', '9cb07cce-0e9e-317b-af13-fd7710d6892d'),
+(10000, '1', 'USR', '2020-01-19 00:38:14', '1eff0035-7af6-3975-beac-59faf0e1317f'),
+(10000, '1', 'USR', '2020-01-19 00:38:20', 'b112d413-f72a-34a5-bad6-3b5c944f71f6'),
+(10000, '1', 'USR', '2020-01-19 00:38:22', 'eb70cd20-2689-3ffb-9b78-649ada406884'),
+(10000, '1', 'USR', '2020-01-19 00:40:01', '16c4949f-e8c9-3182-b55e-b096de06e604'),
+(10000, '1', 'USR', '2020-01-19 00:40:03', '25846a15-4450-3864-8b8c-93b356383443'),
+(10000, '1', 'USR', '2020-01-19 00:41:33', 'cb0a13de-b0a2-3368-b79f-5b30c5181648'),
+(10000, '1', 'USR', '2020-01-19 00:41:35', '404b88ab-171f-3dfd-bbcc-068dbbf59dfd'),
+(10000, '1', 'USR', '2020-01-19 00:41:36', '56e49cfb-1180-32ea-a768-e7ad4b706e85'),
+(10000, '1', 'USR', '2020-01-19 00:43:06', '8129f83b-3a3b-3e47-b6a0-8b01b3f1f3d7'),
+(10000, '1', 'USR', '2020-01-19 00:43:53', 'f86731f1-b3e2-32a9-941c-895cb346f222'),
+(10000, '1', 'USR', '2020-01-19 00:45:09', '5234e059-ac73-318b-a374-fbb92e4d3779'),
+(10000, '1', 'USR', '2020-01-19 00:46:26', 'a89fe975-dff8-3545-bd26-eee024da1f72'),
+(10000, '1', 'USR', '2020-01-19 02:34:34', 'fbe569c0-b6c9-35ae-b5a9-df82ece9bd90'),
+(10000, '1', 'USR', '2020-01-19 02:41:18', '473767a5-021f-394d-bdba-76a2f9ad063e'),
+(10000, '1', 'USR', '2020-01-19 02:55:50', '212b858d-6e2f-3728-a272-f5ba2dfa3678'),
+(10000, '1', 'USR', '2020-01-19 07:08:09', '4146c2cd-1587-3634-bb36-4791581c0737'),
+(10000, '1', 'USR', '2020-01-19 08:14:59', '4ec5db57-e781-3485-b701-0f39c5b49bc5'),
+(10000, '1', 'USR', '2020-01-20 08:36:14', 'ad28087a-4eaa-3e3d-a7c6-1ddc36130d0c'),
+(10000, '1', 'USR', '2020-01-21 02:23:26', '6e2a7c00-d350-3ea8-9552-4a37e34a9e67'),
+(10000, '1', 'USR', '2020-01-21 02:40:15', 'cd605995-9321-3908-b136-7fdee9ee6020');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location_city`
+--
+
+CREATE TABLE `location_city` (
+  `CITY_CODE` varchar(30) NOT NULL,
+  `CITY_NAME` varchar(30) NOT NULL,
+  `DISTRICT_CODE` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `location_city`
+--
+
+INSERT INTO `location_city` (`CITY_CODE`, `CITY_NAME`, `DISTRICT_CODE`) VALUES
+('ANGODA', 'Angoda', 'COLOMBO'),
+('BADULLA', 'Badulla', 'BADULLA'),
+('BANDARAWELA', 'Bandarawela', 'BADULLA'),
+('BATHTHARAMULLE', 'Baththaramulle', 'COLOMBO'),
+('BORALANDA', 'Boralanda', 'BADULLA'),
+('BORELLA', 'Borella', 'COLOMBO'),
+('DIYATALAWA', 'Diyatalawa', 'BADULLA'),
+('EPPAWALA', 'Eppawala', 'ANURADHAPURA'),
+('HAPUTHALE', 'Haputhale', 'BADULLA'),
+('KEKIRAWA', 'Kekirawa', 'ANURADHAPURA'),
+('RAJAGORIYA', 'Rajagiriya', 'COLOMBO'),
+('RATHMALANA', 'Rathmalana', 'COLOMBO'),
+('THALAWA', 'Thalawa', 'ANURADHAPURA'),
+('WELIMADA', 'Welimada', 'BADULLA');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location_district`
+--
+
+CREATE TABLE `location_district` (
+  `DISTRICT_CODE` varchar(30) NOT NULL,
+  `DISTRICT_NAME` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `location_district`
+--
+
+INSERT INTO `location_district` (`DISTRICT_CODE`, `DISTRICT_NAME`) VALUES
+('ANURADHAPURA', 'Anuradhapura'),
+('BADULLA', 'Badulla'),
+('COLOMBO', 'Colombo'),
+('KALUTHARA', 'Kaluthara'),
+('RATHNEPURA', 'Rathnepura');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `owner`
+--
+
+CREATE TABLE `owner` (
+  `OWNER_ID` bigint(20) NOT NULL,
+  `USERNAME` varchar(40) NOT NULL,
+  `PASSWORD` varchar(100) DEFAULT NULL,
+  `TELEPHONE` varchar(15) DEFAULT NULL,
+  `EMAIL` varchar(100) DEFAULT NULL,
+  `LAST_LOGIN_TIME` timestamp NULL DEFAULT NULL,
+  `ACTIVE` char(1) DEFAULT NULL,
+  `ADDRESS` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `owner`
+--
+
+INSERT INTO `owner` (`OWNER_ID`, `USERNAME`, `PASSWORD`, `TELEPHONE`, `EMAIL`, `LAST_LOGIN_TIME`, `ACTIVE`, `ADDRESS`) VALUES
+(10000, 'dushan', 'sanka', '0714356008', 'dushanwickramasinghe@gmail.com', '2020-01-21 02:40:15', '1', 'Anula waasa, Ampitigoda kanda, Kahagolla, Diyathalawa'),
+(10001, 'dushan1', 'password', '071123234345', 'dushan@gmail.com', NULL, NULL, 'ampitigoda,Kahagolla,Diyatalawa'),
+(10002, 'dushan2', 'password', '071123234343', 'dushan1@gmail.com', NULL, NULL, 'ampitigoda,Kahagolla,Diyatalawa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `PRODUCT_CODE` varchar(20) NOT NULL,
+  `PRODUCT_NAME` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`PRODUCT_CODE`, `PRODUCT_NAME`) VALUES
+('VEHI', 'Vehicle');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_configuration`
+--
+
+CREATE TABLE `system_configuration` (
+  `CONFIG_CODE` varchar(200) NOT NULL,
+  `VALUE` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `SERVICE` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `system_configuration`
+--
+
+INSERT INTO `system_configuration` (`CONFIG_CODE`, `VALUE`, `DESCRIPTION`, `SERVICE`) VALUES
+('AGO_CACHE_REFRESH_TIME', '15', 'Ago cache refresh time in minutes', 0),
+('AGO_SESSION_TIME_OUT', '60', 'session time out in minutes', 0),
+('SESSION_TIME_OUT', '60', 'session time out in minutes', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicle_advertisement`
+--
+
+CREATE TABLE `vehicle_advertisement` (
+  `ADV_ID` bigint(20) NOT NULL,
+  `TYPE_ID` int(11) NOT NULL,
+  `brand_id` int(11) NOT NULL,
+  `MODEL_ID` int(11) NOT NULL,
+  `MODEL_YEAR` int(11) NOT NULL,
+  `V_CONDITION` varchar(10) NOT NULL,
+  `TRANSMISSION` varchar(10) NOT NULL,
+  `BODY_TYPE` varchar(12) NOT NULL,
+  `FUEL_TYPE` varchar(10) NOT NULL,
+  `ENGINE_CAPACITY` int(11) NOT NULL,
+  `MILAGE` bigint(20) NOT NULL,
+  `DESCRIPTION` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vehicle_advertisement`
+--
+
+INSERT INTO `vehicle_advertisement` (`ADV_ID`, `TYPE_ID`, `brand_id`, `MODEL_ID`, `MODEL_YEAR`, `V_CONDITION`, `TRANSMISSION`, `BODY_TYPE`, `FUEL_TYPE`, `ENGINE_CAPACITY`, `MILAGE`, `DESCRIPTION`) VALUES
+(10000, 100, 300, 1000, 2028, 'NEW', 'AUTO', 'SALOON', 'HYBRID', 1500, 1000, 'brand new reconditioned test vehicle. For more details please call.'),
+(10001, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10002, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10003, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10004, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10005, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10006, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10007, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10008, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10009, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10010, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
+(10011, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10012, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10013, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10014, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10015, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10016, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10017, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10018, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10019, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10020, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10021, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10022, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10023, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10024, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10025, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10026, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
+(10027, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicle_brand`
+--
+
+CREATE TABLE `vehicle_brand` (
+  `brand_id` int(11) NOT NULL,
+  `BRAND_NAME` varchar(30) NOT NULL,
+  `TYPE_ID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vehicle_brand`
+--
+
+INSERT INTO `vehicle_brand` (`brand_id`, `BRAND_NAME`, `TYPE_ID`) VALUES
+(300, 'Toyota', 100),
+(301, 'Suzuki', 100),
+(302, 'Honda', 100),
+(303, 'Nissan', 100),
+(304, 'Mitsubishi', 100),
+(305, 'BMW', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicle_modelx`
+--
+
+CREATE TABLE `vehicle_modelx` (
+  `MODEL_ID` int(11) NOT NULL,
+  `brand_id` int(11) DEFAULT NULL,
+  `MODEL_NAME` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vehicle_modelx`
+--
+
+INSERT INTO `vehicle_modelx` (`MODEL_ID`, `brand_id`, `MODEL_NAME`) VALUES
+(1000, 300, 'Vitz'),
+(1001, 300, 'Axio'),
+(1002, 300, 'Corolla'),
+(1003, 300, 'Premio'),
+(1004, 300, 'Aqua');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicle_type`
+--
+
+CREATE TABLE `vehicle_type` (
+  `TYPE_ID` int(11) NOT NULL,
+  `TYPE_NAME` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vehicle_type`
+--
+
+INSERT INTO `vehicle_type` (`TYPE_ID`, `TYPE_NAME`) VALUES
+(100, 'Car'),
+(101, 'Motorbikes/Scooters'),
+(102, 'Three Wheelers'),
+(103, 'People Transport'),
+(104, 'Goods Transport'),
+(105, 'Heavy Machines'),
+(106, 'Water Vehicles');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `adv_image`
+--
+ALTER TABLE `adv_image`
+  ADD PRIMARY KEY (`IMAGE_ID`,`ADV_ID`),
+  ADD KEY `FK_ADV_IMAGE_ADV_ID` (`ADV_ID`);
+
+--
+-- Indexes for table `ago_advertisement`
+--
+ALTER TABLE `ago_advertisement`
+  ADD PRIMARY KEY (`ADV_ID`),
+  ADD KEY `FK_ADVERTISEMENT_PROD_CODE` (`PRODUCT_CODE`),
+  ADD KEY `FK_CITY_ADV` (`CITY_CODE`),
+  ADD KEY `FK_OWNER_ID` (`OWNER_ID`);
+
+--
+-- Indexes for table `location_city`
+--
+ALTER TABLE `location_city`
+  ADD PRIMARY KEY (`CITY_CODE`),
+  ADD KEY `FK_LOCATION_CITY_DISTRICT` (`DISTRICT_CODE`);
+
+--
+-- Indexes for table `location_district`
+--
+ALTER TABLE `location_district`
+  ADD PRIMARY KEY (`DISTRICT_CODE`);
+
+--
+-- Indexes for table `owner`
+--
+ALTER TABLE `owner`
+  ADD PRIMARY KEY (`OWNER_ID`),
+  ADD UNIQUE KEY `UK_USERNAME` (`USERNAME`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`PRODUCT_CODE`);
+
+--
+-- Indexes for table `system_configuration`
+--
+ALTER TABLE `system_configuration`
+  ADD PRIMARY KEY (`CONFIG_CODE`);
+
+--
+-- Indexes for table `vehicle_advertisement`
+--
+ALTER TABLE `vehicle_advertisement`
+  ADD PRIMARY KEY (`ADV_ID`),
+  ADD KEY `FK_VEHICLE_ADVERTISEMENT_TYPE_ID` (`TYPE_ID`),
+  ADD KEY `FK_VEHICLE_ADVERTISEMENT_BRAND_ID` (`brand_id`),
+  ADD KEY `FK_VEHICLE_ADVERTISEMENT_MOEL_ID` (`MODEL_ID`);
+
+--
+-- Indexes for table `vehicle_brand`
+--
+ALTER TABLE `vehicle_brand`
+  ADD PRIMARY KEY (`brand_id`),
+  ADD KEY `FK_vehicle_brand_1` (`TYPE_ID`);
+
+--
+-- Indexes for table `vehicle_modelx`
+--
+ALTER TABLE `vehicle_modelx`
+  ADD PRIMARY KEY (`MODEL_ID`),
+  ADD KEY `FK_BRAND_ID` (`brand_id`);
+
+--
+-- Indexes for table `vehicle_type`
+--
+ALTER TABLE `vehicle_type`
+  ADD PRIMARY KEY (`TYPE_ID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `adv_image`
+--
+ALTER TABLE `adv_image`
+  ADD CONSTRAINT `FK_ADV_IMAGE_ADV_ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`);
+
+--
+-- Constraints for table `ago_advertisement`
+--
+ALTER TABLE `ago_advertisement`
+  ADD CONSTRAINT `FK_ADVERTISEMENT_PROD_CODE` FOREIGN KEY (`PRODUCT_CODE`) REFERENCES `product` (`PRODUCT_CODE`),
+  ADD CONSTRAINT `FK_ADV_OWNER_ID` FOREIGN KEY (`OWNER_ID`) REFERENCES `owner` (`OWNER_ID`),
+  ADD CONSTRAINT `FK_CITY_ADV` FOREIGN KEY (`CITY_CODE`) REFERENCES `location_city` (`CITY_CODE`),
+  ADD CONSTRAINT `FK_OWNER_ID` FOREIGN KEY (`OWNER_ID`) REFERENCES `owner` (`OWNER_ID`);
+
+--
+-- Constraints for table `location_city`
+--
+ALTER TABLE `location_city`
+  ADD CONSTRAINT `FK_LOCATION_CITY_DISTRICT` FOREIGN KEY (`DISTRICT_CODE`) REFERENCES `location_district` (`DISTRICT_CODE`);
+
+--
+-- Constraints for table `vehicle_advertisement`
+--
+ALTER TABLE `vehicle_advertisement`
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_ADV_ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`),
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_BRAND_ID` FOREIGN KEY (`brand_id`) REFERENCES `vehicle_brand` (`brand_id`),
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_MOEL_ID` FOREIGN KEY (`MODEL_ID`) REFERENCES `vehicle_modelx` (`MODEL_ID`),
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_TYPE_ID` FOREIGN KEY (`TYPE_ID`) REFERENCES `vehicle_type` (`TYPE_ID`);
+
+--
+-- Constraints for table `vehicle_brand`
+--
+ALTER TABLE `vehicle_brand`
+  ADD CONSTRAINT `FK_vehicle_brand_1` FOREIGN KEY (`TYPE_ID`) REFERENCES `vehicle_type` (`TYPE_ID`);
+
+--
+-- Constraints for table `vehicle_modelx`
+--
+ALTER TABLE `vehicle_modelx`
+  ADD CONSTRAINT `FK_BRAND_ID` FOREIGN KEY (`brand_id`) REFERENCES `vehicle_brand` (`brand_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

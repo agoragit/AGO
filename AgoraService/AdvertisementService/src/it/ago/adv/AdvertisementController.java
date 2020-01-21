@@ -1,6 +1,8 @@
 package it.ago.adv;
 
 import it.ago.*;
+import it.ago.cache.AgoCacheRefresher;
+import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import org.json.JSONException;
 
@@ -14,6 +16,18 @@ import java.sql.SQLException;
 @Path("/advcontroller")
 public class AdvertisementController
 {
+	static
+	{
+		init();
+	}
+
+	private static void init()
+	{
+		SystemConfig.loadConfigurations( SystemConfig.SERVICE_ADVERTISEMENT );
+		SystemConfig.AGO_SESSION_TIME_OUT = SystemConfig.getInt( "AGO_SESSION_TIME_OUT" );
+		SystemConfig.AGO_CACHE_REFRESH_TIME= SystemConfig.getInt( "AGO_CACHE_REFRESH_TIME" );
+		new AgoCacheRefresher().start();
+	}
 	@Path("createAdv/{sessionId}/{type}")
 	@POST
 	@Produces("application/json")

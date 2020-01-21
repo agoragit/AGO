@@ -1,15 +1,25 @@
 package it.ago;
 
+import it.ago.system.SystemConfig;
+
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class AgoSessionCache
 {
-	private static Map<String, AgoSession> SESSION_CACHE;
+	private static Map<String, AgoSession> SESSION_CACHE = new HashMap<>();;
 
-	static
+
+	public static Map<String, AgoSession> getSessionCache()
 	{
-		SESSION_CACHE = new HashMap<>();
+		return SESSION_CACHE;
+	}
+
+	public static void setSessionCache( Map<String, AgoSession> sessionCache )
+	{
+		SESSION_CACHE = sessionCache;
 	}
 
 	public static void putSession( AgoSession agoSession )
@@ -19,7 +29,8 @@ public class AgoSessionCache
 
 	public static boolean isValid( String sessionId )
 	{
-		return SESSION_CACHE.get( sessionId ) != null && SESSION_CACHE.get( sessionId ).isValid();
+		AgoSession agoSession = SESSION_CACHE.get( sessionId );
+		return agoSession != null && agoSession.isValid() && agoSession.getCreateTime().after(new Timestamp( System.currentTimeMillis() - TimeUnit.MINUTES.toMillis( SystemConfig.AGO_SESSION_TIME_OUT )) );
 	}
 
 	public static void invalidateSession( String sessionId )
@@ -41,6 +52,5 @@ public class AgoSessionCache
 	public static AgoSession getSession( String sessionId )
 	{
 		return SESSION_CACHE.get( sessionId );
-
 	}
 }

@@ -91,39 +91,15 @@ public class AdvertisementController
 		{
 			return agoError._getErrorResponse();
 		}
-		try
-		{
-			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
-			ps = con.prepareStatement( DBQuearies.Q_SEARCH_ADV_BY_ID );
-			ps.setLong( 1, id );
-			rs  = ps.executeQuery();
-			while( rs.next() )
-			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
-				agoError.setResult( advertisement );
-			}
-		}
-		catch ( Exception e )
-		{
-			agoError.setErrorMessage( AgoError.ERROR,e.getMessage(), false );
-		}
-		finally
-		{
-			DBConnection.close( con,ps,rs );
-		}
-		return agoError._getErrorResponse();
+		return AdvertisementSearchHandler.getAdvertisementById( sessionId, id );
 	}
 	@Path("getAdvByOwnerId/{sessionId}/{ownerId}")
 	@POST
 	@Produces("application/json")
-	public Response getAdvertisementByOwnerId( @PathParam("sessionId") String sessionId, @PathParam("ownerId") long id ) throws JSONException
+	public Response getAdvertisementByOwnerId( @PathParam("sessionId") String sessionId, @PathParam("ownerId") long ownerId ) throws JSONException
 	{
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs  = null;
-		List<Advertisement> advertisements = new ArrayList<>(  );
-		AgoError agoError = new AgoError( AgoError.SUCCESS, id+"" );
-		if( id < 1 )
+		AgoError agoError = new AgoError( AgoError.SUCCESS, ownerId+"" );
+		if( ownerId < 1 )
 		{
 			return agoError._getErrorResponse();
 		}
@@ -132,28 +108,16 @@ public class AdvertisementController
 			agoError.setErrorMessage( AgoError.ERROR, "invalid session", true );
 			return agoError._getErrorResponse();
 		}
-		try
-		{
-			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
-			ps = con.prepareStatement( DBQuearies.Q_SEARCH_ADV_BY_OWNER_ID );
-			ps.setLong( 1, id );
-			rs  = ps.executeQuery();
-			while( rs.next() )
-			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
-				advertisements.add( advertisement );
-			}
-		}
-		catch ( Exception e )
-		{
-			agoError.setErrorMessage( AgoError.ERROR,e.getMessage(), false );
-		}
-		finally
-		{
-			DBConnection.close( con,ps,rs );
-		}
-		agoError.setResult( advertisements );
-		return agoError._getErrorResponse();
+		return AdvertisementSearchHandler.getAdvertisementByOwnerId( sessionId, ownerId );
+	}
+
+	@Path("universalAdvSearch/{sessionId}")
+	@POST
+	@Produces("application/json")
+	public Response universalAdvertisementSearch( @PathParam("sessionId") String sessionId, @Context UriInfo uriInfo ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.SUCCESS, "not implemented" );
+		return  agoError._getErrorResponse();
 	}
 }
 

@@ -392,17 +392,21 @@ public abstract class Advertisement extends Savable
 	public static Advertisement getInstance( ResultSet rsSuper, Connection con ) throws SQLException
 	{
 		String product = rsSuper.getString( "PRODUCT_CODE" );
+		long advId = rsSuper.getLong( "ADV_ID" );
 		Advertisement advertisement = null;
 		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ) )
 		{
-			ResultSet vehicleRs = getResultSet( product, con );
+			ResultSet vehicleRs = getResultSet( product, con, advId );
 			advertisement = new VehicleAdvertisement();
-			advertisement.loadAll(vehicleRs, rsSuper , con, 1 );
+			if( vehicleRs.next())
+			{
+				advertisement.loadAll( vehicleRs, rsSuper, con, 1 );
+			}
 
 		}
 		return advertisement;
 	}
-	private static ResultSet getResultSet( String product, Connection con )
+	private static ResultSet getResultSet( String product, Connection con, long AdvId )
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -411,6 +415,7 @@ public abstract class Advertisement extends Savable
 			if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ))
 			{
 				ps = con.prepareStatement( DBQuearies.Q_SEARCH_VEHI_ADV_BY_ADV_ID );
+				ps.setLong( 1, AdvId );
 				rs = ps.executeQuery();
 			}
 		}

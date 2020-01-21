@@ -1,13 +1,13 @@
 package it.ago;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AgoError implements Serializable
 {
@@ -16,7 +16,12 @@ public class AgoError implements Serializable
 	private String errorMessage = "";
 	private String errorCode = "";
 	private Object result = new Object();
-
+	private static ObjectMapper mapper = new ObjectMapper();
+	static
+	{
+		mapper.configure( SerializationFeature.INDENT_OUTPUT, true);
+		mapper.configure( SerializationFeature.FAIL_ON_EMPTY_BEANS, false );
+	}
 	public AgoError( String errorCode, String errorMessage )
 	{
 		this.errorCode = errorCode;
@@ -71,15 +76,17 @@ public class AgoError implements Serializable
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put( "STATUS", this.errorCode );
 		jsonObject.put( "MESSAGE", this.errorMessage );
-		if( result instanceof List )
+
+		try
 		{
-			JSONArray jArray = new JSONArray( ( ( ArrayList ) result ).toArray() );
-			jsonObject.put( "RESULT",  jArray );
+			jsonObject.put( "RESULT",  new JSONArray( "["+ mapper.writeValueAsString( result )+ "]" ) );
 		}
-		else
+		catch ( JsonProcessingException e )
 		{
-			jsonObject.put( "RESULT", new JSONObject( result ) );
+			jsonObject.put( "RESULT",  e.getMessage());
+
 		}
+
 		return Response.status( 200 ).entity( jsonObject.toString() ).build();
 	}
 }

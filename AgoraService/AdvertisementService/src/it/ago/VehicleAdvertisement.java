@@ -489,4 +489,15 @@ public class VehicleAdvertisement extends Advertisement
 		this._status = status;
 	}
 
+	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
+	{
+		if ( rsSuper != null )
+		{
+			super.load( rsSuper,con,level );
+		}
+		if( rs != null )
+		{
+			this.load( rs, con, level );
+		}
+	}
 }

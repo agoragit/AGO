@@ -1,10 +1,13 @@
 package it.ago;
 
 import com.google.gson.Gson;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AgoError implements Serializable
 {
@@ -12,7 +15,7 @@ public class AgoError implements Serializable
 	public static final String ERROR = "ERROR";
 	private String errorMessage = "";
 	private String errorCode = "";
-	private Object result = null;
+	private Object result = new Object();
 
 	public AgoError( String errorCode, String errorMessage )
 	{
@@ -68,7 +71,15 @@ public class AgoError implements Serializable
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put( "STATUS", this.errorCode );
 		jsonObject.put( "MESSAGE", this.errorMessage );
-		jsonObject.put( "DATA", new Gson().toJson( result ) );
+		if( result instanceof List )
+		{
+			JSONArray jArray = new JSONArray( ( ( ArrayList ) result ).toArray() );
+			jsonObject.put( "RESULT",  jArray );
+		}
+		else
+		{
+			jsonObject.put( "RESULT", new JSONObject( result ) );
+		}
 		return Response.status( 200 ).entity( jsonObject.toString() ).build();
 	}
 }

@@ -124,7 +124,7 @@ public class AgoSession
 
 	public boolean isValid()
 	{
-		return valid;
+		return valid && createTime.after(new Timestamp( System.currentTimeMillis() - TimeUnit.MINUTES.toMillis( SystemConfig.AGO_SESSION_TIME_OUT )));
 	}
 
 	public void setValid( boolean valid )

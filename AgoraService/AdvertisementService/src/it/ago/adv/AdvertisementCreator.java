@@ -14,7 +14,7 @@ public class AdvertisementCreator
 	public static Advertisement createAdvertisement( String type )
 	{
 		Advertisement advertisement = null;
-		if( Constants.ADV_TYPE_VEHICLE.equalsIgnoreCase( type ) )
+		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( type ) )
 		{
 			advertisement  = new VehicleAdvertisement();
 		}
@@ -23,7 +23,7 @@ public class AdvertisementCreator
 
 	public static Advertisement generateAdvertisementItem( String type, UriInfo uriInfo )
 	{
-		if( Constants.ADV_TYPE_VEHICLE.equalsIgnoreCase( type ))
+		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( type ))
 		{
 			return generateVehicleAdvertisement( uriInfo );
 		}
@@ -49,7 +49,7 @@ public class AdvertisementCreator
 	}
 	public static VehicleAdvertisement generateVehicleAdvertisement( UriInfo uriInfo )
 	{
-		VehicleAdvertisement vehicleAdv = ( VehicleAdvertisement ) AdvertisementCreator.createAdvertisement( Constants.ADV_TYPE_VEHICLE );
+		VehicleAdvertisement vehicleAdv = ( VehicleAdvertisement ) AdvertisementCreator.createAdvertisement( Constants.ADV_PROD_VEHICLE );
 		mapSuper( uriInfo, vehicleAdv  );
 		vehicleAdv.setBodyType( UriInfoUtils.getStringValue( uriInfo, "bodyType" ) );
 		vehicleAdv.setBrandId( UriInfoUtils.getIntValue( uriInfo, "brandId" ));

@@ -30,7 +30,7 @@ public class AgoSessionCache
 	public static boolean isValid( String sessionId )
 	{
 		AgoSession agoSession = SESSION_CACHE.get( sessionId );
-		return agoSession != null && agoSession.isValid() && agoSession.getCreateTime().after(new Timestamp( System.currentTimeMillis() - TimeUnit.MINUTES.toMillis( SystemConfig.AGO_SESSION_TIME_OUT )) );
+		return agoSession != null && agoSession.isValid();
 	}
 
 	public static void invalidateSession( String sessionId )

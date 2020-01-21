@@ -1,5 +1,6 @@
 package it.ago;
 
+import it.ago.adv.DBQuearies;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
@@ -7,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.sql.*;
 
 @XmlType(name = "Advertisement", namespace = "http://lass")
-public class Advertisement extends Savable
+public abstract class Advertisement extends Savable
 {
 	private long advId;
 	private Timestamp validFrom;
@@ -357,7 +358,10 @@ public class Advertisement extends Savable
 	{
 		this.status = status;
 	}
-
+	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
+	{
+		this.load( rsSuper,con,level );
+	}
 	public boolean setNextAdvId( Connection con )
 	{
 		String queary = "SELECT (MAX(ADV_ID) + 1) AS ID FROM AGO_ADVERTISEMENT";
@@ -383,5 +387,36 @@ public class Advertisement extends Savable
 			DBConnection.close( ps );
 		}
 		return false;
+	}
+
+	public static Advertisement getInstance( ResultSet rsSuper, Connection con ) throws SQLException
+	{
+		String product = rsSuper.getString( "PRODUCT_CODE" );
+		Advertisement advertisement = null;
+		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ) )
+		{
+			ResultSet vehicleRs = getResultSet( product, con );
+			advertisement = new VehicleAdvertisement();
+			advertisement.loadAll(vehicleRs, rsSuper , con, 1 );
+
+		}
+		return advertisement;
+	}
+	private static ResultSet getResultSet( String product, Connection con )
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ))
+			{
+				ps = con.prepareStatement( DBQuearies.Q_SEARCH_VEHI_ADV_BY_ADV_ID );
+				rs = ps.executeQuery();
+			}
+		}
+		catch ( Exception e )
+		{
+		}
+		return rs;
 	}
 }

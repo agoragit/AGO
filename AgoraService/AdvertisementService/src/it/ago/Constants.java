@@ -2,7 +2,7 @@ package it.ago;
 
 public class Constants
 {
-	public static String ADV_TYPE_VEHICLE = "vehicle";
+	public static String ADV_PROD_VEHICLE = "VEHI";
 
 
 	public static String VEHI_TRANSMISION_TYPE_MANUAL = "MANUAL";

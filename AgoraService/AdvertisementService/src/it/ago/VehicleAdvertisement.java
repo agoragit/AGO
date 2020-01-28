@@ -13,17 +13,17 @@ import java.sql.SQLException;
 public class VehicleAdvertisement extends Advertisement
 {
 	//private long advId;
-	private int typeId;
-	private int brandId;
-	private int modelId;
-	private int modelYear;
-	private String condition;
-	private String transmission;
-	private String bodyType;
-	private String fuelType;
-	private int engineCapacity;
-	private long milage;
-	private String description;
+	private int v_typeId;
+	private int v_brandId;
+	private int v_modelId;
+	private int v_modelYear;
+	private String v_condition;
+	private String v_transmission;
+	private String v_bodyType;
+	private String v_fuelType;
+	private int v_engineCapacity;
+	private long v_milage;
+	private String v_description;
 	private int _status;
 
 	public VehicleAdvertisement()
@@ -103,72 +103,72 @@ public class VehicleAdvertisement extends Advertisement
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setLong( ++count, super.getAdvId() );
-		ps.setInt( ++count, this.typeId );
-		ps.setInt( ++count, this.brandId );
-		ps.setInt( ++count, this.modelId );
-		if ( this.modelYear == -1 )
+		ps.setInt( ++count, this.v_typeId );
+		ps.setInt( ++count, this.v_brandId );
+		ps.setInt( ++count, this.v_modelId );
+		if ( this.v_modelYear == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
 		}
 		else
 		{
-			ps.setInt( ++count, this.modelYear );
+			ps.setInt( ++count, this.v_modelYear );
 		}
-		if ( this.condition == null )
+		if ( this.v_condition == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.condition );
+			ps.setString( ++count, this.v_condition );
 		}
-		if ( this.transmission == null )
+		if ( this.v_transmission == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.transmission );
+			ps.setString( ++count, this.v_transmission );
 		}
-		if ( this.bodyType == null )
+		if ( this.v_bodyType == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.bodyType );
+			ps.setString( ++count, this.v_bodyType );
 		}
-		if ( this.fuelType == null )
+		if ( this.v_fuelType == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.fuelType );
+			ps.setString( ++count, this.v_fuelType );
 		}
-		if ( this.engineCapacity == -1 )
+		if ( this.v_engineCapacity == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
 		}
 		else
 		{
-			ps.setInt( ++count, this.engineCapacity );
+			ps.setInt( ++count, this.v_engineCapacity );
 		}
-		if ( this.milage == -1 )
+		if ( this.v_milage == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
 		}
 		else
 		{
-			ps.setLong( ++count, this.milage );
+			ps.setLong( ++count, this.v_milage );
 		}
-		if ( this.description == null )
+		if ( this.v_description == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.description );
+			ps.setString( ++count, this.v_description );
 		}
 		ps.execute();
 		DBConnection.close( ps );
@@ -210,72 +210,72 @@ public class VehicleAdvertisement extends Advertisement
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
-		ps.setInt( ++count, this.typeId );
-		ps.setInt( ++count, this.brandId );
-		ps.setInt( ++count, this.modelId );
-		if ( this.modelYear == -1 )
+		ps.setInt( ++count, this.v_typeId );
+		ps.setInt( ++count, this.v_brandId );
+		ps.setInt( ++count, this.v_modelId );
+		if ( this.v_modelYear == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
 		}
 		else
 		{
-			ps.setInt( ++count, this.modelYear );
+			ps.setInt( ++count, this.v_modelYear );
 		}
-		if ( this.condition == null )
+		if ( this.v_condition == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.condition );
+			ps.setString( ++count, this.v_condition );
 		}
-		if ( this.transmission == null )
+		if ( this.v_transmission == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.transmission );
+			ps.setString( ++count, this.v_transmission );
 		}
-		if ( this.bodyType == null )
+		if ( this.v_bodyType == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.bodyType );
+			ps.setString( ++count, this.v_bodyType );
 		}
-		if ( this.fuelType == null )
+		if ( this.v_fuelType == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.fuelType );
+			ps.setString( ++count, this.v_fuelType );
 		}
-		if ( this.engineCapacity == -1 )
+		if ( this.v_engineCapacity == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
 		}
 		else
 		{
-			ps.setInt( ++count, this.engineCapacity );
+			ps.setInt( ++count, this.v_engineCapacity );
 		}
-		if ( this.milage == -1 )
+		if ( this.v_milage == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
 		}
 		else
 		{
-			ps.setLong( ++count, this.milage );
+			ps.setLong( ++count, this.v_milage );
 		}
-		if ( this.description == null )
+		if ( this.v_description == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
 		}
 		else
 		{
-			ps.setString( ++count, this.description );
+			ps.setString( ++count, this.v_description );
 		}
 		ps.setLong( ++count, super.getAdvId() );
 		ps.execute();
@@ -289,72 +289,72 @@ public class VehicleAdvertisement extends Advertisement
 	{
 		this._status = Savable.UNCHANGED;
 		//this.advId = rs.getLong( "ADV_ID" );
-		this.typeId = rs.getInt( "TYPE_ID" );
-		this.brandId = rs.getInt( "BRAND_ID" );
-		this.modelId = rs.getInt( "MODEL_ID" );
+		this.v_typeId = rs.getInt( "TYPE_ID" );
+		this.v_brandId = rs.getInt( "BRAND_ID" );
+		this.v_modelId = rs.getInt( "MODEL_ID" );
 		if ( rs.getObject( "MODEL_YEAR" ) == null )
 		{
-			this.modelYear = -1;
+			this.v_modelYear = -1;
 		}
 		else
 		{
-			this.modelYear = rs.getInt( "MODEL_YEAR" );
+			this.v_modelYear = rs.getInt( "MODEL_YEAR" );
 		}
 		if ( rs.getObject( "V_CONDITION" ) == null )
 		{
-			this.condition = null;
+			this.v_condition = null;
 		}
 		else
 		{
-			this.condition = rs.getString( "V_CONDITION" );
+			this.v_condition = rs.getString( "V_CONDITION" );
 		}
 		if ( rs.getObject( "TRANSMISSION" ) == null )
 		{
-			this.transmission = null;
+			this.v_transmission = null;
 		}
 		else
 		{
-			this.transmission = rs.getString( "TRANSMISSION" );
+			this.v_transmission = rs.getString( "TRANSMISSION" );
 		}
 		if ( rs.getObject( "BODY_TYPE" ) == null )
 		{
-			this.bodyType = null;
+			this.v_bodyType = null;
 		}
 		else
 		{
-			this.bodyType = rs.getString( "BODY_TYPE" );
+			this.v_bodyType = rs.getString( "BODY_TYPE" );
 		}
 		if ( rs.getObject( "FUEL_TYPE" ) == null )
 		{
-			this.fuelType = null;
+			this.v_fuelType = null;
 		}
 		else
 		{
-			this.fuelType = rs.getString( "FUEL_TYPE" );
+			this.v_fuelType = rs.getString( "FUEL_TYPE" );
 		}
 		if ( rs.getObject( "ENGINE_CAPACITY" ) == null )
 		{
-			this.engineCapacity = -1;
+			this.v_engineCapacity = -1;
 		}
 		else
 		{
-			this.engineCapacity = rs.getInt( "ENGINE_CAPACITY" );
+			this.v_engineCapacity = rs.getInt( "ENGINE_CAPACITY" );
 		}
 		if ( rs.getObject( "MILAGE" ) == null )
 		{
-			this.milage = -1;
+			this.v_milage = -1;
 		}
 		else
 		{
-			this.milage = rs.getLong( "MILAGE" );
+			this.v_milage = rs.getLong( "MILAGE" );
 		}
 		if ( rs.getObject( "DESCRIPTION" ) == null )
 		{
-			this.description = null;
+			this.v_description = null;
 		}
 		else
 		{
-			this.description = rs.getString( "DESCRIPTION" );
+			this.v_description = rs.getString( "DESCRIPTION" );
 		}
 
 	}
@@ -371,112 +371,112 @@ public class VehicleAdvertisement extends Advertisement
 
 	public int getTypeId()
 	{
-		return this.typeId;
+		return this.v_typeId;
 	}
 
 	public void setTypeId( int typeId )
 	{
-		this.typeId = typeId;
+		this.v_typeId = typeId;
 	}
 
 	public int getBrandId()
 	{
-		return this.brandId;
+		return this.v_brandId;
 	}
 
 	public void setBrandId( int brandId )
 	{
-		this.brandId = brandId;
+		this.v_brandId = brandId;
 	}
 
 	public int getModelId()
 	{
-		return this.modelId;
+		return this.v_modelId;
 	}
 
 	public void setModelId( int modelId )
 	{
-		this.modelId = modelId;
+		this.v_modelId = modelId;
 	}
 
 	public int getModelYear()
 	{
-		return this.modelYear;
+		return this.v_modelYear;
 	}
 
 	public void setModelYear( int modelYear )
 	{
-		this.modelYear = modelYear;
+		this.v_modelYear = modelYear;
 	}
 
 	public String getCondition()
 	{
-		return this.condition;
+		return this.v_condition;
 	}
 
 	public void setCondition( String condition )
 	{
-		this.condition = condition;
+		this.v_condition = condition;
 	}
 
 	public String getTransmission()
 	{
-		return this.transmission;
+		return this.v_transmission;
 	}
 
 	public void setTransmission( String transmission )
 	{
-		this.transmission = transmission;
+		this.v_transmission = transmission;
 	}
 
 	public String getBodyType()
 	{
-		return this.bodyType;
+		return this.v_bodyType;
 	}
 
 	public void setBodyType( String bodyType )
 	{
-		this.bodyType = bodyType;
+		this.v_bodyType = bodyType;
 	}
 
 	public String getFuelType()
 	{
-		return this.fuelType;
+		return this.v_fuelType;
 	}
 
 	public void setFuelType( String fuelType )
 	{
-		this.fuelType = fuelType;
+		this.v_fuelType = fuelType;
 	}
 
 	public int getEngineCapacity()
 	{
-		return this.engineCapacity;
+		return this.v_engineCapacity;
 	}
 
 	public void setEngineCapacity( int engineCapacity )
 	{
-		this.engineCapacity = engineCapacity;
+		this.v_engineCapacity = engineCapacity;
 	}
 
 	public long getMilage()
 	{
-		return this.milage;
+		return this.v_milage;
 	}
 
 	public void setMilage( long milage )
 	{
-		this.milage = milage;
+		this.v_milage = milage;
 	}
 
 	public String getDescription()
 	{
-		return this.description;
+		return this.v_description;
 	}
 
 	public void setDescription( String description )
 	{
-		this.description = description;
+		this.v_description = description;
 	}
 
 	public int getStatus()

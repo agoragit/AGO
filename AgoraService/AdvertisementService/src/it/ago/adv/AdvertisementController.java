@@ -117,7 +117,7 @@ public class AdvertisementController
 	public Response universalAdvertisementSearch( @PathParam("sessionId") String sessionId, @Context UriInfo uriInfo ) throws JSONException
 	{
 		AgoError agoError = new AgoError( AgoError.SUCCESS, "not implemented" );
-		return  agoError._getErrorResponse();
+		return  AdvertisementSearchHandler.universalAdvSearch( sessionId,uriInfo );
 	}
 }
 

@@ -88,7 +88,7 @@ public class DBQuearies
 			sb.append( " AND VA.MILAGE          <= ? " );
 		}
 		//___________________________________________________
-		sb.append( " ORDER BY AA.ADV_ID DESC " );
+		sb.append( " ORDER BY AA.ADV_ID DESC LIMIT ?,?" ); //offset, rowcount
 
 		return sb.toString();
 	}
@@ -139,6 +139,12 @@ public class DBQuearies
 			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_TO );
 
 		}
+
+		//finally
+		UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_OFFSET);
+		UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_ROW_COUNT);
+
+
 		return ps;
 	}
 }

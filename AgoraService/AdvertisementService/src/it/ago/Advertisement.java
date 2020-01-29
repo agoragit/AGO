@@ -6,6 +6,8 @@ import it.ago.utils.db.Savable;
 
 import javax.xml.bind.annotation.XmlType;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlType(name = "Advertisement", namespace = "http://lass")
 public abstract class Advertisement extends Savable
@@ -23,9 +25,11 @@ public abstract class Advertisement extends Savable
 	private String cityCode;
 	private double price;
 	private int status;
+	private List<AdvImage> advImages;
 
 	public Advertisement()
 	{
+		advImages = new ArrayList<>(  );
 	}
 
 	public void checkValidity() throws SQLException
@@ -226,7 +230,8 @@ public abstract class Advertisement extends Savable
 		}
 		this.cityCode = rs.getString( "CITY_CODE" );
 		this.price = rs.getDouble( "PRICE" );
-
+		this.status  =Savable.UNCHANGED;
+		loadImages(con);
 	}
 
 	public long getAdvId()
@@ -348,6 +353,15 @@ public abstract class Advertisement extends Savable
 	{
 		this.price = price;
 	}
+	public List<AdvImage> getAdvImages()
+	{
+		return advImages;
+	}
+
+	public void setAdvImages( List<AdvImage> advImages )
+	{
+		this.advImages = advImages;
+	}
 
 	public int getStatus()
 	{
@@ -423,5 +437,19 @@ public abstract class Advertisement extends Savable
 		{
 		}
 		return rs;
+	}
+	private void loadImages( Connection con ) throws SQLException
+	{
+		PreparedStatement ps = null;
+		ResultSet rs  = null;
+		ps = con.prepareStatement( "SELECT * FROM ADV_IMAGE WHERE ADV_ID = ?" );
+		ps.setLong( 1, this.getAdvId() );
+		rs = ps.executeQuery();
+		while ( rs.next() )
+		{
+			AdvImage advImage = new AdvImage();
+			advImage.load( rs, con, 1 );
+			this.advImages.add( advImage );
+		}
 	}
 }

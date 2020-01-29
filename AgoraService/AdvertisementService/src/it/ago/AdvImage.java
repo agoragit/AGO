@@ -133,6 +133,7 @@ public class AdvImage extends Savable
 		this.imageId = rs.getLong( "IMAGE_ID" );
 		this.advId = rs.getLong( "ADV_ID" );
 		this.imageUrl = rs.getString( "IMAGE_URL" );
+		this.status  =Savable.UNCHANGED;
 
 	}
 

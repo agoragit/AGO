@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlType(name = "VehicleAdvertisement", namespace = "http://lass")
 public class VehicleAdvertisement extends Advertisement
@@ -25,7 +27,6 @@ public class VehicleAdvertisement extends Advertisement
 	private long v_milage;
 	private String v_description;
 	private int _status;
-
 	public VehicleAdvertisement()
 	{
 		this.setStatus( Savable.NEW );
@@ -356,7 +357,7 @@ public class VehicleAdvertisement extends Advertisement
 		{
 			this.v_description = rs.getString( "DESCRIPTION" );
 		}
-
+		this.setStatus( Savable.UNCHANGED );
 	}
 
 	//public long getAdvId()

@@ -24,7 +24,7 @@ public class DBQuearies
 		{
 			return null;
 		}
-		StringBuilder sb = new StringBuilder( " SELECT * FROM ago_advertisement AA " );
+		StringBuilder sb = new StringBuilder( " SELECT * FROM ago_advertisement AA  INNER JOIN OWNER O ON O.OWNER_ID = AA.OWNER_ID " );
 		// create inner join - customize here for other products
 		if ( isAll || advTypes.contains( Constants.ADV_PROD_VEHICLE ) )
 		{
@@ -109,40 +109,40 @@ public class DBQuearies
 		boolean isAll = advTypesList.contains( Constants.ADV_PRODUCT_ANY );
 		PreparedStatement ps = con.prepareStatement( getUniversalAdvSearchQuary( advTypesList, isAll, uriInfo ) );
 		int count = 0;
-		UriInfoUtils.setPreparedValue( ps, count, Types.BIGINT, uriInfo, Constants.PARAM_ADV_ID );
-		UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_VALID_FROM );
-		UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_VALID_TO );
-		UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_ADV_ACTIVE );
-		UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_CREATED_DATE_FROM );
-		UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_CREATED_DATE_TO );
-		UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_LAST_MODIFIED );
-		UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_ADV_PRODUCT_CODE );
-		UriInfoUtils.setPreparedValue( ps, count, Types.BIGINT, uriInfo, Constants.PARAM_ADV_OWNER_ID );
-		UriInfoUtils.setPreparedValue( ps, count, Types.ARRAY, uriInfo, Constants.PARAM_ADV_CITY_CODE );
-		UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_FROM );
-		UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.BIGINT, uriInfo, Constants.PARAM_ADV_ID );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_VALID_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_VALID_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_ADV_ACTIVE );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_CREATED_DATE_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_CREATED_DATE_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_LAST_MODIFIED );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_ADV_PRODUCT_CODE );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.BIGINT, uriInfo, Constants.PARAM_ADV_OWNER_ID );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.ARRAY, uriInfo, Constants.PARAM_ADV_CITY_CODE );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_TO );
 
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )
 		{
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_BRAND_ID );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_ID );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_FROM );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_TO );
-			UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_CONDITION );
-			UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_TRANSMISSION );
-			UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_BODY_TYPE );
-			UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_FUEL_TYPE );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_FROM );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_TO );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_FROM );
-			UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_TO );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_BRAND_ID );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_ID );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_FROM );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_TO );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_CONDITION );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_TRANSMISSION );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_BODY_TYPE );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_FUEL_TYPE );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_FROM );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_TO );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_FROM );
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_TO );
 
 		}
 
 		//finally
-		UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_OFFSET);
-		UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_ROW_COUNT);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_OFFSET);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_ROW_COUNT);
 
 
 		return ps;

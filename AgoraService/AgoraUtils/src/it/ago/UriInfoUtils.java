@@ -91,7 +91,7 @@ public class UriInfoUtils
 		return  "'"+newData+"'";
 
 	}
-	public static void setPreparedValue(PreparedStatement ps, int count, int sqlType, UriInfo uriInfo, String parameter ) throws SQLException
+	public static int setPreparedValue(PreparedStatement ps, int count, int sqlType, UriInfo uriInfo, String parameter ) throws SQLException
 	{
 		if( sqlType == Types.INTEGER )
 		{
@@ -177,5 +177,6 @@ public class UriInfoUtils
 		{
 			throw new SQLException( "err mapping satement type" );
 		}
+		return count;
 	}
 }

@@ -1,6 +1,7 @@
 package it.ago;
 
 import it.ago.adv.DBQuearies;
+import it.ago.user.Owner;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
@@ -26,6 +27,12 @@ public abstract class Advertisement extends Savable
 	private double price;
 	private int status;
 	private List<AdvImage> advImages;
+	private String _ownerName;
+	private String _ownerEmail;
+	private String _ownerTelephone;
+	private String _address;
+
+
 
 	public Advertisement()
 	{
@@ -232,6 +239,7 @@ public abstract class Advertisement extends Savable
 		this.price = rs.getDouble( "PRICE" );
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
+		loadOwnerDetails( con, rs, level );
 	}
 
 	public long getAdvId()
@@ -372,6 +380,47 @@ public abstract class Advertisement extends Savable
 	{
 		this.status = status;
 	}
+
+	public String get_ownerName()
+	{
+		return _ownerName;
+	}
+
+	public void set_ownerName( String _ownerName )
+	{
+		this._ownerName = _ownerName;
+	}
+
+	public String get_ownerEmail()
+	{
+		return _ownerEmail;
+	}
+
+	public void set_ownerEmail( String _ownerEmail )
+	{
+		this._ownerEmail = _ownerEmail;
+	}
+
+	public String get_ownerTelephone()
+	{
+		return _ownerTelephone;
+	}
+
+	public void set_ownerTelephone( String _ownerTelephone )
+	{
+		this._ownerTelephone = _ownerTelephone;
+	}
+
+	public String get_address()
+	{
+		return _address;
+	}
+
+	public void set_address( String _address )
+	{
+		this._address = _address;
+	}
+
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
 	{
 		this.load( rsSuper,con,level );
@@ -406,17 +455,11 @@ public abstract class Advertisement extends Savable
 	public static Advertisement getInstance( ResultSet rsSuper, Connection con ) throws SQLException
 	{
 		String product = rsSuper.getString( "PRODUCT_CODE" );
-		long advId = rsSuper.getLong( "ADV_ID" );
 		Advertisement advertisement = null;
 		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ) )
 		{
-			ResultSet vehicleRs = getResultSet( product, con, advId );
 			advertisement = new VehicleAdvertisement();
-			if( vehicleRs.next())
-			{
-				advertisement.loadAll( vehicleRs, rsSuper, con, 1 );
-			}
-
+			advertisement.load( rsSuper, con, 1 );
 		}
 		return advertisement;
 	}
@@ -451,5 +494,12 @@ public abstract class Advertisement extends Savable
 			advImage.load( rs, con, 1 );
 			this.advImages.add( advImage );
 		}
+	}
+	private void loadOwnerDetails( Connection con,ResultSet rs, int level ) throws SQLException
+	{
+			this._ownerName = rs.getString( "NAME" );
+			this._ownerTelephone = rs.getString( "TELEPHONE" );
+			this._ownerEmail = rs.getString( "EMAIL" );
+			this._address = rs.getString( "ADDRESS" );
 	}
 }

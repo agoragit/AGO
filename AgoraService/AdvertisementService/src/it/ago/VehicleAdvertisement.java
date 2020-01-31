@@ -288,6 +288,7 @@ public class VehicleAdvertisement extends Advertisement
 	 */
 	public void load( ResultSet rs, Connection con, int level ) throws SQLException
 	{
+		super.load( rs, con, level );
 		this._status = Savable.UNCHANGED;
 		//this.advId = rs.getLong( "ADV_ID" );
 		this.v_typeId = rs.getInt( "TYPE_ID" );

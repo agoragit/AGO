@@ -13,7 +13,7 @@ import javax.ws.rs.core.UriInfo;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@Path("/advcontroller")
+@Path("/advController")
 public class AdvertisementController
 {
 	static

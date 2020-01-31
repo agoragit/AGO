@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AdvertisementSearchHandler
 {
-	public static Response getAdvertisementById( String sessionId, long id ) throws JSONException
+	public static Response getAdvertisementById( boolean isValidSession, long id ) throws JSONException
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -28,7 +28,7 @@ public class AdvertisementSearchHandler
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
+				Advertisement advertisement = Advertisement.getInstance( rs, con, isValidSession ? 1 : 0 );
 				agoError.setResult( advertisement );
 			}
 		}
@@ -43,7 +43,7 @@ public class AdvertisementSearchHandler
 		return agoError._getErrorResponse();
 	}
 
-	public static Response getAdvertisementByOwnerId( String sessionId, long ownerId ) throws JSONException
+	public static Response getAdvertisementByOwnerId( boolean isValidSession, long ownerId ) throws JSONException
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -58,7 +58,7 @@ public class AdvertisementSearchHandler
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
+				Advertisement advertisement = Advertisement.getInstance( rs, con, isValidSession ? 1 : 0 );
 				advertisements.add( advertisement );
 			}
 		}
@@ -73,7 +73,7 @@ public class AdvertisementSearchHandler
 		agoError.setResult( advertisements );
 		return agoError._getErrorResponse();
 	}
-	public static Response universalAdvSearch( String sessionId, UriInfo uriInfo)
+	public static Response universalAdvSearch( boolean isValidSession, UriInfo uriInfo)
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -87,7 +87,7 @@ public class AdvertisementSearchHandler
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
+				Advertisement advertisement = Advertisement.getInstance( rs, con, isValidSession ? 1: 0 );
 				advertisements.add( advertisement );
 			}
 		}

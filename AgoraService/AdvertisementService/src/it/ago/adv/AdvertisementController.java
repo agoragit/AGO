@@ -11,11 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Path("/advcontroller")
 public class AdvertisementController
@@ -78,20 +74,12 @@ public class AdvertisementController
 	@Produces("application/json")
 	public Response getAdvertisementById( @PathParam("sessionId") String sessionId, @PathParam("id") long id ) throws JSONException
 	{
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs  = null;
 		AgoError agoError = new AgoError( AgoError.SUCCESS, id+"" );
-		if(!AgoSession._isValidSession( sessionId ))
-		{
-			agoError.setErrorMessage( AgoError.ERROR, "invalid session", false );
-			return agoError._getErrorResponse();
-		}
 		if( id < 1 )
 		{
 			return agoError._getErrorResponse();
 		}
-		return AdvertisementSearchHandler.getAdvertisementById( sessionId, id );
+		return AdvertisementSearchHandler.getAdvertisementById( AgoSession._isValidSession( sessionId ), id );
 	}
 	@Path("getAdvByOwnerId/{sessionId}/{ownerId}")
 	@POST
@@ -103,12 +91,7 @@ public class AdvertisementController
 		{
 			return agoError._getErrorResponse();
 		}
-		if( !AgoSession._isValidSession( sessionId ) )
-		{
-			agoError.setErrorMessage( AgoError.ERROR, "invalid session", true );
-			return agoError._getErrorResponse();
-		}
-		return AdvertisementSearchHandler.getAdvertisementByOwnerId( sessionId, ownerId );
+		return AdvertisementSearchHandler.getAdvertisementByOwnerId( AgoSession._isValidSession( sessionId ), ownerId );
 	}
 
 	@Path("universalAdvSearch/{sessionId}")
@@ -116,8 +99,7 @@ public class AdvertisementController
 	@Produces("application/json")
 	public Response universalAdvertisementSearch( @PathParam("sessionId") String sessionId, @Context UriInfo uriInfo ) throws JSONException
 	{
-		AgoError agoError = new AgoError( AgoError.SUCCESS, "not implemented" );
-		return  AdvertisementSearchHandler.universalAdvSearch( sessionId,uriInfo );
+		return  AdvertisementSearchHandler.universalAdvSearch( AgoSession._isValidSession( sessionId ),uriInfo );
 	}
 }
 

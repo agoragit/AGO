@@ -1,7 +1,6 @@
 package it.ago;
 
 import it.ago.adv.DBQuearies;
-import it.ago.user.Owner;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
@@ -239,7 +238,10 @@ public abstract class Advertisement extends Savable
 		this.price = rs.getDouble( "PRICE" );
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
-		loadOwnerDetails( con, rs, level );
+		if( level > 0 )
+		{
+			loadOwnerDetails( rs );
+		}
 	}
 
 	public long getAdvId()
@@ -452,14 +454,14 @@ public abstract class Advertisement extends Savable
 		return false;
 	}
 
-	public static Advertisement getInstance( ResultSet rsSuper, Connection con ) throws SQLException
+	public static Advertisement getInstance( ResultSet rsSuper, Connection con, int level ) throws SQLException
 	{
 		String product = rsSuper.getString( "PRODUCT_CODE" );
 		Advertisement advertisement = null;
 		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ) )
 		{
 			advertisement = new VehicleAdvertisement();
-			advertisement.load( rsSuper, con, 1 );
+			advertisement.load( rsSuper, con, level );
 		}
 		return advertisement;
 	}
@@ -495,7 +497,7 @@ public abstract class Advertisement extends Savable
 			this.advImages.add( advImage );
 		}
 	}
-	private void loadOwnerDetails( Connection con,ResultSet rs, int level ) throws SQLException
+	private void loadOwnerDetails( ResultSet rs ) throws SQLException
 	{
 			this._ownerName = rs.getString( "NAME" );
 			this._ownerTelephone = rs.getString( "TELEPHONE" );

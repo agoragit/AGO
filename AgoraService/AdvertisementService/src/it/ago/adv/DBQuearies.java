@@ -15,7 +15,7 @@ import java.util.List;
 public class DBQuearies
 {
 	public static String Q_SEARCH_ADV_BY_ID = "SELECT * FROM AGO_ADVERTISEMENT WHERE ADV_ID  = ?";
-	public static String Q_SEARCH_ADV_BY_OWNER_ID = "SELECT * FROM AGO_ADVERTISEMENT WHERE OWNER_ID  = ?";
+	public static String Q_SEARCH_ADV_BY_OWNER_ID = "SELECT * FROM AGO_ADVERTISEMENT,OWNER AGO_ADVERTISEMENT.OWNER_ID = OWNER.OWNER_ID WHERE AGO_ADVERTISEMENT.OWNER_ID  = ?";
 	public static String Q_SEARCH_VEHI_ADV_BY_ADV_ID = "SELECT * FROM VEHICLE_ADVERTISEMENT WHERE ADV_ID  = ?";
 
 	private static String getUniversalAdvSearchQuary( List<String> advTypes, boolean isAll, UriInfo uriInfo )

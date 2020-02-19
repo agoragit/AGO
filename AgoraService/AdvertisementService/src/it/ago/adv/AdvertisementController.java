@@ -97,7 +97,7 @@ public class AdvertisementController
 					//generate advImages before save advertisement to get advId
 					AdvImage advImage = new AdvImage();
 					advImage.setImageId( i++ );
-					advImage.setImageUrl( formDataBodyPart.getFormDataContentDisposition().getFileName() );
+					advImage.setImageUrl( formDataBodyPart.getFormDataContentDisposition().getFileName().replace( " ","" ) );
 					advImages.add( advImage );
 				}
 				advertisement.setAdvImages( advImages );
@@ -123,7 +123,7 @@ public class AdvertisementController
 						{
 							targetFile.mkdirs();
 						}
-						targetFile = new File( System.getenv("CATALINA_HOME")+"\\webapps\\",SystemConfig.ADV_IMAGE_UPLOAD_PATH + advertisement.getProductCode() + "\\" + advertisement.getAdvId() +"\\"+formDataBodyPart.getFormDataContentDisposition().getFileName() );
+						targetFile = new File( System.getenv("CATALINA_HOME")+"\\webapps\\",SystemConfig.ADV_IMAGE_UPLOAD_PATH + advertisement.getProductCode() + "\\" + advertisement.getAdvId() +"\\"+formDataBodyPart.getFormDataContentDisposition().getFileName().replace( " ","" ) );
 						java.nio.file.Files.copy(
 								instream,
 								targetFile.toPath(),

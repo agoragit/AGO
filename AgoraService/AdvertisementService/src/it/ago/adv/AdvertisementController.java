@@ -188,14 +188,14 @@ public class AdvertisementController
 		{
 			return new AgoError( AgoError.ERROR, "invalid request" )._getErrorResponse();
 		}
-		String sessionId = UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_SESSION_ID );
-		boolean isVald = AgoSession._isValidSession( sessionId );
-		if( sessionId != null && !isVald)
-		{
-			return  new AgoError( AgoError.ERROR, "Session Expired" )._getErrorResponse();
-		}
-		// invalid session restricted some sensitive data. Valid session can return sensitive data
-		return  AdvertisementSearchHandler.universalAdvSearch( isVald,uriInfo );
+//		String sessionId = UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_SESSION_ID );
+//		boolean isVald = AgoSession._isValidSession( sessionId );
+//		if( sessionId != null && !isVald)
+//		{
+//			return  new AgoError( AgoError.ERROR, "Session Expired" )._getErrorResponse();
+//		}
+		// invalid session restricted some sensitive data. Valid session can return sensitive data// currently it is true
+		return  AdvertisementSearchHandler.universalAdvSearch( true,uriInfo );
 	}
 }
 

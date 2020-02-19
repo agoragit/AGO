@@ -49,12 +49,18 @@ public class AdvertisementController
 	@Produces("application/json")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 
-	public Response createAdvertisement( @Context UriInfo uriInfo, @PathParam("sessionId") String sessionId, @PathParam("type") String type, FormDataMultiPart uploadedInputStream ) throws JSONException
+	public Response createAdvertisement( @Context UriInfo uriInfo, @PathParam("type") String type, FormDataMultiPart uploadedInputStream ) throws JSONException
 	{
 		AgoError agoError = new AgoError( AgoError.ERROR, type );
-		if( !AgoSession._isValidSession( sessionId ) || uriInfo == null || uriInfo.getQueryParameters() == null || uriInfo.getQueryParameters().isEmpty() )
+		if( uriInfo == null || uriInfo.getQueryParameters() == null || uriInfo.getQueryParameters().isEmpty() )
 		{
-			agoError.setErrorMessage( AgoError.ERROR, "invalid session or request", false );
+			agoError.setErrorMessage( AgoError.ERROR, "invalid request", false );
+			return agoError._getErrorResponse();
+		}
+		String sessionId = UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_SESSION_ID );
+		if( !AgoSession._isValidSession( sessionId ))
+		{
+			agoError.setErrorMessage( AgoError.ERROR, "Session Expired", false );
 			return agoError._getErrorResponse();
 		}
 		if( AgoSessionCache.getSession( sessionId ).getUserId() != UriInfoUtils.getLongValue( uriInfo, "ownerId" ) )
@@ -147,7 +153,7 @@ public class AdvertisementController
 		return agoError._getErrorResponse();
 	}
 
-	@Path("getAdvById/{sessionId}/{id}")
+	@Path("getAdvById/{id}")
 	@POST
 	@Produces("application/json")
 	public Response getAdvertisementById( @PathParam("sessionId") String sessionId, @PathParam("id") long id ) throws JSONException
@@ -173,12 +179,23 @@ public class AdvertisementController
 		return AdvertisementSearchHandler.getAdvertisementByOwnerId( AgoSession._isValidSession( sessionId ), ownerId );
 	}
 
-	@Path("universalAdvSearch/{sessionId}")
+	@Path("universalAdvSearch/")
 	@POST
 	@Produces("application/json")
-	public Response universalAdvertisementSearch( @PathParam("sessionId") String sessionId, @Context UriInfo uriInfo ) throws JSONException
+	public Response universalAdvertisementSearch(  @Context UriInfo uriInfo ) throws JSONException
 	{
-		return  AdvertisementSearchHandler.universalAdvSearch( AgoSession._isValidSession( sessionId ),uriInfo );
+		if( uriInfo == null || uriInfo.getQueryParameters() == null || uriInfo.getQueryParameters().isEmpty() )
+		{
+			return new AgoError( AgoError.ERROR, "invalid request" )._getErrorResponse();
+		}
+		String sessionId = UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_SESSION_ID );
+		boolean isVald = AgoSession._isValidSession( sessionId );
+		if( sessionId != null && !isVald)
+		{
+			return  new AgoError( AgoError.ERROR, "Session Expired" )._getErrorResponse();
+		}
+		// invalid session restricted some sensitive data. Valid session can return sensitive data
+		return  AdvertisementSearchHandler.universalAdvSearch( isVald,uriInfo );
 	}
 }
 

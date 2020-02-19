@@ -6,6 +6,7 @@ public class Constants
 //---------------------PRODUCT TYPES
 	public static String ADV_PROD_VEHICLE = "VEHI";
 	public static final String ADV_PRODUCT_ANY = "ANY";
+	public static final String PARAM_SESSION_ID = "sessionId";
 
 
 	public static final String PARAM_PRODUCT_TYPES = "productTypes";

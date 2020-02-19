@@ -35,6 +35,7 @@ public class AdvertisementCreator
 	{
 		advertisement.setActive( true );
 		advertisement.setCityCode( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_CITY_CODE) );
+		advertisement.setAdvId( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_ADV_ID) );
 		advertisement.setCreatedDate( new Timestamp( System.currentTimeMillis() ) );
 		advertisement.setLastModified( advertisement.getCreatedDate() );
 		advertisement.setLatitude( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_LATITUDE ) );

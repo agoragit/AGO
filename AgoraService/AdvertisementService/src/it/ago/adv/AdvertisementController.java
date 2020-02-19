@@ -7,6 +7,7 @@ import it.ago.*;
 import it.ago.cache.AgoCacheRefresher;
 import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
+import it.ago.utils.ValidationUtils;
 import it.ago.utils.db.Savable;
 import org.json.JSONException;
 
@@ -68,6 +69,13 @@ public class AdvertisementController
 			List<AdvImage> advImages = new ArrayList<>(  );
 			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
 			con.setAutoCommit( false );
+
+			if( !ValidationUtils.validateAdvertisementOwner( AgoSession.loadSession( sessionId ).getUserId(),  UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_ADV_ID), con, UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS), UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_PRODUCT_CODE) ) )
+			{
+				agoError.setErrorMessage( AgoError.ERROR, "wrong owner trying to change advertisement or incorrect advid or product", false );
+				return agoError._getErrorResponse();
+			}
+
 			Advertisement advertisement = AdvertisementCreator.generateAdvertisementItem( type, uriInfo );
 			if( Savable.NEW == UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) && bodyPartList != null )
 			{

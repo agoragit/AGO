@@ -195,7 +195,7 @@ public abstract class Advertisement extends Savable
 		ps.setTimestamp( ++count, this.createdDate );
 		ps.setTimestamp( ++count, this.lastModified );
 		ps.setString( ++count, this.productCode );
-		ps.setLong( ++count, this.ownerId );
+		//ps.setLong( ++count, this.ownerId ); // owner cannot change
 		if ( this.longtute == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );

@@ -47,6 +47,8 @@ public class AdvertisementCreator
 		advertisement.setValidTo( UriInfoUtils.getTimestamp( uriInfo, Constants.PARAM_ADV_VALID_TO ) );
 		advertisement.setAddress( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_ADDRESS) );
 		advertisement.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
+		advertisement.setRent( UriInfoUtils.getBooleanValue( uriInfo, Constants.PARAM_ADV_RENT ) );
+
 	}
 	public static VehicleAdvertisement generateVehicleAdvertisement( UriInfo uriInfo )
 	{

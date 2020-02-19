@@ -57,6 +57,8 @@ public class DBQuearies
 			sb.append( " AND AA.PRICE           >= ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_PRICE_TO) )
 			sb.append( " AND AA.PRICE           <= ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_RENT) )
+			sb.append( " AND AA.RENT         	 = ? " );
 
 		// add product wise filter columns here
 		//_________________________________________________
@@ -123,6 +125,7 @@ public class DBQuearies
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.ARRAY, uriInfo, Constants.PARAM_ADV_CITY_CODE );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_FROM );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_ADV_RENT);
 
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )

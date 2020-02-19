@@ -32,6 +32,7 @@ public abstract class Advertisement extends Savable
 	private String _ownerTelephone;
 	private String _ownerAddress;
 	private String address;
+	private boolean isRent;
 
 
 
@@ -120,7 +121,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE, "
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
-				+ "PRICE )VALUES(?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "PRICE, ADDRESS, RENT )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -150,6 +151,8 @@ public abstract class Advertisement extends Savable
 		}
 		ps.setString( ++count, this.cityCode );
 		ps.setDouble( ++count, this.price );
+		ps.setString( ++count, this.address );
+		ps.setBoolean( ++count, this.isRent );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -185,7 +188,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE = ?, "
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
-				+ "PRICE = ?, ADDRESS = ? WHERE "
+				+ "PRICE = ?, ADDRESS = ?, RENT = ? WHERE "
 				+ "ADV_ID = ? ";
 
 		int count = 0;
@@ -216,6 +219,7 @@ public abstract class Advertisement extends Savable
 		ps.setString( ++count, this.cityCode );
 		ps.setDouble( ++count, this.price );
 		ps.setString( ++count, this.address );
+		ps.setBoolean( ++count, this.isRent );
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -254,6 +258,7 @@ public abstract class Advertisement extends Savable
 		this.cityCode = rs.getString( "CITY_CODE" );
 		this.price = rs.getDouble( "PRICE" );
 		this.address = rs.getString( "ADDRESS" );
+		this.isRent = rs.getBoolean( "RENT" );
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -451,6 +456,16 @@ public abstract class Advertisement extends Savable
 		this._ownerAddress = _ownerAddress;
 	}
 
+	public boolean isRent()
+	{
+		return isRent;
+	}
+
+	public void setRent( boolean rent )
+	{
+		isRent = rent;
+	}
+
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
 	{
 		this.load( rsSuper,con,level );
@@ -515,14 +530,25 @@ public abstract class Advertisement extends Savable
 	{
 		PreparedStatement ps = null;
 		ResultSet rs  = null;
-		ps = con.prepareStatement( "SELECT * FROM ADV_IMAGE WHERE ADV_ID = ?" );
-		ps.setLong( 1, this.getAdvId() );
-		rs = ps.executeQuery();
-		while ( rs.next() )
+		try
 		{
-			AdvImage advImage = new AdvImage();
-			advImage.load( rs, con, 1 );
-			this.advImages.add( advImage );
+			ps = con.prepareStatement( "SELECT * FROM ADV_IMAGE WHERE ADV_ID = ?" );
+			ps.setLong( 1, this.getAdvId() );
+			rs = ps.executeQuery();
+			while ( rs.next() )
+			{
+				AdvImage advImage = new AdvImage();
+				advImage.load( rs, con, 1 );
+				this.advImages.add( advImage );
+			}
+		}
+		catch ( Exception e )
+		{
+
+		}
+		finally
+		{
+			DBConnection.close( null, ps, rs );
 		}
 	}
 	private void loadOwnerDetails( ResultSet rs ) throws SQLException

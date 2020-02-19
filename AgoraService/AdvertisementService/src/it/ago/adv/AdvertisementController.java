@@ -62,6 +62,12 @@ public class AdvertisementController
 			agoError.setErrorMessage( AgoError.ERROR, "invalid session/owner for advertisement created owner - mismatch", false );
 			return agoError._getErrorResponse();
 		}
+		long status = UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS );
+		if( !(status == Savable.NEW || status == Savable.MODIFIED ) )
+		{
+			agoError.setErrorMessage( AgoError.ERROR, "advertisement only support for update and create", false );
+			return agoError._getErrorResponse();
+		}
 		Connection con = null;
 		try
 		{
@@ -77,7 +83,7 @@ public class AdvertisementController
 			}
 
 			Advertisement advertisement = AdvertisementCreator.generateAdvertisementItem( type, uriInfo );
-			if( Savable.NEW == UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) && bodyPartList != null )
+			if( Savable.NEW == status && bodyPartList != null )
 			{
 				int i = 0;
 				for ( FormDataBodyPart formDataBodyPart : bodyPartList )
@@ -98,7 +104,7 @@ public class AdvertisementController
 
 			advertisement.save( con );
 
-			if( Savable.NEW == UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) && bodyPartList!= null )
+			if( Savable.NEW == status && bodyPartList!= null )
 			{
 				try
 				{

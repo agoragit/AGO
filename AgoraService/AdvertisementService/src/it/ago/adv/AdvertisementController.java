@@ -89,6 +89,7 @@ public class AdvertisementController
 			}
 
 			Advertisement advertisement = AdvertisementCreator.generateAdvertisementItem( type, uriInfo );
+
 			if( Savable.NEW == status && bodyPartList != null )
 			{
 				int i = 0;

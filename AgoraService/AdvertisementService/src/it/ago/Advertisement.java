@@ -30,7 +30,8 @@ public abstract class Advertisement extends Savable
 	private String _ownerName;
 	private String _ownerEmail;
 	private String _ownerTelephone;
-	private String _address;
+	private String _ownerAddress;
+	private String address;
 
 
 
@@ -184,7 +185,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE = ?, "
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
-				+ "PRICE = ? WHERE "
+				+ "PRICE = ?, ADDRESS = ? WHERE "
 				+ "ADV_ID = ? ";
 
 		int count = 0;
@@ -214,6 +215,7 @@ public abstract class Advertisement extends Savable
 		}
 		ps.setString( ++count, this.cityCode );
 		ps.setDouble( ++count, this.price );
+		ps.setString( ++count, this.address );
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -251,6 +253,7 @@ public abstract class Advertisement extends Savable
 		}
 		this.cityCode = rs.getString( "CITY_CODE" );
 		this.price = rs.getDouble( "PRICE" );
+		this.address = rs.getString( "ADDRESS" );
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -428,14 +431,24 @@ public abstract class Advertisement extends Savable
 		this._ownerTelephone = _ownerTelephone;
 	}
 
-	public String get_address()
+	public String getAddress()
 	{
-		return _address;
+		return address;
 	}
 
-	public void set_address( String _address )
+	public void setAddress( String address )
 	{
-		this._address = _address;
+		this.address = address;
+	}
+
+	public String get_ownerAddress()
+	{
+		return _ownerAddress;
+	}
+
+	public void set_ownerAddress( String _ownerAddress )
+	{
+		this._ownerAddress = _ownerAddress;
 	}
 
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
@@ -517,6 +530,6 @@ public abstract class Advertisement extends Savable
 			this._ownerName = rs.getString( "NAME" );
 			this._ownerTelephone = rs.getString( "TELEPHONE" );
 			this._ownerEmail = rs.getString( "EMAIL" );
-			this._address = rs.getString( "ADDRESS" );
+			this._ownerAddress = rs.getString( "ADDRESS" );
 	}
 }

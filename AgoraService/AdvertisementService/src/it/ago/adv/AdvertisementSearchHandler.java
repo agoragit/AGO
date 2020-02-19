@@ -85,11 +85,14 @@ public class AdvertisementSearchHandler
 			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
 			ps = DBQuearies.getUniversalAdvSearchStatement(con,uriInfo);
 			rs  = ps.executeQuery();
+			int c = 0;
 			while( rs.next() )
 			{
 				Advertisement advertisement = Advertisement.getInstance( rs, con, isValidSession ? 1: 0 );
 				advertisements.add( advertisement );
+				c++;
 			}
+			agoError.setErrorMessage( AgoError.SUCCESS, String.valueOf( c ), true );
 		}
 		catch ( Exception e )
 		{

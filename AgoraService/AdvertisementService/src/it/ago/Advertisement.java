@@ -1,6 +1,7 @@
 package it.ago;
 
 import it.ago.adv.DBQuearies;
+import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
@@ -84,6 +85,20 @@ public abstract class Advertisement extends Savable
 					se.getMessage(),
 					se.getSQLState(),
 					se.getErrorCode() );
+		}
+
+		if( this.status == Savable.NEW )
+		{
+			for( AdvImage advImage : this.advImages )
+			{
+				advImage.setStatus( Savable.NEW );
+				advImage.setAdvId( advId );
+				//Image path should be change in both places -> inside the advrtersement and main saving method
+				advImage.setImageUrl( this.productCode+"/"+this.advId+"/"+advImage.getImageUrl() );
+				advImage.save( con );
+				advImage.setImageUrl( SystemConfig.ADV_ROOT_URL+SystemConfig.ADV_IMAGE_UPLOAD_PATH.replace( "\\", "/" )+advImage.getImageUrl() );
+
+			}
 		}
 	}
 

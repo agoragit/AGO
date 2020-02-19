@@ -15,8 +15,11 @@ public class SystemConfig
 
 	public static int AGO_SESSION_TIME_OUT = 1;
 	public static int AGO_CACHE_REFRESH_TIME = 1;
+	public static int ADV_MAX_UPLOAD_IMAGE_COUNT = 5;
+	public static String ADV_IMAGE_UPLOAD_PATH = "resources\\images\\adv\\";
+	public static String ADV_ROOT_URL= "http://localhost:8080/";
 
-	public static final int SERVICE_ADVERTISEMENT = 1;
+	public static final int SERVICE_ADVERTISEMENT = 0;
 	public static final int SERVICE_SICURITY = 1;
 
 	public static void loadConfigurations( int service )

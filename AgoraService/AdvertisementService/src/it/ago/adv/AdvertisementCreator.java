@@ -4,7 +4,6 @@ import it.ago.Advertisement;
 import it.ago.Constants;
 import it.ago.UriInfoUtils;
 import it.ago.VehicleAdvertisement;
-import it.ago.utils.db.Savable;
 
 import javax.ws.rs.core.UriInfo;
 import java.sql.Timestamp;
@@ -45,7 +44,7 @@ public class AdvertisementCreator
 		advertisement.setProductCode( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_PRODUCT_CODE ) );
 		advertisement.setValidFrom( UriInfoUtils.getTimestamp( uriInfo, Constants.PARAM_ADV_VALID_FROM ) );
 		advertisement.setValidTo( UriInfoUtils.getTimestamp( uriInfo, Constants.PARAM_ADV_VALID_TO ) );
-		advertisement.setStatus( Savable.NEW );
+		advertisement.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
 	}
 	public static VehicleAdvertisement generateVehicleAdvertisement( UriInfo uriInfo )
 	{
@@ -62,7 +61,7 @@ public class AdvertisementCreator
 		vehicleAdv.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR ) );
 		vehicleAdv.setTransmission( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_TRANSMISSION ));
 		vehicleAdv.setTypeId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_TYPE_ID) );
-		vehicleAdv.setStatus( Savable.NEW );
+		vehicleAdv.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
 
 		return vehicleAdv;
 

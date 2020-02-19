@@ -28,6 +28,9 @@ public class Constants
 	public static final String PARAM_ADV_PRICE_TO  ="priceTo";
 	public static final String PARAM_ADV_CREATED_DATE_FROM = "createdDateFrom";
 	public static final String PARAM_ADV_CREATED_DATE_TO = "createdDateTo";
+	public static final String PARAM_ADV_IMAGE = "image";
+	public static final String PARAM_ADV_SAVABLE_STATUS = "status";
+
 
 	public static final String PARAM_ADV_QUARY_OFFSET = "offset";
 	public static final String PARAM_ADV_QUARY_ROW_COUNT= "rowCount";

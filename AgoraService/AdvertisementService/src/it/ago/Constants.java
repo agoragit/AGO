@@ -59,6 +59,12 @@ public class Constants
 	public static final String PARAM_VEHI_MILLAGE_FROM = "vMillageFrom";
 	public static final String PARAM_VEHI_MILLAGE_TO = "vMillageTo";
 
+	public static final String PARAM_ADV_IMAGE_ID = "imageId";
+	public static final String PARAM_ADV_IMAGE_URL = "imageUrl";
+	public static final String PARAM_ADV_IMAGE_ADV_ID = "advId";
+	public static final String PARAM_ADV_IMAGE_STATUS = "status";
+
+
 
 
 	//---------------VEHICLE PROPERTIES-----------------------
@@ -85,6 +91,7 @@ public class Constants
 	public static String VEHI_CONDITION_NEW= "NEW";
 	public static String VEHI_CONDITION_USED ="USED";
 	public static String VEHI_CONDITION_RECONDITION ="RECONDITION";
+	public static String VEHI_CONDITION_OTHER ="OTHER";
 	//-----------------------------------------------------------------
 
 

@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class AdvertisementController
 		new AgoCacheRefresher().start();
 	}
 
-	@Path("createAdv/{sessionId}/{type}")
+	@Path("createAdv/{type}")
 	@POST
 	@Produces("application/json")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -68,7 +70,7 @@ public class AdvertisementController
 			agoError.setErrorMessage( AgoError.ERROR, "invalid session/owner for advertisement created owner - mismatch", false );
 			return agoError._getErrorResponse();
 		}
-		long status = UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS );
+		int status = UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS );
 		if( !(status == Savable.NEW || status == Savable.MODIFIED ) )
 		{
 			agoError.setErrorMessage( AgoError.ERROR, "advertisement only support for update and create", false );
@@ -100,6 +102,10 @@ public class AdvertisementController
 					advImage.setImageId( i++ );
 					advImage.setImageUrl( formDataBodyPart.getFormDataContentDisposition().getFileName().replace( " ","" ) );
 					advImages.add( advImage );
+					if( i == SystemConfig.ADV_MAX_UPLOAD_IMAGE_COUNT )
+					{
+						break;
+					}
 				}
 				advertisement.setAdvImages( advImages );
 			}
@@ -111,34 +117,13 @@ public class AdvertisementController
 
 			advertisement.save( con );
 
-			if( Savable.NEW == status && bodyPartList!= null )
+			agoError = saveImages( status, bodyPartList, advertisement.getProductCode(), advertisement.getAdvId(), null );
+			if( agoError._isError() )
 			{
-				try
-				{
-					for ( FormDataBodyPart formDataBodyPart : bodyPartList )
-					{
-						//Image path should be change in both places -> inside the advrtersement and here
-						InputStream instream = ( ( BodyPartEntity ) formDataBodyPart.getEntity() ).getInputStream();
-						File targetFile = new File( System.getenv("CATALINA_HOME")+"\\webapps\\",SystemConfig.ADV_IMAGE_UPLOAD_PATH + advertisement.getProductCode() + "\\" + advertisement.getAdvId()  );
-						if(!targetFile.exists())
-						{
-							targetFile.mkdirs();
-						}
-						targetFile = new File( System.getenv("CATALINA_HOME")+"\\webapps\\",SystemConfig.ADV_IMAGE_UPLOAD_PATH + advertisement.getProductCode() + "\\" + advertisement.getAdvId() +"\\"+formDataBodyPart.getFormDataContentDisposition().getFileName().replace( " ","" ) );
-						java.nio.file.Files.copy(
-								instream,
-								targetFile.toPath(),
-								StandardCopyOption.REPLACE_EXISTING );
-						instream.close();
-					}
-				}
-				catch ( IOException e )
-				{
-					agoError.setErrorMessage( AgoError.ERROR, "Error creating adv. Image upload failed", false );
-					con.rollback();
-					return agoError._getErrorResponse();
-				}
+				con.rollback();
+				return agoError._getErrorResponse();
 			}
+
 			con.commit();
 			agoError.setErrorMessage( AgoError.SUCCESS,"Advertisement created!", true );
 			agoError.setResult( advertisement );
@@ -197,6 +182,137 @@ public class AdvertisementController
 //		}
 		// invalid session restricted some sensitive data. Valid session can return sensitive data// currently it is true
 		return  AdvertisementSearchHandler.universalAdvSearch( true,uriInfo );
+	}
+	@Path("modifyAdvImage/{type}")
+	@POST
+	@Produces("application/json")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response modifyAdvImage( @Context UriInfo uriInfo, @PathParam("type") String type, FormDataMultiPart uploadedInputStream ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.SUCCESS, type );
+		if( uriInfo == null || uriInfo.getQueryParameters() == null || uriInfo.getQueryParameters().isEmpty() || uploadedInputStream == null )
+		{
+			agoError.setErrorMessage( AgoError.ERROR, "invalid request", false );
+			return agoError._getErrorResponse();
+		}
+		String sessionId = UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_SESSION_ID );
+		if( !AgoSession._isValidSession( sessionId ))
+		{
+			agoError.setErrorMessage( AgoError.ERROR, "Session Expired", false );
+			return agoError._getErrorResponse();
+		}
+		List<FormDataBodyPart> formDataBodyPart = uploadedInputStream.getFields( Constants.PARAM_ADV_IMAGE );
+
+		Connection con = null;
+		try
+		{
+
+			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
+			if( !ValidationUtils.validateAdvertisementOwner( AgoSession.loadSession( sessionId ).getUserId(),  UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_ADV_IMAGE_ADV_ID), con, Savable.MODIFIED, type ) )
+			{
+				agoError.setErrorMessage( AgoError.ERROR, "wrong owner trying to change advertisement images or incorrect advid or product", false );
+				return agoError._getErrorResponse();
+			}
+			AdvImage advImage = new AdvImage();
+			advImage.setAdvId( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_ADV_IMAGE_ADV_ID ) );
+			advImage.setImageId( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_ADV_IMAGE_ID) );
+			advImage = loadAdvImageUrl( advImage, con );
+			advImage.setStatus( Savable.MODIFIED );
+			saveImages( Savable.MODIFIED , formDataBodyPart, type, advImage.getAdvId(), advImage.getImageUrl() );
+			advImage.setImageUrl(  type + "/" + advImage.getAdvId() +"/"+formDataBodyPart.get( 0 ).getContentDisposition().getFileName().replace( " ","" ) );
+			advImage.save( con );
+			agoError.setErrorMessage( AgoError.SUCCESS, advImage.getImageUrl(), false );
+
+		}
+		catch ( Exception e )
+		{
+			agoError.setErrorMessage( AgoError.ERROR, e.getMessage(), false );
+		}
+		finally
+		{
+			DBConnection.close( con );
+		}
+		return agoError._getErrorResponse();
+	}
+
+	private AgoError saveImages( int status, List<FormDataBodyPart> formDataBodyParts, String productCode, Long advId, String imgPathLoadFromDBToDelete )
+	{
+		AgoError agoError = new AgoError( AgoError.SUCCESS,"" );
+		if( Savable.NEW == status && formDataBodyParts!= null )
+		{
+			try
+			{
+				int ic = 0;
+				for ( FormDataBodyPart formDataBodyPart : formDataBodyParts )
+				{
+					//Image path should be change in both places -> inside the advrtersement and here
+					InputStream instream = ( ( BodyPartEntity ) formDataBodyPart.getEntity() ).getInputStream();
+					File targetFile = new File( System.getenv("CATALINA_HOME")+"\\webapps\\",SystemConfig.ADV_IMAGE_UPLOAD_PATH + productCode + "\\" + advId );
+					if(!targetFile.exists())
+					{
+						targetFile.mkdirs();
+					}
+					targetFile = new File( System.getenv("CATALINA_HOME")+"\\webapps\\",SystemConfig.ADV_IMAGE_UPLOAD_PATH + productCode + "\\" + advId +"\\"+formDataBodyPart.getFormDataContentDisposition().getFileName().replace( " ","" ) );
+					java.nio.file.Files.copy(
+							instream,
+							targetFile.toPath(),
+							StandardCopyOption.REPLACE_EXISTING );
+					instream.close();
+					ic++;
+					if( ic == SystemConfig.ADV_MAX_UPLOAD_IMAGE_COUNT )
+					{
+						break;
+					}
+				}
+			}
+			catch ( IOException e )
+			{
+				agoError.setErrorMessage( AgoError.ERROR, "Error creating adv. Image upload failed", false );
+				return agoError;
+			}
+		}
+		else if ( Savable.MODIFIED == status && formDataBodyParts!= null )
+		{
+			if(imgPathLoadFromDBToDelete == null )
+			{
+				agoError.setErrorMessage( AgoError.ERROR, "incorect image path", true );
+				return agoError;
+			}
+			deleteImage( System.getenv( "CATALINA_HOME" ) + "\\webapps\\" + SystemConfig.ADV_IMAGE_UPLOAD_PATH + imgPathLoadFromDBToDelete.replace( "/", "\\" ) );
+			return saveImages( Savable.NEW, formDataBodyParts, productCode, advId,null );
+		}
+		return agoError;
+	}
+	private AdvImage loadAdvImageUrl( AdvImage advImage, Connection con)
+	{
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try
+		{
+			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
+			ps = con.prepareStatement( DBQuearies.Q_LOAD_ADV_IMAGE );
+			ps.setLong( 1, advImage.getAdvId() );
+			ps.setLong( 2, advImage.getImageId() );
+			rs = ps.executeQuery();
+			if(rs.next())
+			{
+				advImage.setImageUrl( rs.getString( "IMAGE_URL" ) );
+			}
+		}
+		catch ( Exception e )
+		{
+
+		}
+		finally
+		{
+			DBConnection.close( null,ps,rs );
+		}
+		return advImage;
+	}
+	private  void deleteImage( String path )
+	{
+		File targetFile = new File( path );
+		targetFile.deleteOnExit();
 	}
 }
 

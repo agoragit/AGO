@@ -62,8 +62,10 @@ public class DBQuearies
 		//_________________________________________________
 		if ( isAll || advTypes.contains( Constants.ADV_PROD_VEHICLE ) )
 		{
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_TYPE_ID) )
+			sb.append( " AND VA.TYPE_ID         = ? " );
 			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_BRAND_ID) )
-				sb.append( " AND VA.BRAND_ID         = ? " );
+			sb.append( " AND VA.BRAND_ID         = ? " );
 			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_MODEL_ID) )
 			sb.append( " AND VA.MODEL_ID         = ? " );
 			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR_FROM) )
@@ -125,6 +127,7 @@ public class DBQuearies
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )
 		{
+			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_TYPE_ID );
 			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_BRAND_ID );
 			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_ID );
 			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_FROM );

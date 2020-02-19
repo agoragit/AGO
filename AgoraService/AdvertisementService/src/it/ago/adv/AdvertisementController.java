@@ -43,6 +43,7 @@ public class AdvertisementController
 		SystemConfig.ADV_IMAGE_UPLOAD_PATH = SystemConfig.getString("ADV_IMAGE_UPLOAD_PATH"  );
 		SystemConfig.ADV_MAX_UPLOAD_IMAGE_COUNT = SystemConfig.getInt( "ADV_MAX_UPLOAD_IMAGE_COUNT" );
 		SystemConfig.ADV_ROOT_URL= SystemConfig.getString( "ADV_ROOT_URL" );
+		SystemConfig.ADV_MAX_RESULTS_LIMIT_PER_SEARCH = SystemConfig.getInt( "ADV_MAX_RESULTS_LIMIT_PER_SEARCH" );
 		new AgoCacheRefresher().start();
 	}
 

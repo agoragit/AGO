@@ -18,7 +18,7 @@ public class SystemConfig
 	public static int ADV_MAX_UPLOAD_IMAGE_COUNT = 5;
 	public static String ADV_IMAGE_UPLOAD_PATH = "resources\\images\\adv\\";
 	public static String ADV_ROOT_URL= "http://localhost:8080/";
-
+	public static int ADV_MAX_RESULTS_LIMIT_PER_SEARCH = 100;
 	public static final int SERVICE_ADVERTISEMENT = 0;
 	public static final int SERVICE_SICURITY = 1;
 

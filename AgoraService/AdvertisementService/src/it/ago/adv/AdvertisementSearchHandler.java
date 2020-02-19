@@ -2,6 +2,7 @@ package it.ago.adv;
 
 import it.ago.Advertisement;
 import it.ago.AgoError;
+import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import org.json.JSONException;
 import javax.ws.rs.core.Response;
@@ -91,6 +92,10 @@ public class AdvertisementSearchHandler
 				Advertisement advertisement = Advertisement.getInstance( rs, con, isValidSession ? 1: 0 );
 				advertisements.add( advertisement );
 				c++;
+				if( c > SystemConfig.ADV_MAX_RESULTS_LIMIT_PER_SEARCH  )
+				{
+					break;
+				}
 			}
 			agoError.setErrorMessage( AgoError.SUCCESS, String.valueOf( c ), true );
 		}

@@ -4,6 +4,7 @@ import it.ago.*;
 import it.ago.cache.AgoCacheRefresher;
 import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
+import it.ago.utils.SystemPropertyCache;
 import org.json.JSONException;
 
 import javax.ws.rs.*;
@@ -99,7 +100,7 @@ public class AdvertisementController
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
+				Advertisement advertisement = Advertisement.getInstance( rs, con, 1000 );
 				agoError.setResult( advertisement );
 			}
 		}
@@ -140,7 +141,7 @@ public class AdvertisementController
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con );
+				Advertisement advertisement = Advertisement.getInstance( rs, con, 1000 );
 				advertisements.add( advertisement );
 			}
 		}
@@ -153,6 +154,15 @@ public class AdvertisementController
 			DBConnection.close( con,ps,rs );
 		}
 		agoError.setResult( advertisements );
+		return agoError._getErrorResponse();
+	}
+	@Path("loadProductCategories")
+	@POST
+	@Produces("application/json")
+	public Response loadProductCategories( ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.SUCCESS, "All product List" );
+		agoError.setResult(SystemPropertyCache.getCashProductsList());
 		return agoError._getErrorResponse();
 	}
 }

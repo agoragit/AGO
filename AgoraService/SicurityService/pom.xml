@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
-
     <artifactId>SicurityService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <dependencies>
@@ -20,5 +19,14 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
+    <build>
+        <finalName>SecurityService</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

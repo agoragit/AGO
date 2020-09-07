@@ -18,6 +18,7 @@ public class Owner extends Savable
 	private Timestamp lastLoginTime;
 	private boolean active;
 	private String address;
+	private String name;
 	private int status;
 
 	public Owner()
@@ -35,6 +36,7 @@ public class Owner extends Savable
 		active = false;
 		address = null;
 		status = Savable.NEW;
+		name = null;
 	}
 
 	public void checkValidity() throws SQLException
@@ -99,7 +101,7 @@ public class Owner extends Savable
 				+ "EMAIL, "
 				+ "LAST_LOGIN_TIME, "
 				+ "ACTIVE, "
-				+ "ADDRESS )VALUES(?,?,?,?,?,?,?,? )";
+				+ "ADDRESS,NAME )VALUES(?,?,?,?,?,?,?,?,NAME )";
 		setNextUserId( con );
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
@@ -146,6 +148,14 @@ public class Owner extends Savable
 		{
 			ps.setString( ++count, this.address );
 		}
+		if ( this.name == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.name );
+		}
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -178,7 +188,7 @@ public class Owner extends Savable
 				+ "EMAIL = ?, "
 				+ "LAST_LOGIN_TIME = ?, "
 				+ "ACTIVE = ?, "
-				+ "ADDRESS = ? WHERE "
+				+ "ADDRESS = ?, NAME = ? WHERE "
 				+ "OWNER_ID = ? AND "
 				+ "USERNAME = ? ";
 
@@ -224,6 +234,14 @@ public class Owner extends Savable
 		else
 		{
 			ps.setString( ++count, this.address );
+		}
+		if ( this.name == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.name );
 		}
 		ps.setLong( ++count, this.ownerId );
 		ps.setString( ++count, this.username );
@@ -280,6 +298,14 @@ public class Owner extends Savable
 		else
 		{
 			this.address = rs.getString( "ADDRESS" );
+		}
+		if ( rs.getObject( "NAME" ) == null )
+		{
+			this.name = null;
+		}
+		else
+		{
+			this.name = rs.getString( "NAME" );
 		}
 
 	}
@@ -362,6 +388,16 @@ public class Owner extends Savable
 	public void setAddress( String address )
 	{
 		this.address = address;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName( String name )
+	{
+		this.name = name;
 	}
 
 	public int getStatus()

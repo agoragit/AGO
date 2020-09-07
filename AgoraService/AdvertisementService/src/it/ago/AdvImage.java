@@ -1,5 +1,6 @@
 package it.ago;
 
+import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
@@ -132,7 +133,8 @@ public class AdvImage extends Savable
 		this.status = Savable.UNCHANGED;
 		this.imageId = rs.getLong( "IMAGE_ID" );
 		this.advId = rs.getLong( "ADV_ID" );
-		this.imageUrl = rs.getString( "IMAGE_URL" );
+		this.imageUrl = SystemConfig.ADV_ROOT_URL+SystemConfig.ADV_IMAGE_UPLOAD_PATH.replace( "\\", "/" )+rs.getString( "IMAGE_URL" );
+		this.status  =Savable.UNCHANGED;
 
 	}
 

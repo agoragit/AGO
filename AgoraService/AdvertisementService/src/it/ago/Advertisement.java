@@ -1,11 +1,14 @@
 package it.ago;
 
 import it.ago.adv.DBQuearies;
+import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
 import javax.xml.bind.annotation.XmlType;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlType(name = "Advertisement", namespace = "http://lass")
 public abstract class Advertisement extends Savable
@@ -23,9 +26,19 @@ public abstract class Advertisement extends Savable
 	private String cityCode;
 	private double price;
 	private int status;
+	private List<AdvImage> advImages;
+	private String _ownerName;
+	private String _ownerEmail;
+	private String _ownerTelephone;
+	private String _ownerAddress;
+	private String address;
+	private boolean isRent;
+
+
 
 	public Advertisement()
 	{
+		advImages = new ArrayList<>(  );
 	}
 
 	public void checkValidity() throws SQLException
@@ -75,6 +88,20 @@ public abstract class Advertisement extends Savable
 					se.getSQLState(),
 					se.getErrorCode() );
 		}
+
+		if( this.status == Savable.NEW )
+		{
+			for( AdvImage advImage : this.advImages )
+			{
+				advImage.setStatus( Savable.NEW );
+				advImage.setAdvId( advId );
+				//Image path should be change in both places -> inside the advrtersement and main saving method
+				advImage.setImageUrl( this.productCode+"/"+this.advId+"/"+advImage.getImageUrl() );
+				advImage.save( con );
+				advImage.setImageUrl( SystemConfig.ADV_ROOT_URL+SystemConfig.ADV_IMAGE_UPLOAD_PATH.replace( "\\", "/" )+advImage.getImageUrl() );
+
+			}
+		}
 	}
 
 	/**
@@ -94,7 +121,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE, "
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
-				+ "PRICE )VALUES(?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "PRICE, ADDRESS, RENT )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -124,6 +151,8 @@ public abstract class Advertisement extends Savable
 		}
 		ps.setString( ++count, this.cityCode );
 		ps.setDouble( ++count, this.price );
+		ps.setString( ++count, this.address );
+		ps.setBoolean( ++count, this.isRent );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -159,7 +188,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE = ?, "
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
-				+ "PRICE = ? WHERE "
+				+ "PRICE = ?, ADDRESS = ?, RENT = ? WHERE "
 				+ "ADV_ID = ? ";
 
 		int count = 0;
@@ -170,7 +199,7 @@ public abstract class Advertisement extends Savable
 		ps.setTimestamp( ++count, this.createdDate );
 		ps.setTimestamp( ++count, this.lastModified );
 		ps.setString( ++count, this.productCode );
-		ps.setLong( ++count, this.ownerId );
+		//ps.setLong( ++count, this.ownerId ); // owner cannot change
 		if ( this.longtute == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
@@ -189,6 +218,8 @@ public abstract class Advertisement extends Savable
 		}
 		ps.setString( ++count, this.cityCode );
 		ps.setDouble( ++count, this.price );
+		ps.setString( ++count, this.address );
+		ps.setBoolean( ++count, this.isRent );
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -226,7 +257,14 @@ public abstract class Advertisement extends Savable
 		}
 		this.cityCode = rs.getString( "CITY_CODE" );
 		this.price = rs.getDouble( "PRICE" );
-
+		this.address = rs.getString( "ADDRESS" );
+		this.isRent = rs.getBoolean( "RENT" );
+		this.status  =Savable.UNCHANGED;
+		loadImages(con);
+		if( level > 0 )
+		{
+			loadOwnerDetails( rs );
+		}
 	}
 
 	public long getAdvId()
@@ -348,6 +386,15 @@ public abstract class Advertisement extends Savable
 	{
 		this.price = price;
 	}
+	public List<AdvImage> getAdvImages()
+	{
+		return advImages;
+	}
+
+	public void setAdvImages( List<AdvImage> advImages )
+	{
+		this.advImages = advImages;
+	}
 
 	public int getStatus()
 	{
@@ -358,6 +405,67 @@ public abstract class Advertisement extends Savable
 	{
 		this.status = status;
 	}
+
+	public String get_ownerName()
+	{
+		return _ownerName;
+	}
+
+	public void set_ownerName( String _ownerName )
+	{
+		this._ownerName = _ownerName;
+	}
+
+	public String get_ownerEmail()
+	{
+		return _ownerEmail;
+	}
+
+	public void set_ownerEmail( String _ownerEmail )
+	{
+		this._ownerEmail = _ownerEmail;
+	}
+
+	public String get_ownerTelephone()
+	{
+		return _ownerTelephone;
+	}
+
+	public void set_ownerTelephone( String _ownerTelephone )
+	{
+		this._ownerTelephone = _ownerTelephone;
+	}
+
+	public String getAddress()
+	{
+		return address;
+	}
+
+	public void setAddress( String address )
+	{
+		this.address = address;
+	}
+
+	public String get_ownerAddress()
+	{
+		return _ownerAddress;
+	}
+
+	public void set_ownerAddress( String _ownerAddress )
+	{
+		this._ownerAddress = _ownerAddress;
+	}
+
+	public boolean isRent()
+	{
+		return isRent;
+	}
+
+	public void setRent( boolean rent )
+	{
+		isRent = rent;
+	}
+
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
 	{
 		this.load( rsSuper,con,level );
@@ -389,20 +497,14 @@ public abstract class Advertisement extends Savable
 		return false;
 	}
 
-	public static Advertisement getInstance( ResultSet rsSuper, Connection con ) throws SQLException
+	public static Advertisement getInstance( ResultSet rsSuper, Connection con, int level ) throws SQLException
 	{
 		String product = rsSuper.getString( "PRODUCT_CODE" );
-		long advId = rsSuper.getLong( "ADV_ID" );
 		Advertisement advertisement = null;
 		if( Constants.ADV_PROD_VEHICLE.equalsIgnoreCase( product ) )
 		{
-			ResultSet vehicleRs = getResultSet( product, con, advId );
 			advertisement = new VehicleAdvertisement();
-			if( vehicleRs.next())
-			{
-				advertisement.loadAll( vehicleRs, rsSuper, con, 1 );
-			}
-
+			advertisement.load( rsSuper, con, level );
 		}
 		return advertisement;
 	}
@@ -423,5 +525,37 @@ public abstract class Advertisement extends Savable
 		{
 		}
 		return rs;
+	}
+	private void loadImages( Connection con ) throws SQLException
+	{
+		PreparedStatement ps = null;
+		ResultSet rs  = null;
+		try
+		{
+			ps = con.prepareStatement( "SELECT * FROM ADV_IMAGE WHERE ADV_ID = ?" );
+			ps.setLong( 1, this.getAdvId() );
+			rs = ps.executeQuery();
+			while ( rs.next() )
+			{
+				AdvImage advImage = new AdvImage();
+				advImage.load( rs, con, 1 );
+				this.advImages.add( advImage );
+			}
+		}
+		catch ( Exception e )
+		{
+
+		}
+		finally
+		{
+			DBConnection.close( null, ps, rs );
+		}
+	}
+	private void loadOwnerDetails( ResultSet rs ) throws SQLException
+	{
+			this._ownerName = rs.getString( "NAME" );
+			this._ownerTelephone = rs.getString( "TELEPHONE" );
+			this._ownerEmail = rs.getString( "EMAIL" );
+			this._ownerAddress = rs.getString( "ADDRESS" );
 	}
 }

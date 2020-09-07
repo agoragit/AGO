@@ -100,7 +100,7 @@ public class AdvertisementController
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con,1000 );
+				Advertisement advertisement = Advertisement.getInstance( rs, con );
 				agoError.setResult( advertisement );
 			}
 		}
@@ -141,7 +141,7 @@ public class AdvertisementController
 			rs  = ps.executeQuery();
 			while( rs.next() )
 			{
-				Advertisement advertisement = Advertisement.getInstance( rs, con, 1000 );
+				Advertisement advertisement = Advertisement.getInstance( rs, con );
 				advertisements.add( advertisement );
 			}
 		}

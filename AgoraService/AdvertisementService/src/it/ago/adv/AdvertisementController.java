@@ -7,6 +7,7 @@ import it.ago.*;
 import it.ago.cache.AgoCacheRefresher;
 import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
+import it.ago.utils.SystemPropertyCache;
 import it.ago.utils.ValidationUtils;
 import it.ago.utils.db.Savable;
 import org.json.JSONException;
@@ -314,6 +315,15 @@ public class AdvertisementController
 	{
 		File targetFile = new File( path );
 		targetFile.deleteOnExit();
+	}
+	@Path("loadProductCategories")
+	@POST
+	@Produces("application/json")
+	public Response loadProductCategories( ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.SUCCESS, "All product List" );
+		agoError.setResult(SystemPropertyCache.getCashProductsList());
+		return agoError._getErrorResponse();
 	}
 }
 

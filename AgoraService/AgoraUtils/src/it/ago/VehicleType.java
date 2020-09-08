@@ -7,15 +7,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleType extends Savable
 {
 	private int typeId;
 	private String typeName;
 	private int status;
+	private List<VehicleBrand> vehicleBrands;
 
 	public VehicleType()
 	{
+		vehicleBrands = new ArrayList<>(  );
 	}
 
 	public void checkValidity() throws SQLException
@@ -124,8 +128,41 @@ public class VehicleType extends Savable
 		this.typeId = rs.getInt( "TYPE_ID" );
 		this.typeName = rs.getString( "TYPE_NAME" );
 
+		if( level > 0 )
+		{
+			loadBrands( con,level );
+		}
+
 	}
 
+	private void loadBrands( Connection con, int level )
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			ps = con.prepareStatement( "SELECT * FROM VEHICLE_BRAND WHERE TYPE_ID = ?");
+			ps.setInt( 1, this.typeId );
+			rs = ps.executeQuery();
+			while (rs.next())
+			{
+				VehicleBrand vehicleBrand = new VehicleBrand();
+				vehicleBrand.load(rs, con, level);
+				vehicleBrands.add(vehicleBrand);
+			}
+
+		}
+		catch ( Exception e )
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			DBConnection.close(rs);
+			DBConnection.close(ps);
+		}
+
+	}
 	public int getTypeId()
 	{
 		return this.typeId;
@@ -156,4 +193,13 @@ public class VehicleType extends Savable
 		this.status = status;
 	}
 
+	public List<VehicleBrand> getVehicleBrands()
+	{
+		return vehicleBrands;
+	}
+
+	public void setVehicleBrands( List<VehicleBrand> vehicleBrands )
+	{
+		this.vehicleBrands = vehicleBrands;
+	}
 }

@@ -132,7 +132,7 @@ public class Product extends Savable
 
 		if(level > 0 )
 		{
-			loadProductCategories(con);
+			loadProductCategories(con, level);
 		}
 	}
 
@@ -176,7 +176,7 @@ public class Product extends Savable
 		this.productCategoryList = productCategoryList;
 	}
 
-	private void loadProductCategories(Connection con)
+	private void loadProductCategories(Connection con, int level)
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -188,7 +188,7 @@ public class Product extends Savable
 			while (rs.next())
 			{
 				ProductCategory productCategory = new ProductCategory();
-				productCategory.load(rs);
+				productCategory.load( con, rs, level);
 				productCategoryList.add(productCategory);
 			}
 

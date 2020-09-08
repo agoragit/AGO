@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlType(name = "VehicleBrand", namespace = "http://lass")
 public class VehicleBrand extends Savable
@@ -16,9 +18,10 @@ public class VehicleBrand extends Savable
 	private String brandName;
 	private int typeId;
 	private int status;
-
+	private List<VehicleModelx> vehicleModelxes;
 	public VehicleBrand()
 	{
+		vehicleModelxes = new ArrayList<>(  );
 	}
 
 	public void checkValidity() throws SQLException
@@ -167,8 +170,41 @@ public class VehicleBrand extends Savable
 			this.typeId = rs.getInt( "TYPE_ID" );
 		}
 
+		if ( level > 0)
+		{
+			loadModels( con, level );
+		}
+
 	}
 
+	private void loadModels( Connection con, int level )
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			ps = con.prepareStatement( "SELECT * FROM VEHICLE_MODELX WHERE BRAND_ID = ?");
+			ps.setInt( 1, this.brandId );
+			rs = ps.executeQuery();
+			while (rs.next())
+			{
+				VehicleModelx vehicleModelx = new VehicleModelx();
+				vehicleModelx.load(rs, con, level);
+				this.vehicleModelxes.add(vehicleModelx);
+			}
+
+		}
+		catch ( Exception e )
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			DBConnection.close(rs);
+			DBConnection.close(ps);
+		}
+
+	}
 	public int getBrandId()
 	{
 		return this.brandId;
@@ -209,4 +245,13 @@ public class VehicleBrand extends Savable
 		this.status = status;
 	}
 
+	public List<VehicleModelx> getVehicleModelxes()
+	{
+		return vehicleModelxes;
+	}
+
+	public void setVehicleModelxes( List<VehicleModelx> vehicleModelxes )
+	{
+		this.vehicleModelxes = vehicleModelxes;
+	}
 }

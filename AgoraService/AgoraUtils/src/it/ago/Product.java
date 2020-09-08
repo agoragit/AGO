@@ -79,8 +79,8 @@ public class Product extends Savable
 	private void insert( Connection con ) throws SQLException
 	{
 		String str = "INSERT INTO PRODUCT ( "
-				+ "CODE, "
-				+ "NAME )VALUES(?,? )";
+				+ "PRODUCT_CCODE, "
+				+ "PRODUCT_CNAME )VALUES(?,? )";
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setString( ++count, this.code );
@@ -95,7 +95,7 @@ public class Product extends Savable
 	public void delete( Connection con ) throws SQLException
 	{
 		String str = "DELETE FROM PRODUCT WHERE "
-				+ "CODE = ? ";
+				+ "PRODUCT_CCODE = ? ";
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
@@ -110,8 +110,8 @@ public class Product extends Savable
 	public void update( Connection con ) throws SQLException
 	{
 		String str = "UPDATE PRODUCT SET "
-				+ "NAME = ? WHERE "
-				+ "CODE = ? ";
+				+ "PRODUCT_CNAME = ? WHERE "
+				+ "PRODUCT_CCODE = ? ";
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
@@ -127,8 +127,8 @@ public class Product extends Savable
 	public void load( ResultSet rs, Connection con, int level ) throws SQLException
 	{
 		this.status = Savable.UNCHANGED;
-		this.code = rs.getString( "CODE" );
-		this.name = rs.getString( "NAME" );
+		this.code = rs.getString( "PRODUCT_CODE" );
+		this.name = rs.getString( "PRODUCT_NAME" );
 
 		if(level > 0 )
 		{
@@ -164,6 +164,16 @@ public class Product extends Savable
 	public void setStatus( int status )
 	{
 		this.status = status;
+	}
+
+	public List<ProductCategory> getProductCategoryList()
+	{
+		return productCategoryList;
+	}
+
+	public void setProductCategoryList( List<ProductCategory> productCategoryList )
+	{
+		this.productCategoryList = productCategoryList;
 	}
 
 	private void loadProductCategories(Connection con)

@@ -55,6 +55,7 @@ public class SystemPropertyCache
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs  = null;
+		cashProductsList.clear();
 		try
 		{
 			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );

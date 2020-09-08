@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlType(name = "LocationDistrict", namespace = "http://lass")
 public class LocationDistrict extends Savable
@@ -15,9 +17,11 @@ public class LocationDistrict extends Savable
 	private String districtCode;
 	private String districtName;
 	private int status;
+	private List<LocationCity> locationCities;
 
 	public LocationDistrict()
 	{
+		locationCities = new ArrayList<>(  );
 	}
 
 	public void checkValidity() throws SQLException
@@ -126,6 +130,11 @@ public class LocationDistrict extends Savable
 		this.districtCode = rs.getString( "DISTRICT_CODE" );
 		this.districtName = rs.getString( "DISTRICT_NAME" );
 
+		if(level > 0)
+		{
+			loadCities( con, level );
+		}
+
 	}
 
 	public String getDistrictCode()
@@ -158,4 +167,42 @@ public class LocationDistrict extends Savable
 		this.status = status;
 	}
 
+	public List<LocationCity> getLocationCities()
+	{
+		return locationCities;
+	}
+
+	public void setLocationCities( List<LocationCity> locationCities )
+	{
+		this.locationCities = locationCities;
+	}
+
+	private void loadCities( Connection con, int level )
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try
+		{
+			ps = con.prepareStatement( "SELECT * FROM location_city WHERE DISTRICT_CODE = ?");
+			ps.setString( 1, this.districtCode );
+			rs = ps.executeQuery();
+			while (rs.next())
+			{
+				LocationCity locationCity = new LocationCity();
+				locationCity.load(rs, con, level);
+				locationCities.add(locationCity);
+			}
+
+		}
+		catch ( Exception e )
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			DBConnection.close(rs);
+			DBConnection.close(ps);
+		}
+
+	}
 }

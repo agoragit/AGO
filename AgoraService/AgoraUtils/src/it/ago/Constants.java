@@ -33,6 +33,7 @@ public class Constants
 	public static final String PARAM_ADV_IMAGE = "image";
 	public static final String PARAM_ADV_ADDRESS = "address";
 	public static final String PARAM_ADV_RENT = "rent";
+	public static final String PARAM_ADV_WANTED_TO_BUY = "wantedToBuy";
 	public static final String PARAM_ADV_SAVABLE_STATUS = "status";
 
 

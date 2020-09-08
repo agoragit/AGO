@@ -33,6 +33,7 @@ public abstract class Advertisement extends Savable
 	private String _ownerAddress;
 	private String address;
 	private boolean isRent;
+	private boolean isWantedToBuy;
 
 
 
@@ -121,7 +122,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE, "
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
-				+ "PRICE, ADDRESS, RENT )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -153,6 +154,8 @@ public abstract class Advertisement extends Savable
 		ps.setDouble( ++count, this.price );
 		ps.setString( ++count, this.address );
 		ps.setBoolean( ++count, this.isRent );
+		ps.setBoolean( ++count, this.isWantedToBuy );
+
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -188,7 +191,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE = ?, "
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
-				+ "PRICE = ?, ADDRESS = ?, RENT = ? WHERE "
+				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ? WHERE "
 				+ "ADV_ID = ? ";
 
 		int count = 0;
@@ -220,6 +223,7 @@ public abstract class Advertisement extends Savable
 		ps.setDouble( ++count, this.price );
 		ps.setString( ++count, this.address );
 		ps.setBoolean( ++count, this.isRent );
+		ps.setBoolean( ++count, this.isWantedToBuy );
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -259,6 +263,7 @@ public abstract class Advertisement extends Savable
 		this.price = rs.getDouble( "PRICE" );
 		this.address = rs.getString( "ADDRESS" );
 		this.isRent = rs.getBoolean( "RENT" );
+		this.isWantedToBuy = rs.getBoolean( "WANTED_TO_BUY" );
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -464,6 +469,16 @@ public abstract class Advertisement extends Savable
 	public void setRent( boolean rent )
 	{
 		isRent = rent;
+	}
+
+	public boolean isWantedToBuy()
+	{
+		return isWantedToBuy;
+	}
+
+	public void setWantedToBuy( boolean wantedToBuy )
+	{
+		isWantedToBuy = wantedToBuy;
 	}
 
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException

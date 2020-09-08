@@ -325,5 +325,14 @@ public class AdvertisementController
 		agoError.setResult(SystemPropertyCache.getCashProductsList());
 		return agoError._getErrorResponse();
 	}
+	@Path("loadLocations")
+	@POST
+	@Produces("application/json")
+	public Response loadLocations( ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.SUCCESS, "All Locations List" );
+		agoError.setResult(SystemPropertyCache.getLocationDistricts());
+		return agoError._getErrorResponse();
+	}
 }
 

@@ -1,11 +1,9 @@
 package it.ago.adv;
 
-import it.ago.Advertisement;
-import it.ago.Constants;
-import it.ago.UriInfoUtils;
-import it.ago.VehicleAdvertisement;
+import it.ago.*;
 
 import javax.ws.rs.core.UriInfo;
+import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 
 public class AdvertisementCreator
@@ -17,6 +15,10 @@ public class AdvertisementCreator
 		{
 			advertisement  = new VehicleAdvertisement();
 		}
+		if( Constants.ADV_PROD_PROPERTY.equalsIgnoreCase( type ) )
+		{
+			advertisement  = new PropertyAvertisement();
+		}
 		return advertisement;
 	}
 
@@ -26,12 +28,16 @@ public class AdvertisementCreator
 		{
 			return generateVehicleAdvertisement( uriInfo );
 		}
+		if( Constants.ADV_PROD_PROPERTY.equalsIgnoreCase( type ))
+		{
+			return generatePropertyAdvertisement( uriInfo );
+		}
 		else
 		{
 			return null;
 		}
 	}
-	private static void mapSuper( UriInfo uriInfo, VehicleAdvertisement advertisement )
+	private static void mapSuper( UriInfo uriInfo, Advertisement advertisement )
 	{
 		advertisement.setActive( true );
 		advertisement.setCityCode( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_CITY_CODE) );
@@ -68,6 +74,22 @@ public class AdvertisementCreator
 		vehicleAdv.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
 
 		return vehicleAdv;
+
+	}
+	public static PropertyAvertisement generatePropertyAdvertisement( UriInfo uriInfo )
+	{
+		PropertyAvertisement propertyAdv = ( PropertyAvertisement ) AdvertisementCreator.createAdvertisement( Constants.ADV_PROD_PROPERTY );
+		mapSuper( uriInfo, propertyAdv  );
+		propertyAdv.setPropertyType( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_TYPE_ID ) );
+		propertyAdv.setBeds( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_BEDS ) );
+		propertyAdv.setBath( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_BATH ) );
+		propertyAdv.setHouseSize( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_HOUSE_SIZE ) );
+		propertyAdv.setLandSize( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_LAND_SIZE) );
+		propertyAdv.setParking( UriInfoUtils.getBooleanValue( uriInfo, Constants.PARAM_PROP_PARKING) );
+		propertyAdv.setDistanceToMainRd( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_DISTANCE_TO_MAIN_RD) );
+		propertyAdv.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
+
+		return propertyAdv;
 
 	}
 }

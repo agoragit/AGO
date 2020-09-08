@@ -5,6 +5,7 @@ public class Constants
 
 //---------------------PRODUCT TYPES
 	public static String ADV_PROD_VEHICLE = "VEHI";
+	public static String ADV_PROD_PROPERTY = "PROP";
 	public static final String ADV_PRODUCT_ANY = "ANY";
 	public static final String PARAM_SESSION_ID = "sessionId";
 
@@ -63,6 +64,23 @@ public class Constants
 	public static final String PARAM_ADV_IMAGE_URL = "imageUrl";
 	public static final String PARAM_ADV_IMAGE_ADV_ID = "advId";
 	public static final String PARAM_ADV_IMAGE_STATUS = "status";
+
+	public static final String PARAM_PROP_TYPE_ID = "pTypeId";
+	public static final String PARAM_PROP_BEDS = "pBeds";
+	public static final String PARAM_PROP_BEDS_FROM = "pBedsFrom";
+	public static final String PARAM_PROP_BEDS_TO = "pBedsTo";
+	public static final String PARAM_PROP_BATH = "pBath";
+	public static final String PARAM_PROP_HOUSE_SIZE = "pHouseSize";
+	public static final String PARAM_PROP_HOUSE_SIZE_FROM = "pHouseSizeFrom";
+	public static final String PARAM_PROP_HOUSE_SIZE_TO = "pHouseSizeTo";
+	public static final String PARAM_PROP_LAND_SIZE = "pLandSize";
+	public static final String PARAM_PROP_LAND_SIZE_FROM = "pLandSizeFrom";
+	public static final String PARAM_PROP_LAND_SIZE_TO = "pLandSizeTo";
+	public static final String PARAM_PROP_PARKING= "pParking";
+	public static final String PARAM_PROP_DISTANCE_TO_MAIN_RD= "pDistanceToMainRd";
+
+
+
 
 
 

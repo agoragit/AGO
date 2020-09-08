@@ -32,9 +32,13 @@ public class DBQuearies
 		{
 			sb.append( " INNER JOIN VEHICLE_ADVERTISEMENT VA ON VA.ADV_ID = AA.ADV_ID " );
 		}
+		if ( isAll || advTypes.contains( Constants.ADV_PROD_PROPERTY) )
+		{
+			sb.append( " INNER JOIN PROPERTY_ADVERTISEMENT PA ON PA.ADV_ID = AA.ADV_ID " );
+		}
 		//ToDO : other product inner joins
 
-		sb.append( " WHERE true " );
+		sb.append( " WHERE AA.ACTIVE = true " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_ID ) )
 			sb.append( " AND AA.ADV_ID         = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_VALID_FROM ) )
@@ -93,6 +97,29 @@ public class DBQuearies
 			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_MILLAGE_TO) )
 				sb.append( " AND VA.MILAGE          <= ? " );
 		}
+		if ( isAll || advTypes.contains( Constants.ADV_PROD_PROPERTY ) )
+		{
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_DISTANCE_TO_MAIN_RD) )
+				sb.append( " AND PA.DISTANCE_TO_MAIN_RD         <= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_LAND_SIZE_FROM) )
+				sb.append( " AND PA.LAND_SIZE         >= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_LAND_SIZE_TO) )
+				sb.append( " AND PA.LAND_SIZE         <= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_HOUSE_SIZE_FROM) )
+				sb.append( " AND PA.HOUSE_SIZE      >= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_HOUSE_SIZE_TO) )
+				sb.append( " AND PA.HOUSE_SIZE      <= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_BATH) )
+				sb.append( " AND PA.BATH     >= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_BEDS_FROM) )
+				sb.append( " AND PA.BEDS    >= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_BEDS_TO) )
+				sb.append( " AND PA.BEDS  <= ? " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_TYPE_ID) )
+				sb.append( " AND PA.PROPERTY_TYPE       IN (?) " );
+			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_PROP_PARKING) )
+				sb.append( " AND PA.PARKING >= ? " );
+		}
 		//___________________________________________________
 		sb.append( " ORDER BY AA.ADV_ID DESC LIMIT ?,?" ); //offset, rowcount
 
@@ -131,22 +158,37 @@ public class DBQuearies
 
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )
-		{
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_TYPE_ID );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_BRAND_ID );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_ID );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_FROM );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_TO );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_CONDITION );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_TRANSMISSION );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_BODY_TYPE );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_FUEL_TYPE );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_FROM );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_TO );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_FROM );
-			count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_TO );
+	{
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_TYPE_ID );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_BRAND_ID );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_ID );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_CONDITION );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_TRANSMISSION );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_BODY_TYPE );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_FUEL_TYPE );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_TO );
 
-		}
+	}
+
+	if ( isAll || advTypesList.contains( Constants.ADV_PROD_PROPERTY ) )
+	{
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_DISTANCE_TO_MAIN_RD);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_LAND_SIZE_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_LAND_SIZE_TO );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_HOUSE_SIZE_FROM);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_HOUSE_SIZE_TO);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_BATH);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_BEDS_FROM);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_BEDS_TO);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_TYPE_ID);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_PROP_PARKING);
+
+	}
 
 		//finally
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_QUARY_OFFSET);

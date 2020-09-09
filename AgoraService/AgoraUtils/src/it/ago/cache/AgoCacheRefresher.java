@@ -21,7 +21,7 @@ public class AgoCacheRefresher extends Thread
 			try
 			{
 				refreshAgoSessionCache();
-				Thread.sleep( SystemConfig.AGO_CACHE_REFRESH_TIME * 60 * 60 );
+				Thread.sleep( SystemConfig.AGO_CACHE_REFRESH_TIME * 1000 * 60 );
 			}
 			catch ( InterruptedException e )
 			{

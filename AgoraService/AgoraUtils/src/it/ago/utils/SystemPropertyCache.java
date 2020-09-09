@@ -2,6 +2,7 @@ package it.ago.utils;
 
 import it.ago.LocationDistrict;
 import it.ago.Product;
+import it.ago.utils.DBConnection;
 import org.json.JSONException;
 
 import java.io.FileInputStream;

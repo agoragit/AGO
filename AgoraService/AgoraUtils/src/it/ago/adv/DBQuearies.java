@@ -30,15 +30,20 @@ public class DBQuearies
 		// create inner join - customize here for other products
 		if ( isAll || advTypes.contains( Constants.ADV_PROD_VEHICLE ) )
 		{
-			sb.append( " INNER JOIN VEHICLE_ADVERTISEMENT VA ON VA.ADV_ID = AA.ADV_ID " );
+			sb.append( " LEFT JOIN VEHICLE_ADVERTISEMENT VA ON VA.ADV_ID = AA.ADV_ID "  );
 		}
 		if ( isAll || advTypes.contains( Constants.ADV_PROD_PROPERTY) )
 		{
-			sb.append( " INNER JOIN PROPERTY_ADVERTISEMENT PA ON PA.ADV_ID = AA.ADV_ID " );
+			sb.append( " LEFT JOIN PROPERTY_ADVERTISEMENT PA ON PA.ADV_ID = AA.ADV_ID " );
 		}
-		//ToDO : other product inner joins
+		//ToDO : other product Left joins
 
 		sb.append( " WHERE AA.ACTIVE = true " );
+
+		if( !isAll )
+		{
+			sb.append( " AND AA.PRODUCT_CODE IN ( "+_getInQueary( advTypes )+") ");
+		}
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_ID ) )
 			sb.append( " AND AA.ADV_ID         = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_VALID_FROM ) )
@@ -199,5 +204,20 @@ public class DBQuearies
 
 
 		return ps;
+	}
+
+	private static String _getInQueary( List<String> advTypes )
+	{
+		String q="";
+		for ( int i = 0; i < advTypes.size(); i++ )
+		{
+			String advT = advTypes.get( i );
+			q = q +"'"+ advT + "'";
+			if ( i <advTypes.size()-1 )
+			{
+				q+=",";
+			}
+		}
+		return q;
 	}
 }

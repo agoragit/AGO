@@ -521,6 +521,11 @@ public abstract class Advertisement extends Savable
 			advertisement = new VehicleAdvertisement();
 			advertisement.load( rsSuper, con, level );
 		}
+		if( Constants.ADV_PROD_PROPERTY.equalsIgnoreCase( product ) )
+		{
+			advertisement = new PropertyAvertisement();
+			advertisement.load( rsSuper, con, level );
+		}
 		return advertisement;
 	}
 	private static ResultSet getResultSet( String product, Connection con, long AdvId )

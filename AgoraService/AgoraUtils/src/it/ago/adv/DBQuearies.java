@@ -18,6 +18,9 @@ public class DBQuearies
 	public static String Q_SEARCH_ADV_BY_OWNER_ID = "SELECT * FROM AGO_ADVERTISEMENT,OWNER AGO_ADVERTISEMENT.OWNER_ID = OWNER.OWNER_ID WHERE AGO_ADVERTISEMENT.OWNER_ID  = ?";
 	public static String Q_SEARCH_VEHI_ADV_BY_ADV_ID = "SELECT * FROM VEHICLE_ADVERTISEMENT WHERE ADV_ID  = ?";
 	public static String Q_LOAD_ADV_IMAGE = "SELECT * FROM ADV_IMAGE WHERE ADV_ID  = ? AND IMAGE_ID = ?";
+	public static String Q_ACTIVE_ADV_BY_ID = "UPDATE AGO_ADVERTISEMENT SET ACTIVE= ? WHERE ADV_ID  = ?";
+	public static String Q_ACTIVE_OWNER_BY_ID = "UPDATE OWNER SET ACTIVE= ? WHERE OWNER_ID  = ?";
+
 
 
 	private static String getUniversalAdvSearchQuary( List<String> advTypes, boolean isAll, UriInfo uriInfo )
@@ -38,7 +41,7 @@ public class DBQuearies
 		}
 		//ToDO : other product Left joins
 
-		sb.append( " WHERE AA.ACTIVE = true " );
+		sb.append( " WHERE AA.ACTIVE = true AND O.ACTIVE = true " );
 
 		if( !isAll )
 		{

@@ -334,5 +334,22 @@ public class AdvertisementController
 		agoError.setResult(SystemPropertyCache.getLocationDistricts());
 		return agoError._getErrorResponse();
 	}
+	@Path("activeAdvertisement/{sessionId}/{id}/{active}")
+	@POST
+	@Produces("application/json")
+	public Response activeAdvertisement( @PathParam("sessionId") String sessionId, @PathParam("id") long id,  @PathParam("active") boolean active ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.ERROR, id+" adv id not valid" );
+		if(  !AgoSession._isValidSession( sessionId ) )
+		{
+			agoError.setErrorMessage( AgoError.ERROR, "Session expired", true );
+			return agoError._getErrorResponse();
+		}
+		if( id < 1 )
+		{
+			return agoError._getErrorResponse();
+		}
+		return AdvertisementModifier.activeAdvertisement( active,id );
+	}
 }
 

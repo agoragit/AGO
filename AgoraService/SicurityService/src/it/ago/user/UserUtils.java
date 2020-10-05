@@ -1,13 +1,19 @@
 package it.ago.user;
 
+import it.ago.Advertisement;
 import it.ago.AgoError;
 import it.ago.AgoSession;
 import it.ago.AgoSessionCache;
+import it.ago.adv.DBQuearies;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
+import org.json.JSONException;
 
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserUtils
 {
@@ -99,5 +105,29 @@ public class UserUtils
 		}
 		return agoError;
 	}
-
+	public static Response activeOwner( boolean active, long ownerId ) throws JSONException
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<Advertisement> advertisements = new ArrayList<>(  );
+		AgoError agoError = new AgoError( AgoError.SUCCESS, ownerId+" activated" );
+		try
+		{
+			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );
+			ps = con.prepareStatement( DBQuearies.Q_ACTIVE_OWNER_BY_ID );
+			ps.setBoolean( 1, active );
+			ps.setLong( 2, ownerId );
+			ps.executeUpdate();
+		}
+		catch ( Exception e )
+		{
+			agoError.setErrorMessage( AgoError.ERROR,e.getMessage(), false );
+		}
+		finally
+		{
+			DBConnection.close( con,ps,null );
+		}
+		agoError.setResult( advertisements );
+		return agoError._getErrorResponse();
+	}
 }

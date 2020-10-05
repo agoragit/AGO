@@ -92,7 +92,7 @@ public class AdvertisementSearchHandler
 				Advertisement advertisement = Advertisement.getInstance( rs, con, isValidSession ? 1: 0 );
 				advertisements.add( advertisement );
 				c++;
-				if( c > SystemConfig.ADV_MAX_RESULTS_LIMIT_PER_SEARCH  )
+				if( c > SystemConfig.ADV_MAX_RESULTS_LIMIT_PER_SEARCH  ) // this field handle configured max size except results requesting limit rather than specifying quary
 				{
 					break;
 				}

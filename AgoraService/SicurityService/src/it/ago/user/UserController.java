@@ -1,8 +1,10 @@
 package it.ago.user;
 
 import it.ago.AgoError;
+import it.ago.AgoSession;
 import it.ago.AgoSessionCache;
 import it.ago.utils.DBConnection;
+import org.json.JSONException;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -76,5 +78,22 @@ public class UserController
 		AgoError agoError = new AgoError( AgoError.SUCCESS, "session removed-(logout)" );
 		AgoSessionCache.removeSession( sessionId );
 		return agoError._getErrorResponse();
+	}
+	@Path("activeOwner/{sessionId}/{id}/{active}")
+	@POST
+	@Produces("application/json")
+	public Response activeAdvertisement( @PathParam("sessionId") String sessionId, @PathParam("id") long id,  @PathParam("active") boolean active ) throws JSONException
+	{
+		AgoError agoError = new AgoError( AgoError.ERROR, id+" owner id not valid" );
+		if(  !AgoSession._isValidSession( sessionId ) )
+		{
+			agoError.setErrorMessage( AgoError.ERROR, "Session expired", true );
+			return agoError._getErrorResponse();
+		}
+		if( id < 1 )
+		{
+			return agoError._getErrorResponse();
+		}
+		return UserUtils.activeOwner( active,id );
 	}
 }

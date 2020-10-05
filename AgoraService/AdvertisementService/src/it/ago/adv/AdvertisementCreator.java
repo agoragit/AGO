@@ -1,6 +1,7 @@
 package it.ago.adv;
 
 import it.ago.*;
+import it.ago.utils.db.Savable;
 
 import javax.ws.rs.core.UriInfo;
 import java.sql.PreparedStatement;
@@ -39,7 +40,11 @@ public class AdvertisementCreator
 	}
 	private static void mapSuper( UriInfo uriInfo, Advertisement advertisement )
 	{
-		advertisement.setActive( true );
+		if( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) == Savable.NEW )
+		{
+			advertisement.setActive( false );
+		}
+		// manually active after review
 		advertisement.setCityCode( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_CITY_CODE) );
 		advertisement.setAdvId( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_ADV_ID) );
 		advertisement.setCreatedDate( new Timestamp( System.currentTimeMillis() ) );

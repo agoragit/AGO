@@ -32,6 +32,7 @@ public class UserUtils
 		owner.setEmail( userInfo.getQueryParameters().getFirst( "email" ) );
 		owner.setTelephone( userInfo.getQueryParameters().getFirst( "telephone" ) );
 		owner.setName( userInfo.getQueryParameters().getFirst( "name" ) );
+		owner.setType( userInfo.getQueryParameters().getFirst( "type" )  );
 		if ( status != Savable.NEW )
 		{
 			String ownerId = userInfo.getQueryParameters().getFirst( "ownerid" );

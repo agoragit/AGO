@@ -1,6 +1,7 @@
 package it.ago.user;
 
 import it.ago.AgoError;
+import it.ago.Constants;
 import it.ago.utils.DBConnection;
 import it.ago.utils.db.Savable;
 
@@ -20,6 +21,7 @@ public class Owner extends Savable
 	private String address;
 	private String name;
 	private int status;
+	private String type;
 
 	public Owner()
 	{
@@ -37,6 +39,7 @@ public class Owner extends Savable
 		address = null;
 		status = Savable.NEW;
 		name = null;
+		type = null;
 	}
 
 	public void checkValidity() throws SQLException
@@ -101,7 +104,7 @@ public class Owner extends Savable
 				+ "EMAIL, "
 				+ "LAST_LOGIN_TIME, "
 				+ "ACTIVE, "
-				+ "ADDRESS,NAME )VALUES(?,?,?,?,?,?,?,?,NAME )";
+				+ "ADDRESS,NAME,TYPE )VALUES(?,?,?,?,?,?,?,?,?,? )";
 		setNextUserId( con );
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
@@ -156,6 +159,14 @@ public class Owner extends Savable
 		{
 			ps.setString( ++count, this.name );
 		}
+		if ( this.type == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.type );
+		}
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -188,7 +199,7 @@ public class Owner extends Savable
 				+ "EMAIL = ?, "
 				+ "LAST_LOGIN_TIME = ?, "
 				+ "ACTIVE = ?, "
-				+ "ADDRESS = ?, NAME = ? WHERE "
+				+ "ADDRESS = ?, NAME = ?, TYPE=? WHERE "
 				+ "OWNER_ID = ? AND "
 				+ "USERNAME = ? ";
 
@@ -242,6 +253,14 @@ public class Owner extends Savable
 		else
 		{
 			ps.setString( ++count, this.name );
+		}
+		if ( this.type == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.type );
 		}
 		ps.setLong( ++count, this.ownerId );
 		ps.setString( ++count, this.username );
@@ -306,6 +325,14 @@ public class Owner extends Savable
 		else
 		{
 			this.name = rs.getString( "NAME" );
+		}
+		if ( rs.getObject( "TYPE" ) == null )
+		{
+			this.type = null;
+		}
+		else
+		{
+			this.type = rs.getString( "TYPE" );
 		}
 
 	}
@@ -410,6 +437,16 @@ public class Owner extends Savable
 		this.status = status;
 	}
 
+	public String getType()
+	{
+		return type;
+	}
+
+	public void setType( String type )
+	{
+		this.type = type;
+	}
+
 	public AgoError _validateUserForSave( Connection con )
 	{
 		AgoError error = new AgoError( AgoError.SUCCESS, "SUCCESS" );
@@ -438,7 +475,12 @@ public class Owner extends Savable
 		}
 		if ( _isEmailTPAlradyTakenByOtherUser( con ) )
 		{
-			error.setErrorMessage( AgoError.ERROR, "contact detail belogs to another user", true );
+			error.setErrorMessage( AgoError.ERROR, "contact detail belongs to another user", true );
+			return error;
+		}
+		if( this.type == null || this.type.length()==0 || !( Constants.USER_TYPE_CUSTOMER.equals( this.type ) || Constants.USER_TYPE_STORE.equals( this.type ) ))
+		{
+			error.setErrorMessage( AgoError.ERROR, "Invalid user type", true );
 			return error;
 		}
 		PreparedStatement ps = null;

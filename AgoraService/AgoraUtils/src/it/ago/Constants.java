@@ -35,6 +35,7 @@ public class Constants
 	public static final String PARAM_ADV_RENT = "rent";
 	public static final String PARAM_ADV_WANTED_TO_BUY = "wantedToBuy";
 	public static final String PARAM_ADV_SAVABLE_STATUS = "status";
+	public static final String PARAM_ADV_KEYWORDS = "keywords";
 
 
 	public static final String PARAM_ADV_QUARY_OFFSET = "offset";
@@ -115,7 +116,8 @@ public class Constants
 
 
 
-
+	public static String USER_TYPE_STORE= "STORE";
+	public static String USER_TYPE_CUSTOMER= "CUSTOMER";
 
 
 

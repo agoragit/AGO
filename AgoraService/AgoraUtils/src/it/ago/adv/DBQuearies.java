@@ -41,7 +41,13 @@ public class DBQuearies
 		}
 		//ToDO : other product Left joins
 
-		sb.append( " WHERE AA.ACTIVE = true AND O.ACTIVE = true " );
+		sb.append( " WHERE " );
+		sb.append( " AA.ACTIVE = true " );
+		sb.append( " AND O.ACTIVE = true " );
+
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_KEYWORDS ) )
+		sb.append( generateKeywordsQueary( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_KEYWORDS )) );
+
 
 		if( !isAll )
 		{
@@ -221,6 +227,39 @@ public class DBQuearies
 				q+=",";
 			}
 		}
+		return q;
+	}
+
+	private static String generateKeywordsQueary( String keywords )
+	{
+		if( keywords == null || keywords.length() == 0 )
+		{
+			return "";
+		}
+		else
+		{
+			keywords = keywords.toLowerCase();
+			if( keywords.contains( "delete " )|| keywords.contains( "insert " ) || keywords.contains( "update " ) || keywords.contains( "alter " ) || keywords.contains( "create " ))
+			{
+				return "";
+			}
+			keywords = keywords.replaceAll( " ","," );
+		}
+		String q = " AND ( ";
+
+		String keys[] = keywords.split( "," );
+		for ( int i = 0; i < keys.length; i++ )
+		{
+			if( keys[i] != null && keys[i].length() > 2 )
+			{
+				q = q + " AA.KEYWORDS LIKE '%" + keys[i] + "%' ";
+			}
+			if ( keys.length - 1 < i && q.contains( " AA.KEYWORDS LIKE '%" ) )
+			{
+				q= q+" OR ";
+			}
+		}
+		q=q+" ) ";
 		return q;
 	}
 }

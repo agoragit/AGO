@@ -34,6 +34,7 @@ public abstract class Advertisement extends Savable
 	private String address;
 	private boolean isRent;
 	private boolean isWantedToBuy;
+	private String keyWords;
 
 
 
@@ -122,7 +123,7 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE, "
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
-				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY,KEYWORDS )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -155,7 +156,14 @@ public abstract class Advertisement extends Savable
 		ps.setString( ++count, this.address );
 		ps.setBoolean( ++count, this.isRent );
 		ps.setBoolean( ++count, this.isWantedToBuy );
-
+		if ( this.keyWords == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.keyWords );
+		}
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -191,8 +199,8 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE = ?, "
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
-				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ? WHERE "
-				+ "ADV_ID = ? ";
+				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ?, KEYWORDS = ? WHERE "
+				+ " ADV_ID = ? ";
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
@@ -224,6 +232,14 @@ public abstract class Advertisement extends Savable
 		ps.setString( ++count, this.address );
 		ps.setBoolean( ++count, this.isRent );
 		ps.setBoolean( ++count, this.isWantedToBuy );
+		if ( this.keyWords == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.keyWords );
+		}
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -264,6 +280,14 @@ public abstract class Advertisement extends Savable
 		this.address = rs.getString( "ADDRESS" );
 		this.isRent = rs.getBoolean( "RENT" );
 		this.isWantedToBuy = rs.getBoolean( "WANTED_TO_BUY" );
+		if ( rs.getObject( "KEYWORDS" ) == null )
+		{
+			this.keyWords = null;
+		}
+		else
+		{
+			this.keyWords = rs.getString( "KEYWORDS" );
+		}
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -479,6 +503,16 @@ public abstract class Advertisement extends Savable
 	public void setWantedToBuy( boolean wantedToBuy )
 	{
 		isWantedToBuy = wantedToBuy;
+	}
+
+	public String getKeyWords()
+	{
+		return keyWords;
+	}
+
+	public void setKeyWords( String keyWords )
+	{
+		this.keyWords = keyWords;
 	}
 
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException

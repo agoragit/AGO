@@ -23,7 +23,7 @@ public class DBQuearies
 
 
 
-	private static String getUniversalAdvSearchQuary( List<String> advTypes, boolean isAll, UriInfo uriInfo )
+	private static String getUniversalAdvSearchQueary( List<String> advTypes, boolean isAll, UriInfo uriInfo )
 	{
 		if ( advTypes == null || advTypes.isEmpty() )
 		{
@@ -44,10 +44,6 @@ public class DBQuearies
 		sb.append( " WHERE " );
 		sb.append( " AA.ACTIVE = true " );
 		sb.append( " AND O.ACTIVE = true " );
-
-		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_KEYWORDS ) )
-		sb.append( generateKeywordsQueary( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_KEYWORDS )) );
-
 
 		if( !isAll )
 		{
@@ -81,6 +77,10 @@ public class DBQuearies
 			sb.append( " AND AA.RENT         	 = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_WANTED_TO_BUY) )
 			sb.append( " AND AA.WANTED_TO_BUY    = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_OWNER_TYPE) )
+			sb.append( " AND O.TYPE         = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_KEYWORDS ) )
+			sb.append( generateKeywordsQueary( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_KEYWORDS )) );
 
 		// add product wise filter columns here
 		//_________________________________________________
@@ -156,7 +156,7 @@ public class DBQuearies
 			advTypesList.add( Constants.ADV_PRODUCT_ANY );
 		}
 		boolean isAll = advTypesList.contains( Constants.ADV_PRODUCT_ANY );
-		PreparedStatement ps = con.prepareStatement( getUniversalAdvSearchQuary( advTypesList, isAll, uriInfo ) );
+		PreparedStatement ps = con.prepareStatement( getUniversalAdvSearchQueary( advTypesList, isAll, uriInfo ) );
 		int count = 0;
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.BIGINT, uriInfo, Constants.PARAM_ADV_ID );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.TIMESTAMP, uriInfo, Constants.PARAM_ADV_VALID_FROM );
@@ -172,6 +172,8 @@ public class DBQuearies
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.DOUBLE, uriInfo, Constants.PARAM_ADV_PRICE_TO );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_ADV_RENT);
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_ADV_WANTED_TO_BUY);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_OWNER_TYPE );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_ADV_KEYWORDS );
 
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )
@@ -191,7 +193,7 @@ public class DBQuearies
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MILLAGE_TO );
 
 	}
-
+		//------- property adv filter data
 	if ( isAll || advTypesList.contains( Constants.ADV_PROD_PROPERTY ) )
 	{
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_PROP_DISTANCE_TO_MAIN_RD);

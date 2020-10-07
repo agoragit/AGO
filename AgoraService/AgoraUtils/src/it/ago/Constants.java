@@ -37,6 +37,7 @@ public class Constants
 	public static final String PARAM_ADV_SAVABLE_STATUS = "status";
 	public static final String PARAM_ADV_KEYWORDS = "keywords";
 
+	public static final String PARAM_OWNER_TYPE = "ownerType";
 
 	public static final String PARAM_ADV_QUARY_OFFSET = "offset";
 	public static final String PARAM_ADV_QUARY_ROW_COUNT= "rowCount";

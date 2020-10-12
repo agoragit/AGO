@@ -12,8 +12,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "AdvProperty", namespace = "http://lass")
 public class PropertyAvertisement extends Advertisement
 {
-// 	private long advId;
-//	private int propertyType;
 	private int beds;
 	private int bath;
 	private float houseSize;
@@ -67,7 +65,6 @@ public class PropertyAvertisement extends Advertisement
 		}
 		catch( SQLException se )
 		{
-			se.printStackTrace();
 			throw new SQLException( "Error in "+ action +
 							se.getMessage(),
 							se.getSQLState(),
@@ -92,7 +89,6 @@ public class PropertyAvertisement extends Advertisement
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setLong( ++count, super.getAdvId() );
-//		ps.setInt( ++count, this.propertyType );
 		if( this.beds == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
@@ -133,14 +129,9 @@ public class PropertyAvertisement extends Advertisement
 		{
 			ps.setString( ++count, this.description );
 		}
-		if( this.parking == false )
-		{
-			ps.setNull( ++count, java.sql.Types.CHAR );
-		}
-		else
-		{
-			ps.setBoolean( ++count, this.parking );
-		}
+
+		ps.setBoolean( ++count, this.parking );
+
 		if( this.distanceToMainRd == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
@@ -184,7 +175,6 @@ public class PropertyAvertisement extends Advertisement
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
-//		ps.setInt( ++count, this.propertyType );
 		if( this.beds == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
@@ -225,14 +215,9 @@ public class PropertyAvertisement extends Advertisement
 		{
 			ps.setString( ++count, this.description );
 		}
-		if( this.parking == false )
-		{
-			ps.setNull( ++count, java.sql.Types.CHAR );
-		}
-		else
-		{
-			ps.setBoolean( ++count, this.parking );
-		}
+
+		ps.setBoolean( ++count, this.parking );
+
 		if( this.distanceToMainRd == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
@@ -252,8 +237,7 @@ public class PropertyAvertisement extends Advertisement
 	public void load( ResultSet rs, Connection con, int level ) throws SQLException
 	{
 		this.status = Savable.UNCHANGED;
-//		this.advId = rs.getLong( "ADV_ID" );
-//		this.propertyType = rs.getInt( "PROPERTY_TYPE" );
+
 		if( rs.getObject( "BEDS" ) == null )
 		{
 			this.beds = -1;
@@ -313,26 +297,6 @@ public class PropertyAvertisement extends Advertisement
 
 
 	}
-
-//	public long getAdvId()
-//	{
-//		return this.advId;
-//	}
-//
-//	public void setAdvId( long advId )
-//	{
-//		this.advId = advId;
-//	}
-
-//	public int getPropertyType()
-//	{
-//		return this.propertyType;
-//	}
-
-//	public void setPropertyType( int propertyType )
-//	{
-//		this.propertyType = propertyType;
-//	}
 
 	public int getBeds()
 	{

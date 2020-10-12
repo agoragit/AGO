@@ -35,7 +35,13 @@ public abstract class Advertisement extends Savable
 	private boolean isRent;
 	private boolean isWantedToBuy;
 	private String keyWords;
-
+	private int brandId;
+	private int modelId;
+	private int modelYear;
+	private int type_level_1;
+	private int type_level_2;
+	private int type_level_3;
+	private String advDescription;
 
 
 	public Advertisement()
@@ -123,7 +129,9 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE, "
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
-				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY,KEYWORDS )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY,KEYWORDS, "
+				+ "BRAND_ID, MODEL_ID, MODEL_YEAR, TYPE_LEVEL_1, TYPE_LEVEL_2, TYPE_LEVEL_3, DESCRIPTION "
+				+" )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -164,6 +172,13 @@ public abstract class Advertisement extends Savable
 		{
 			ps.setString( ++count, this.keyWords );
 		}
+		ps.setInt( ++count, this.brandId );
+		ps.setInt( ++count, this.modelId );
+		ps.setInt( ++count, this.modelYear );
+		ps.setInt( ++count, this.type_level_1 );
+		ps.setInt( ++count, this.type_level_2 );
+		ps.setInt( ++count, this.type_level_3 );
+		ps.setString( ++count, this.advDescription );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -199,7 +214,9 @@ public abstract class Advertisement extends Savable
 				+ "LONGTUTE = ?, "
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
-				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ?, KEYWORDS = ? WHERE "
+				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ?, KEYWORDS = ?, "
+				+ "BRAND_ID= ?, MODEL_ID= ?, MODEL_YEAR= ?, TYPE_LEVEL_1= ?, TYPE_LEVEL_2= ?, TYPE_LEVEL_3= ?, DESCRIPTION = ? "
+				+ " WHERE "
 				+ " ADV_ID = ? ";
 
 		int count = 0;
@@ -239,6 +256,20 @@ public abstract class Advertisement extends Savable
 		else
 		{
 			ps.setString( ++count, this.keyWords );
+		}
+		ps.setInt( ++count, this.brandId );
+		ps.setInt( ++count, this.modelId );
+		ps.setInt( ++count, this.modelYear );
+		ps.setInt( ++count, this.type_level_1 );
+		ps.setInt( ++count, this.type_level_2 );
+		ps.setInt( ++count, this.type_level_3 );
+		if ( this.advDescription == null )
+		{
+			ps.setNull( ++count, java.sql.Types.VARCHAR );
+		}
+		else
+		{
+			ps.setString( ++count, this.advDescription );
 		}
 		ps.setLong( ++count, this.advId );
 		ps.execute();
@@ -288,6 +319,14 @@ public abstract class Advertisement extends Savable
 		{
 			this.keyWords = rs.getString( "KEYWORDS" );
 		}
+		this.brandId =  rs.getInt( "BRAND_ID" );
+		this.modelId =  rs.getInt( "MODEL_ID" );
+		this.modelYear =  rs.getInt( "MODEL_YEAR" );
+		this.type_level_1 =  rs.getInt( "TYPE_LEVEL_1" );
+		this.type_level_2 =  rs.getInt( "TYPE_LEVEL_2" );
+		this.type_level_3 =  rs.getInt( "TYPE_LEVEL_3" );
+		this.advDescription = rs.getString( "DESCRIPTION" );
+
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -513,6 +552,76 @@ public abstract class Advertisement extends Savable
 	public void setKeyWords( String keyWords )
 	{
 		this.keyWords = keyWords;
+	}
+
+	public int getBrandId()
+	{
+		return brandId;
+	}
+
+	public void setBrandId( int brandId )
+	{
+		this.brandId = brandId;
+	}
+
+	public int getModelId()
+	{
+		return modelId;
+	}
+
+	public void setModelId( int modelId )
+	{
+		this.modelId = modelId;
+	}
+
+	public int getModelYear()
+	{
+		return modelYear;
+	}
+
+	public void setModelYear( int modelYear )
+	{
+		this.modelYear = modelYear;
+	}
+
+	public int getType_level_1()
+	{
+		return type_level_1;
+	}
+
+	public void setType_level_1( int type_level_1 )
+	{
+		this.type_level_1 = type_level_1;
+	}
+
+	public int getType_level_2()
+	{
+		return type_level_2;
+	}
+
+	public void setType_level_2( int type_level_2 )
+	{
+		this.type_level_2 = type_level_2;
+	}
+
+	public int getType_level_3()
+	{
+		return type_level_3;
+	}
+
+	public void setType_level_3( int type_level_3 )
+	{
+		this.type_level_3 = type_level_3;
+	}
+
+	public String getAdvDescription()
+	{
+		return advDescription;
+	}
+
+	public void setAdvDescription( String advDescription )
+	{
+		this.advDescription = advDescription;
 	}
 
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2020 at 12:23 PM
+-- Generation Time: Oct 12, 2020 at 02:10 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.26
 
@@ -34,89 +34,6 @@ CREATE TABLE `adv_image` (
   `IMAGE_URL` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `adv_image`
---
-
-INSERT INTO `adv_image` (`IMAGE_ID`, `ADV_ID`, `IMAGE_URL`) VALUES
-(0, 10063, 'VEHI/10063/57180204_10216680072707664_7716460865309900800_n.jpg'),
-(0, 10064, 'VEHI/10064/57180204_10216680072707664_7716460865309900800_n.jpg'),
-(0, 10065, 'VEHI/10065/Screenshot_3 - Copy.jpg'),
-(0, 10066, 'VEHI/10066/Screenshot_3 - Copy.jpg'),
-(0, 10067, 'VEHI/10067/Screenshot_3-Copy.jpg'),
-(0, 10068, 'VEHI/10068/Screenshot_3-Copy.jpg'),
-(0, 10069, 'VEHI/10069/Screenshot_3-Copy.jpg'),
-(0, 10070, 'VEHI/10070/Screenshot_3-Copy.jpg'),
-(0, 10071, 'VEHI/10071/Screenshot_3-Copy.jpg'),
-(0, 10072, 'VEHI/10072/Screenshot_3-Copy.jpg'),
-(0, 10073, 'VEHI\\10073\\1572943093959.JPEG'),
-(0, 10074, 'VEHI/10074/Screenshot_3-Copy.jpg'),
-(0, 10075, '1572943093959.JPEG'),
-(0, 10076, '1572943093959.JPEG'),
-(1, 10063, 'VEHI/10063/1572943085297.JPEG'),
-(1, 10064, 'VEHI/10064/1572943085297.JPEG'),
-(1, 10065, 'VEHI/10065/Screenshot_3.jpg'),
-(1, 10066, 'VEHI/10066/Screenshot_3.jpg'),
-(1, 10067, 'VEHI/10067/Screenshot_3.jpg'),
-(1, 10068, 'VEHI/10068/Screenshot_3.jpg'),
-(1, 10069, 'VEHI/10069/Screenshot_3.jpg'),
-(1, 10070, 'VEHI/10070/Screenshot_3.jpg'),
-(1, 10071, 'VEHI/10071/Screenshot_3.jpg'),
-(1, 10072, 'VEHI/10072/Screenshot_3.jpg'),
-(1, 10073, 'VEHI\\10073\\1572943093959.JPEG'),
-(1, 10074, 'VEHI\\10074\\1572943093959.JPEG'),
-(1, 10075, '1572943093959.JPEG'),
-(1, 10076, 'VEHI/10076/Screenshot_3.jpg'),
-(2, 10063, 'VEHI/10063/1572943093959.JPEG'),
-(2, 10064, 'VEHI/10064/1572943093959.JPEG'),
-(2, 10065, 'VEHI/10065/Screenshot_28.jpg'),
-(2, 10066, 'VEHI/10066/Screenshot_28.jpg'),
-(2, 10067, 'VEHI/10067/Screenshot_28.jpg'),
-(2, 10068, 'VEHI/10068/Screenshot_28.jpg'),
-(2, 10069, 'VEHI/10069/Screenshot_28.jpg'),
-(2, 10070, 'VEHI/10070/Screenshot_28.jpg'),
-(2, 10071, 'VEHI/10071/Screenshot_28.jpg'),
-(2, 10072, 'VEHI/10072/Screenshot_28.jpg'),
-(2, 10073, 'VEHI/10073/57180204_10216680072707664_7716460865309900800_n-Copy.jpg'),
-(2, 10074, 'VEHI/10074/Screenshot_28.jpg'),
-(2, 10075, 'VEHI/10075/Screenshot_28.jpg'),
-(2, 10076, 'http://localhost:8080/resources/images/adv/1572943093959.JPEG'),
-(3, 10065, 'VEHI/10065/Screenshot_29.jpg'),
-(3, 10066, 'VEHI/10066/Screenshot_29.jpg'),
-(3, 10067, 'VEHI/10067/Screenshot_29.jpg'),
-(3, 10068, 'VEHI/10068/Screenshot_29.jpg'),
-(3, 10069, 'VEHI/10069/Screenshot_29.jpg'),
-(3, 10070, 'VEHI/10070/Screenshot_29.jpg'),
-(3, 10071, 'VEHI/10071/Screenshot_29.jpg'),
-(3, 10072, 'VEHI/10072/Screenshot_29.jpg'),
-(3, 10073, 'VEHI/10073/Screenshot_29.jpg'),
-(3, 10074, 'resources\\images\\adv\\1572943093959.JPEG'),
-(3, 10075, 'resources\\images\\adv\\1572943093959.JPEG'),
-(3, 10076, 'http://localhost:8080/resources/images/adv/1572943093959.JPEG'),
-(4, 10065, 'VEHI/10065/Screenshot_ll.jpg'),
-(4, 10066, 'VEHI/10066/Screenshot_ll.jpg'),
-(4, 10067, 'VEHI/10067/Screenshot_ll.jpg'),
-(4, 10068, 'VEHI/10068/Screenshot_ll.jpg'),
-(4, 10069, 'VEHI/10069/Screenshot_ll.jpg'),
-(4, 10070, 'VEHI/10070/Screenshot_ll.jpg'),
-(4, 10071, 'VEHI/10071/Screenshot_ll.jpg'),
-(4, 10072, 'VEHI/10072/Screenshot_ll.jpg'),
-(4, 10073, 'VEHI/10073/Screenshot_ll.jpg'),
-(4, 10074, 'VEHI/10074/Screenshot_ll.jpg'),
-(4, 10075, 'VEHI/10075/Screenshot_ll.jpg'),
-(4, 10076, 'http://localhost:8080/resources/images/adv/1572943093959.JPEG');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `adv_property_type`
---
-
-CREATE TABLE `adv_property_type` (
-  `PROPERTY_TYPE_NAME` varchar(100) NOT NULL,
-  `PROPERTY_CODE` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- --------------------------------------------------------
 
 --
@@ -139,91 +56,15 @@ CREATE TABLE `ago_advertisement` (
   `ADDRESS` varchar(200) DEFAULT NULL,
   `RENT` tinyint(1) NOT NULL DEFAULT 0,
   `WANTED_TO_BUY` tinyint(1) NOT NULL DEFAULT 0,
-  `KEYWORDS` varchar(100) NOT NULL
+  `KEYWORDS` varchar(100) NOT NULL,
+  `BRAND_ID` int(11) NOT NULL DEFAULT 0,
+  `MODEL_ID` int(11) NOT NULL DEFAULT 0,
+  `MODEL_YEAR` int(11) NOT NULL,
+  `TYPE_LEVEL_1` int(11) NOT NULL DEFAULT 0,
+  `TYPE_LEVEL_2` int(11) NOT NULL DEFAULT 0,
+  `TYPE_LEVEL_3` int(11) NOT NULL DEFAULT 0,
+  `DESCRIPTION` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ago_advertisement`
---
-
-INSERT INTO `ago_advertisement` (`ADV_ID`, `VALID_FROM`, `VALID_TO`, `ACTIVE`, `CREATED_DATE`, `LAST_MODIFIED`, `PRODUCT_CODE`, `OWNER_ID`, `LONGTUTE`, `LATITUDE`, `CITY_CODE`, `PRICE`, `ADDRESS`, `RENT`, `WANTED_TO_BUY`, `KEYWORDS`) VALUES
-(10000, '2019-12-25 06:29:27', '2020-01-31 06:29:36', '1', '2019-12-26 06:29:50', '2019-12-26 06:29:53', 'PROP', 10000, '23.45454', '33.12232', 'DIYATALAWA', 0000000000000000005456, NULL, 0, 0, ''),
-(10001, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:25:45', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10002, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:26:21', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10003, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:28:48', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10004, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:29:47', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10005, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:33:51', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10006, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:37:52', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10007, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:38:08', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10008, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:40:26', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10009, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 07:41:22', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10010, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 08:30:37', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543, NULL, 0, 0, ''),
-(10011, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 08:31:05', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000005435, NULL, 0, 0, ''),
-(10012, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 08:33:41', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000005435, NULL, 0, 0, ''),
-(10013, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-20 08:37:42', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10014, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:23:50', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10015, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:24:22', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10016, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:24:23', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10017, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:24:23', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10018, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:24:24', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10019, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:24:24', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10020, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:31:37', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10021, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:38:20', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10022, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:40:32', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10023, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:41:59', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10024, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:42:43', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10025, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 02:47:48', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10026, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 03:02:43', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10027, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 03:04:04', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10028, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 03:59:42', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10029, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 04:14:25', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10030, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 06:06:52', '2020-01-21 11:59:42', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10031, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 06:29:02', '2020-01-21 06:29:02', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10032, '2020-01-21 13:22:07', '2020-01-21 13:22:15', '1', '2020-01-21 06:30:03', '2020-01-21 06:30:03', 'VEHI', 10000, NULL, NULL, '', 0000000000000000000543, NULL, 0, 0, ''),
-(10033, '2020-01-28 02:40:03', '2020-01-28 02:40:03', '1', '2020-01-27 21:10:03', '2020-01-27 21:10:03', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543, NULL, 0, 0, ''),
-(10034, '2020-01-28 04:48:20', '2020-01-28 04:48:20', '1', '2020-01-27 23:18:20', '2020-01-27 23:18:20', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543, NULL, 0, 0, ''),
-(10035, '2020-01-28 04:55:47', '2020-01-28 04:55:47', '1', '2020-01-27 23:25:47', '2020-01-27 23:25:47', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543, NULL, 0, 0, ''),
-(10036, '2020-01-28 04:55:51', '2020-01-28 04:55:51', '1', '2020-01-27 23:25:51', '2020-01-27 23:25:51', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543, NULL, 0, 0, ''),
-(10037, '2020-01-28 04:56:09', '2020-01-28 04:56:09', '1', '2020-01-27 23:26:09', '2020-01-27 23:26:09', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000543, NULL, 0, 0, ''),
-(10038, '2020-02-17 09:57:31', '2020-02-17 09:57:31', '1', '2020-02-17 04:27:31', '2020-02-17 04:27:31', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10039, '2020-02-17 10:24:39', '2020-02-17 10:24:39', '1', '2020-02-17 04:54:38', '2020-02-17 04:54:38', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10040, '2020-02-18 13:24:32', '2020-02-18 13:24:32', '1', '2020-02-18 07:54:32', '2020-02-18 07:54:32', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10041, '2020-02-18 13:25:04', '2020-02-18 13:25:04', '1', '2020-02-18 07:55:04', '2020-02-18 07:55:04', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10042, '2020-02-18 13:26:40', '2020-02-18 13:26:40', '1', '2020-02-18 07:56:40', '2020-02-18 07:56:40', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10043, '2020-02-18 13:26:48', '2020-02-18 13:26:48', '1', '2020-02-18 07:56:48', '2020-02-18 07:56:48', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10044, '2020-02-18 13:37:46', '2020-02-18 13:37:46', '1', '2020-02-18 08:07:46', '2020-02-18 08:07:46', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10045, '2020-02-18 13:37:56', '2020-02-18 13:37:56', '1', '2020-02-18 08:07:56', '2020-02-18 08:07:56', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10046, '2020-02-18 13:38:36', '2020-02-18 13:38:36', '1', '2020-02-18 08:08:36', '2020-02-18 08:08:36', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10047, '2020-02-18 13:39:12', '2020-02-18 13:39:12', '1', '2020-02-18 08:09:12', '2020-02-18 08:09:12', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10048, '2020-02-18 13:40:16', '2020-02-18 13:40:16', '1', '2020-02-18 08:10:16', '2020-02-18 08:10:16', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10049, '2020-02-18 13:42:54', '2020-02-18 13:42:54', '1', '2020-02-18 08:12:54', '2020-02-18 08:12:54', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10050, '2020-02-19 03:13:59', '2020-02-19 03:13:59', '1', '2020-02-18 21:43:59', '2020-02-18 21:43:59', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10051, '2020-02-19 03:17:45', '2020-02-19 03:17:45', '1', '2020-02-18 21:47:42', '2020-02-18 21:47:42', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10052, '2020-02-19 03:29:20', '2020-02-19 03:29:20', '1', '2020-02-18 21:59:20', '2020-02-18 21:59:20', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10053, '2020-02-19 03:30:10', '2020-02-19 03:30:10', '1', '2020-02-18 22:00:06', '2020-02-18 22:00:06', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10054, '2020-02-19 03:38:44', '2020-02-19 03:38:44', '1', '2020-02-18 22:08:44', '2020-02-18 22:08:44', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10055, '2020-02-19 03:42:13', '2020-02-19 03:42:13', '1', '2020-02-18 22:10:17', '2020-02-18 22:10:17', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10056, '2020-02-19 03:43:02', '2020-02-19 03:43:02', '1', '2020-02-18 22:13:02', '2020-02-18 22:13:02', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10057, '2020-02-19 03:45:32', '2020-02-19 03:45:32', '1', '2020-02-18 22:15:32', '2020-02-18 22:15:32', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10058, '2020-02-19 03:52:06', '2020-02-19 03:52:06', '1', '2020-02-18 22:22:06', '2020-02-18 22:22:06', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10059, '2020-02-19 04:02:24', '2020-02-19 04:02:24', '1', '2020-02-18 22:32:24', '2020-02-18 22:32:24', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10060, '2020-02-19 04:03:25', '2020-02-19 04:03:25', '1', '2020-02-18 22:33:25', '2020-02-18 22:33:25', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10061, '2020-02-19 04:03:51', '2020-02-19 04:03:51', '1', '2020-02-18 22:33:51', '2020-02-18 22:33:51', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10062, '2020-02-19 04:04:49', '2020-02-19 04:04:49', '1', '2020-02-18 22:34:49', '2020-02-18 22:34:49', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10063, '2020-02-19 04:05:33', '2020-02-19 04:05:33', '1', '2020-02-18 22:35:33', '2020-02-18 22:35:33', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10064, '2020-02-19 04:10:12', '2020-02-19 04:10:12', '1', '2020-02-18 22:40:12', '2020-02-18 22:40:12', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10065, '2020-02-19 04:10:27', '2020-02-19 04:10:27', '1', '2020-02-18 22:40:27', '2020-02-18 22:40:27', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10066, '2020-02-19 08:27:01', '2020-02-19 08:27:01', '1', '2020-02-19 02:57:01', '2020-02-19 02:57:01', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10067, '2020-02-19 08:27:22', '2020-02-19 08:27:22', '1', '2020-02-19 02:57:22', '2020-02-19 02:57:22', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10068, '2020-02-19 08:28:52', '2020-02-19 08:28:52', '1', '2020-02-19 02:58:52', '2020-02-19 02:58:52', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10069, '2020-02-19 09:31:17', '2020-02-19 09:31:17', '1', '2020-02-19 04:01:17', '2020-02-19 04:01:17', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, NULL, 0, 0, ''),
-(10070, '2020-02-19 10:14:44', '2020-02-19 10:14:44', '1', '2020-02-19 04:44:44', '2020-02-19 04:44:44', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 0, 0, ''),
-(10071, '2020-02-19 10:14:56', '2020-02-19 10:14:56', '1', '2020-02-19 04:44:56', '2020-02-19 04:44:56', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 0, 0, ''),
-(10072, '2020-02-19 10:15:50', '2020-02-19 10:15:50', '1', '2020-02-19 04:45:41', '2020-02-19 04:45:41', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 0, 0, ''),
-(10073, '2020-02-19 10:16:47', '2020-02-19 10:16:47', '1', '2020-02-19 04:46:09', '2020-02-19 04:46:09', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 0, 0, ''),
-(10074, '2020-02-19 10:17:03', '2020-02-19 10:17:03', '1', '2020-02-19 04:47:03', '2020-02-19 04:47:03', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 1, 0, ''),
-(10075, '2020-02-19 10:27:03', '2020-02-19 10:27:03', '1', '2020-02-19 04:57:03', '2020-02-19 04:57:03', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 1, 0, ''),
-(10076, '2020-02-19 10:36:00', '2020-02-19 10:36:00', '1', '2020-02-19 05:06:00', '2020-02-19 05:06:00', 'VEHI', 10000, NULL, NULL, 'DIYATALAWA', 0000000000000000000100, 'tet address, dushan house, bla bla', 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -396,63 +237,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`PRODUCT_CODE`, `PRODUCT_NAME`) VALUES
+('ELEC', 'Electronics/Electricals'),
 ('PROP', 'Properties'),
 ('VEHI', 'Vehicle');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_category`
---
-
-CREATE TABLE `product_category` (
-  `PRODUCT_CODE` varchar(20) NOT NULL,
-  `CATEGORY_ID` int(11) NOT NULL,
-  `CATEGORY_NAME` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `product_category`
---
-
-INSERT INTO `product_category` (`PRODUCT_CODE`, `CATEGORY_ID`, `CATEGORY_NAME`) VALUES
-('VEHI', 100, 'Car'),
-('PROP', 108, 'Commercial Property'),
-('VEHI', 104, 'Goods Transport'),
-('VEHI', 105, 'Heavy Machines'),
-('PROP', 109, 'Houses'),
-('PROP', 110, 'Lands'),
-('VEHI', 101, 'Motorbikes/Scooters'),
-('VEHI', 103, 'People Transport'),
-('VEHI', 102, 'Three Wheelers'),
-('VEHI', 107, 'Vehicles Parts'),
-('VEHI', 106, 'Water Vehicles');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `property_advertisement`
---
-
-CREATE TABLE `property_advertisement` (
-  `ADV_ID` bigint(20) NOT NULL,
-  `PROPERTY_TYPE` int(11) NOT NULL,
-  `BEDS` int(11) DEFAULT 0,
-  `BATH` int(11) DEFAULT 0,
-  `HOUSE_SIZE` int(11) DEFAULT NULL,
-  `LAND_SIZE` int(11) DEFAULT NULL,
-  `DESCRIPTION` varchar(200) DEFAULT NULL,
-  `PARKING` tinyint(1) DEFAULT 0,
-  `DISTANCE_TO_MAIN_RD` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `property_advertisement`
---
-
-INSERT INTO `property_advertisement` (`ADV_ID`, `PROPERTY_TYPE`, `BEDS`, `BATH`, `HOUSE_SIZE`, `LAND_SIZE`, `DESCRIPTION`, `PARKING`, `DISTANCE_TO_MAIN_RD`) VALUES
-(10000, 108, 1, 1, 11, 123, 'test 11', 1, 10),
-(10000, 108, 1, 1, 11, 123, 'test 11', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -502,159 +289,6 @@ CREATE TABLE `vehicle_advertisement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `vehicle_advertisement`
---
-
-INSERT INTO `vehicle_advertisement` (`ADV_ID`, `TYPE_ID`, `brand_id`, `MODEL_ID`, `MODEL_YEAR`, `V_CONDITION`, `TRANSMISSION`, `BODY_TYPE`, `FUEL_TYPE`, `ENGINE_CAPACITY`, `MILAGE`, `DESCRIPTION`) VALUES
-(10001, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10002, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10003, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10004, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10005, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10006, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10007, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10008, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10009, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10010, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, 'this is test vehicle description'),
-(10011, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10012, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10013, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10014, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10015, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10016, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10017, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10018, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10019, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10020, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10021, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10022, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10023, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10024, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10025, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10026, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10027, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10028, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'SALOON', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10029, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10030, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10031, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10032, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10033, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10034, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10035, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10036, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10037, 101, 301, 1001, 2017, 'NEW', 'MANUAL', 'HATCHBACK', 'PETROL', 1500, 1121, 'this is test vehicle description sanka'),
-(10038, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10039, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10040, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10041, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10042, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10043, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10044, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10045, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10046, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10047, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10048, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10049, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10050, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10051, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10052, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10053, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10054, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10055, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10056, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10057, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10058, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10059, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10060, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10061, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10062, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10063, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10064, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10065, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10066, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10067, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10068, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10069, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10070, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10071, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10072, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10073, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10074, 100, 300, 1000, 2017, 'USED', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10075, 100, 300, 1000, 2017, 'OTHER', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL),
-(10076, 100, 300, 1000, 2017, 'OTHER', 'AUTO', 'SALOON', 'PETROL', 1500, 13000, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle_brand`
---
-
-CREATE TABLE `vehicle_brand` (
-  `brand_id` int(11) NOT NULL,
-  `BRAND_NAME` varchar(30) NOT NULL,
-  `TYPE_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `vehicle_brand`
---
-
-INSERT INTO `vehicle_brand` (`brand_id`, `BRAND_NAME`, `TYPE_ID`) VALUES
-(300, 'Toyota', 100),
-(301, 'Suzuki', 100),
-(302, 'Honda', 100),
-(303, 'Nissan', 100),
-(304, 'Mitsubishi', 100),
-(305, 'BMW', 100);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle_modelx`
---
-
-CREATE TABLE `vehicle_modelx` (
-  `MODEL_ID` int(11) NOT NULL,
-  `brand_id` int(11) DEFAULT NULL,
-  `MODEL_NAME` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `vehicle_modelx`
---
-
-INSERT INTO `vehicle_modelx` (`MODEL_ID`, `brand_id`, `MODEL_NAME`) VALUES
-(1000, 300, 'Vitz'),
-(1001, 300, 'Axio'),
-(1002, 300, 'Corolla'),
-(1003, 300, 'Premio'),
-(1004, 300, 'Aqua');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle_type`
---
-
-CREATE TABLE `vehicle_type` (
-  `TYPE_ID` int(11) NOT NULL,
-  `TYPE_NAME` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `vehicle_type`
---
-
-INSERT INTO `vehicle_type` (`TYPE_ID`, `TYPE_NAME`) VALUES
-(100, 'Car'),
-(101, 'Motorbikes/Scooters'),
-(102, 'Three Wheelers'),
-(103, 'People Transport'),
-(104, 'Goods Transport'),
-(105, 'Heavy Machines'),
-(106, 'Water Vehicles');
-
---
 -- Indexes for dumped tables
 --
 
@@ -664,12 +298,6 @@ INSERT INTO `vehicle_type` (`TYPE_ID`, `TYPE_NAME`) VALUES
 ALTER TABLE `adv_image`
   ADD PRIMARY KEY (`IMAGE_ID`,`ADV_ID`),
   ADD KEY `FK_ADV_IMAGE_ADV_ID` (`ADV_ID`);
-
---
--- Indexes for table `adv_property_type`
---
-ALTER TABLE `adv_property_type`
-  ADD PRIMARY KEY (`PROPERTY_CODE`);
 
 --
 -- Indexes for table `ago_advertisement`
@@ -707,20 +335,6 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`PRODUCT_CODE`);
 
 --
--- Indexes for table `product_category`
---
-ALTER TABLE `product_category`
-  ADD UNIQUE KEY `CATEGORY_NAME` (`CATEGORY_NAME`),
-  ADD KEY `product_category_ibfk_1` (`PRODUCT_CODE`),
-  ADD KEY `CATEGORY_ID` (`CATEGORY_ID`);
-
---
--- Indexes for table `property_advertisement`
---
-ALTER TABLE `property_advertisement`
-  ADD KEY `ADV_PROP__ID` (`ADV_ID`);
-
---
 -- Indexes for table `system_configuration`
 --
 ALTER TABLE `system_configuration`
@@ -736,35 +350,6 @@ ALTER TABLE `vehicle_advertisement`
   ADD KEY `FK_VEHICLE_ADVERTISEMENT_MOEL_ID` (`MODEL_ID`);
 
 --
--- Indexes for table `vehicle_brand`
---
-ALTER TABLE `vehicle_brand`
-  ADD PRIMARY KEY (`brand_id`);
-
---
--- Indexes for table `vehicle_modelx`
---
-ALTER TABLE `vehicle_modelx`
-  ADD PRIMARY KEY (`MODEL_ID`),
-  ADD KEY `FK_BRAND_ID` (`brand_id`);
-
---
--- Indexes for table `vehicle_type`
---
-ALTER TABLE `vehicle_type`
-  ADD PRIMARY KEY (`TYPE_ID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `product_category`
---
-ALTER TABLE `product_category`
-  MODIFY `CATEGORY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
-
---
 -- Constraints for dumped tables
 --
 
@@ -772,7 +357,7 @@ ALTER TABLE `product_category`
 -- Constraints for table `adv_image`
 --
 ALTER TABLE `adv_image`
-  ADD CONSTRAINT `FK_ADV_IMAGE_ADV_ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`);
+  ADD CONSTRAINT `FK_ADV_IMAGE_ADV_ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ago_advertisement`
@@ -790,43 +375,13 @@ ALTER TABLE `location_city`
   ADD CONSTRAINT `FK_LOCATION_CITY_DISTRICT` FOREIGN KEY (`DISTRICT_CODE`) REFERENCES `location_district` (`DISTRICT_CODE`);
 
 --
--- Constraints for table `product_category`
---
-ALTER TABLE `product_category`
-  ADD CONSTRAINT `product_category_ibfk_1` FOREIGN KEY (`PRODUCT_CODE`) REFERENCES `product` (`PRODUCT_CODE`) ON DELETE CASCADE;
-
---
--- Constraints for table `property_advertisement`
---
-ALTER TABLE `property_advertisement`
-  ADD CONSTRAINT `ADV_PROP__ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `vehicle_advertisement`
 --
 ALTER TABLE `vehicle_advertisement`
-  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_ADV_ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`),
-  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_BRAND_ID` FOREIGN KEY (`brand_id`) REFERENCES `vehicle_brand` (`brand_id`),
-  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_MOEL_ID` FOREIGN KEY (`MODEL_ID`) REFERENCES `vehicle_modelx` (`MODEL_ID`),
-  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_TYPE_ID` FOREIGN KEY (`TYPE_ID`) REFERENCES `vehicle_type` (`TYPE_ID`);
-
---
--- Constraints for table `vehicle_brand`
---
-ALTER TABLE `vehicle_brand`
-  ADD CONSTRAINT `FK_vehicle_brand_1` FOREIGN KEY (`TYPE_ID`) REFERENCES `vehicle_type` (`TYPE_ID`);
-
---
--- Constraints for table `vehicle_modelx`
---
-ALTER TABLE `vehicle_modelx`
-  ADD CONSTRAINT `FK_BRAND_ID` FOREIGN KEY (`brand_id`) REFERENCES `vehicle_brand` (`brand_id`);
-
---
--- Constraints for table `vehicle_type`
---
-ALTER TABLE `vehicle_type`
-  ADD CONSTRAINT `FK_CATE_TYPE` FOREIGN KEY (`TYPE_ID`) REFERENCES `product_category` (`CATEGORY_ID`);
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_ADV_ID` FOREIGN KEY (`ADV_ID`) REFERENCES `ago_advertisement` (`ADV_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_BRAND_ID` FOREIGN KEY (`brand_id`) REFERENCES `vehicle_brand` (`brand_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_MOEL_ID` FOREIGN KEY (`MODEL_ID`) REFERENCES `vehicle_modelx` (`MODEL_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_VEHICLE_ADVERTISEMENT_TYPE_ID` FOREIGN KEY (`TYPE_ID`) REFERENCES `vehicle_type` (`TYPE_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

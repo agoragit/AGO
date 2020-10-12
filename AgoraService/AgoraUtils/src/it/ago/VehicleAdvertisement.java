@@ -14,11 +14,7 @@ import java.util.List;
 @XmlType(name = "VehicleAdvertisement", namespace = "http://lass")
 public class VehicleAdvertisement extends Advertisement
 {
-	//private long advId;
-	private int v_typeId;
-	private int v_brandId;
-	private int v_modelId;
-	private int v_modelYear;
+
 	private String v_condition;
 	private String v_transmission;
 	private String v_bodyType;
@@ -90,31 +86,31 @@ public class VehicleAdvertisement extends Advertisement
 	{
 		String str = "INSERT INTO VEHICLE_ADVERTISEMENT ( "
 				+ "ADV_ID, "
-				+ "TYPE_ID, "
-				+ "BRAND_ID, "
-				+ "MODEL_ID, "
-				+ "MODEL_YEAR, "
+//				+ "TYPE_ID, "
+//				+ "BRAND_ID, "
+//				+ "MODEL_ID, "
+//				+ "MODEL_YEAR, "
 				+ "V_CONDITION, "
 				+ "TRANSMISSION, "
 				+ "BODY_TYPE, "
 				+ "FUEL_TYPE, "
 				+ "ENGINE_CAPACITY, "
 				+ "MILAGE, "
-				+ "DESCRIPTION )VALUES(?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "DESCRIPTION )VALUES(?,?,?,?,?,?,?,? )";
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setLong( ++count, super.getAdvId() );
-		ps.setInt( ++count, this.v_typeId );
-		ps.setInt( ++count, this.v_brandId );
-		ps.setInt( ++count, this.v_modelId );
-		if ( this.v_modelYear == -1 )
-		{
-			ps.setNull( ++count, java.sql.Types.NUMERIC );
-		}
-		else
-		{
-			ps.setInt( ++count, this.v_modelYear );
-		}
+//		ps.setInt( ++count, this.v_typeId );
+//		ps.setInt( ++count, this.v_brandId );
+//		ps.setInt( ++count, this.v_modelId );
+//		if ( this.v_modelYear == -1 )
+//		{
+//			ps.setNull( ++count, java.sql.Types.NUMERIC );
+//		}
+//		else
+//		{
+//			ps.setInt( ++count, this.v_modelYear );
+//		}
 		if ( this.v_condition == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
@@ -196,10 +192,10 @@ public class VehicleAdvertisement extends Advertisement
 	public void update( Connection con ) throws SQLException
 	{
 		String str = "UPDATE VEHICLE_ADVERTISEMENT SET "
-				+ "TYPE_ID = ?, "
-				+ "BRAND_ID = ?, "
-				+ "MODEL_ID = ?, "
-				+ "MODEL_YEAR = ?, "
+//				+ "TYPE_ID = ?, "
+//				+ "BRAND_ID = ?, "
+//				+ "MODEL_ID = ?, "
+//				+ "MODEL_YEAR = ?, "
 				+ "V_CONDITION = ?, "
 				+ "TRANSMISSION = ?, "
 				+ "BODY_TYPE = ?, "
@@ -211,17 +207,17 @@ public class VehicleAdvertisement extends Advertisement
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
-		ps.setInt( ++count, this.v_typeId );
-		ps.setInt( ++count, this.v_brandId );
-		ps.setInt( ++count, this.v_modelId );
-		if ( this.v_modelYear == -1 )
-		{
-			ps.setNull( ++count, java.sql.Types.NUMERIC );
-		}
-		else
-		{
-			ps.setInt( ++count, this.v_modelYear );
-		}
+//		ps.setInt( ++count, this.v_typeId );
+//		ps.setInt( ++count, this.v_brandId );
+//		ps.setInt( ++count, this.v_modelId );
+//		if ( this.v_modelYear == -1 )
+//		{
+//			ps.setNull( ++count, java.sql.Types.NUMERIC );
+//		}
+//		else
+//		{
+//			ps.setInt( ++count, this.v_modelYear );
+//		}
 		if ( this.v_condition == null )
 		{
 			ps.setNull( ++count, java.sql.Types.VARCHAR );
@@ -291,17 +287,17 @@ public class VehicleAdvertisement extends Advertisement
 		super.load( rs, con, level );
 		this._status = Savable.UNCHANGED;
 		//this.advId = rs.getLong( "ADV_ID" );
-		this.v_typeId = rs.getInt( "TYPE_ID" );
-		this.v_brandId = rs.getInt( "BRAND_ID" );
-		this.v_modelId = rs.getInt( "MODEL_ID" );
-		if ( rs.getObject( "MODEL_YEAR" ) == null )
-		{
-			this.v_modelYear = -1;
-		}
-		else
-		{
-			this.v_modelYear = rs.getInt( "MODEL_YEAR" );
-		}
+//		this.v_typeId = rs.getInt( "TYPE_ID" );
+//		this.v_brandId = rs.getInt( "BRAND_ID" );
+//		this.v_modelId = rs.getInt( "MODEL_ID" );
+//		if ( rs.getObject( "MODEL_YEAR" ) == null )
+//		{
+//			this.v_modelYear = -1;
+//		}
+//		else
+//		{
+//			this.v_modelYear = rs.getInt( "MODEL_YEAR" );
+//		}
 		if ( rs.getObject( "V_CONDITION" ) == null )
 		{
 			this.v_condition = null;
@@ -371,45 +367,45 @@ public class VehicleAdvertisement extends Advertisement
 	//	this.advId = advId;
 	//}
 
-	public int getTypeId()
-	{
-		return this.v_typeId;
-	}
+//	public int getTypeId()
+//	{
+//		return this.v_typeId;
+//	}
 
-	public void setTypeId( int typeId )
-	{
-		this.v_typeId = typeId;
-	}
+//	public void setTypeId( int typeId )
+//	{
+//		this.v_typeId = typeId;
+//	}
 
-	public int getBrandId()
-	{
-		return this.v_brandId;
-	}
+//	public int getBrandId()
+//	{
+//		return this.v_brandId;
+//	}
 
-	public void setBrandId( int brandId )
-	{
-		this.v_brandId = brandId;
-	}
+//	public void setBrandId( int brandId )
+//	{
+//		this.v_brandId = brandId;
+//	}
 
-	public int getModelId()
-	{
-		return this.v_modelId;
-	}
+//	public int getModelId()
+//	{
+//		return this.v_modelId;
+//	}
 
-	public void setModelId( int modelId )
-	{
-		this.v_modelId = modelId;
-	}
+//	public void setModelId( int modelId )
+//	{
+//		this.v_modelId = modelId;
+//	}
 
-	public int getModelYear()
-	{
-		return this.v_modelYear;
-	}
+//	public int getModelYear()
+//	{
+//		return this.v_modelYear;
+//	}
 
-	public void setModelYear( int modelYear )
-	{
-		this.v_modelYear = modelYear;
-	}
+//	public void setModelYear( int modelYear )
+//	{
+//		this.v_modelYear = modelYear;
+//	}
 
 	public String getCondition()
 	{

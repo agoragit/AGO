@@ -68,16 +68,16 @@ public class AdvertisementCreator
 		VehicleAdvertisement vehicleAdv = ( VehicleAdvertisement ) AdvertisementCreator.createAdvertisement( Constants.ADV_PROD_VEHICLE );
 		mapSuper( uriInfo, vehicleAdv  );
 		vehicleAdv.setBodyType( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_BODY_TYPE ) );
-		vehicleAdv.setBrandId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_BRAND_ID ));
+//		vehicleAdv.setBrandId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_BRAND_ID ));
 		vehicleAdv.setCondition( UriInfoUtils.getStringValue( uriInfo,Constants.PARAM_VEHI_CONDITION ) );
 		vehicleAdv.setDescription( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_DESCRIPTION ) );
 		vehicleAdv.setEngineCapacity( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY) );
 		vehicleAdv.setFuelType( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_FUEL_TYPE ) );
 		vehicleAdv.setMilage( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_VEHI_MILLAGE ) );
-		vehicleAdv.setModelId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_MODEL_ID ) );
-		vehicleAdv.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR ) );
+//		vehicleAdv.setModelId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_MODEL_ID ) );
+//		vehicleAdv.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR ) );
 		vehicleAdv.setTransmission( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_TRANSMISSION ));
-		vehicleAdv.setTypeId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_TYPE_ID) );
+//		vehicleAdv.setTypeId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_TYPE_ID) );
 		vehicleAdv.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
 
 		return vehicleAdv;
@@ -87,7 +87,6 @@ public class AdvertisementCreator
 	{
 		PropertyAvertisement propertyAdv = ( PropertyAvertisement ) AdvertisementCreator.createAdvertisement( Constants.ADV_PROD_PROPERTY );
 		mapSuper( uriInfo, propertyAdv  );
-		propertyAdv.setPropertyType( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_TYPE_ID ) );
 		propertyAdv.setBeds( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_BEDS ) );
 		propertyAdv.setBath( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_BATH ) );
 		propertyAdv.setHouseSize( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_PROP_HOUSE_SIZE ) );

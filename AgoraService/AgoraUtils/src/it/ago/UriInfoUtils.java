@@ -81,6 +81,15 @@ public class UriInfoUtils
 		}
 		return true;
 	}
+	public static boolean isNotZero( UriInfo uriInfo, String parameter )
+	{
+		int val = getIntValue( uriInfo,parameter );
+		if( val < 1)
+		{
+			return false;
+		}
+		return true;
+	}
 	private static String getInQuaryValueFromCommaSeparatedValues( String value )
 	{
 		if(value == null || value.length() == 0)

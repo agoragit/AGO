@@ -81,21 +81,24 @@ public class DBQuearies
 			sb.append( " AND O.TYPE         = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_KEYWORDS ) )
 			sb.append( generateKeywordsQueary( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_KEYWORDS )) );
-
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_BRAND_ID) )
+			sb.append( " AND AA.BRAND_ID         = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_MODEL_ID) )
+			sb.append( " AND AA.MODEL_ID         = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_MODEL_YEAR_FROM) )
+			sb.append( " AND VA.MODEL_YEAR      >= ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_MODEL_YEAR_TO) )
+			sb.append( " AND VA.MODEL_YEAR      <= ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_1) && UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_1))
+			sb.append( " AND AA.TYPE_LEVEL_1         = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_2) && UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_2) )
+			sb.append( " AND AA.TYPE_LEVEL_2         = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_3) && UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_3))
+			sb.append( " AND AA.TYPE_LEVEL_3         = ? " );
 		// add product wise filter columns here
 		//_________________________________________________
 		if ( isAll || advTypes.contains( Constants.ADV_PROD_VEHICLE ) )
 		{
-			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_TYPE_ID) )
-				sb.append( " AND VA.TYPE_ID         = ? " );
-			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_BRAND_ID) )
-				sb.append( " AND VA.BRAND_ID         = ? " );
-			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_MODEL_ID) )
-				sb.append( " AND VA.MODEL_ID         = ? " );
-			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR_FROM) )
-				sb.append( " AND VA.MODEL_YEAR      >= ? " );
-			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR_TO) )
-				sb.append( " AND VA.MODEL_YEAR      <= ? " );
 			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_CONDITION) )
 				sb.append( " AND VA.V_CONDITION     IN (?) " );
 			if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_VEHI_TRANSMISSION) )
@@ -137,7 +140,7 @@ public class DBQuearies
 				sb.append( " AND PA.PARKING >= ? " );
 		}
 		//___________________________________________________
-		sb.append( " ORDER BY AA.ADV_ID DESC LIMIT ?,?" ); //offset, rowcount
+		sb.append( " ORDER BY AA.ADV_ID DESC LIMIT ?,? " ); //offset, rowcount
 
 		return sb.toString();
 	}
@@ -174,15 +177,20 @@ public class DBQuearies
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.BOOLEAN, uriInfo, Constants.PARAM_ADV_WANTED_TO_BUY);
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_OWNER_TYPE );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_ADV_KEYWORDS );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_BRAND_ID );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_MODEL_ID);
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_MODEL_YEAR_FROM );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_MODEL_YEAR_TO );
+		if( UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_1 ) )
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_1);
+		if( UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_2 ) )
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_2 );
+		if( UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_3 ) )
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_3 );
 
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )
 	{
-		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_TYPE_ID );
-		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_BRAND_ID );
-		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_ID );
-		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_FROM );
-		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_VEHI_MODEL_YEAR_TO );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_CONDITION );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_TRANSMISSION );
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.VARCHAR, uriInfo, Constants.PARAM_VEHI_BODY_TYPE );

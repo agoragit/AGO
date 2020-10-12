@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 public class PropertyAvertisement extends Advertisement
 {
 // 	private long advId;
-	private int propertyType;
+//	private int propertyType;
 	private int beds;
 	private int bath;
 	private float houseSize;
@@ -81,18 +81,18 @@ public class PropertyAvertisement extends Advertisement
 	{
 		String str = "INSERT INTO ADV_PROPERTY ( " 
  		 + "ADV_ID, "
-		 + "PROPERTY_TYPE, "
+//		 + "PROPERTY_TYPE, "
 		 + "BEDS, "
 		 + "BATH, "
 		 + "HOUSE_SIZE, "
 		 + "LAND_SIZE, "
 		 + "DESCRIPTION, "
 		 + "PARKING, "
-		 + "DISTANCE_TO_MAIN_RD )VALUES(?,?,?,?,?,?,?,?,? )"; 
+		 + "DISTANCE_TO_MAIN_RD )VALUES(?,?,?,?,?,?,?,? )";
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
 		ps.setLong( ++count, super.getAdvId() );
-		ps.setInt( ++count, this.propertyType );
+//		ps.setInt( ++count, this.propertyType );
 		if( this.beds == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
@@ -173,7 +173,7 @@ public class PropertyAvertisement extends Advertisement
 	public void update( Connection con ) throws SQLException
 	{
 		String str = "UPDATE ADV_PROPERTY SET "
-		 + "PROPERTY_TYPE = ?, "
+//		 + "PROPERTY_TYPE = ?, "
 		 + "BEDS = ?, "
 		 + "BATH = ?, "
 		 + "HOUSE_SIZE = ?, "
@@ -184,7 +184,7 @@ public class PropertyAvertisement extends Advertisement
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
-		ps.setInt( ++count, this.propertyType );
+//		ps.setInt( ++count, this.propertyType );
 		if( this.beds == -1 )
 		{
 			ps.setNull( ++count, java.sql.Types.NUMERIC );
@@ -253,7 +253,7 @@ public class PropertyAvertisement extends Advertisement
 	{
 		this.status = Savable.UNCHANGED;
 //		this.advId = rs.getLong( "ADV_ID" );
-		this.propertyType = rs.getInt( "PROPERTY_TYPE" );
+//		this.propertyType = rs.getInt( "PROPERTY_TYPE" );
 		if( rs.getObject( "BEDS" ) == null )
 		{
 			this.beds = -1;
@@ -324,15 +324,15 @@ public class PropertyAvertisement extends Advertisement
 //		this.advId = advId;
 //	}
 
-	public int getPropertyType()
-	{
-		return this.propertyType;
-	}
+//	public int getPropertyType()
+//	{
+//		return this.propertyType;
+//	}
 
-	public void setPropertyType( int propertyType )
-	{
-		this.propertyType = propertyType;
-	}
+//	public void setPropertyType( int propertyType )
+//	{
+//		this.propertyType = propertyType;
+//	}
 
 	public int getBeds()
 	{

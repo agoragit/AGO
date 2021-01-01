@@ -61,10 +61,6 @@ public class AdvertisementCreator
 		advertisement.setRent( UriInfoUtils.getBooleanValue( uriInfo, Constants.PARAM_ADV_RENT ) );
 		advertisement.setWantedToBuy( UriInfoUtils.getBooleanValue( uriInfo, Constants.PARAM_ADV_WANTED_TO_BUY ) );
 		advertisement.setKeyWords( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_KEYWORDS) );
-		advertisement.setModelId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_MODEL_ID ) );
-		advertisement.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_ADV_MODEL_YEAR ) );
-		advertisement.setBrandId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_BRAND_ID ));
-		advertisement.setCategoryId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_CATEGORY_ID) );
 		advertisement.setType_level_1( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_1) );
 		advertisement.setType_level_2( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_2) );
 		advertisement.setType_level_3( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_3) );
@@ -83,7 +79,10 @@ public class AdvertisementCreator
 		vehicleAdv.setMilage( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_VEHI_MILLAGE ) );
 		vehicleAdv.setTransmission( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_TRANSMISSION ));
 		vehicleAdv.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
-
+		vehicleAdv.setModelId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_MODEL_ID ) );
+		vehicleAdv.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR ) );
+		vehicleAdv.setBrandId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_BRAND_ID ));
+		vehicleAdv.setTypeId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_TYPE_ID) );
 		return vehicleAdv;
 
 	}

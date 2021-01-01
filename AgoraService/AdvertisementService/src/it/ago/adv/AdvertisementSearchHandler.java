@@ -2,6 +2,7 @@ package it.ago.adv;
 
 import it.ago.Advertisement;
 import it.ago.AgoError;
+import it.ago.VehicleAdvertisement;
 import it.ago.system.SystemConfig;
 import it.ago.utils.DBConnection;
 import org.json.JSONException;

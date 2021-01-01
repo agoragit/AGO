@@ -38,19 +38,14 @@ public class Constants
 	public static final String PARAM_ADV_KEYWORDS = "keywords";
 	public static final String PARAM_ADV_DESCRIPTION = "advDescription";
 	public static final String PARAM_OWNER_TYPE = "ownerType";
-	public static final String PARAM_ADV_CATEGORY_ID = "categoryId";
 
 	public static final String PARAM_ADV_QUARY_OFFSET = "offset";
 	public static final String PARAM_ADV_QUARY_ROW_COUNT= "rowCount";
-	public static final String PARAM_ADV_BRAND_ID  = "brandId";
-	public static final String PARAM_ADV_MODEL_ID = "modelId";
-	public static final String PARAM_ADV_MODEL_YEAR = "modelYear";
 	public static final String PARAM_ADV_TYPE_LEVEL_1 = "typeLevel1";
 	public static final String PARAM_ADV_TYPE_LEVEL_2 = "typeLevel2";
 	public static final String PARAM_ADV_TYPE_LEVEL_3 = "typeLevel3";
 //	public static final String PARAM_ADV_TYPE_ID = "advTypeId";
-	public static final String PARAM_ADV_MODEL_YEAR_TO = "modelYearTo";
-	public static final String PARAM_ADV_MODEL_YEAR_FROM = "modelYearFrom";
+
 
 
 	//Vehicle uri params
@@ -61,7 +56,12 @@ public class Constants
 	public static final String PARAM_VEHI_ENGINE_CAPACITY = "vEngineCapacity";
 	public static final String PARAM_VEHI_MILLAGE = "vMillage";
 	public static final String PARAM_VEHI_DESCRIPTION = "vDescription";
-
+	public static final String PARAM_VEHI_BRAND_ID  = "vBrandId";
+	public static final String PARAM_VEHI_MODEL_ID = "vModelId";
+	public static final String PARAM_VEHI_MODEL_YEAR = "vModelYear";
+	public static final String PARAM_VEHI_TYPE_ID = "vTypeId";
+	public static final String PARAM_VEHI_MODEL_YEAR_TO = "vModelYearTo";
+	public static final String PARAM_VEHI_MODEL_YEAR_FROM = "vModelYearFrom";
 	public static final String PARAM_VEHI_ENGINE_CAPACITY_FROM = "vEngineCapacityFrom";
 	public static final String PARAM_VEHI_ENGINE_CAPACITY_TO = "vEngineCapacityTo";
 	public static final String PARAM_VEHI_MILLAGE_FROM = "vMillageFrom";

@@ -35,14 +35,10 @@ public abstract class Advertisement extends Savable
 	private boolean isRent;
 	private boolean isWantedToBuy;
 	private String keyWords;
-	private int brandId;
-	private int modelId;
-	private int modelYear;
 	private int type_level_1;
 	private int type_level_2;
 	private int type_level_3;
 	private String advDescription;
-	private int categoryId;
 
 
 	public Advertisement()
@@ -131,8 +127,8 @@ public abstract class Advertisement extends Savable
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
 				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY,KEYWORDS, "
-				+ "BRAND_ID, MODEL_ID, MODEL_YEAR, TYPE_LEVEL_1, TYPE_LEVEL_2, TYPE_LEVEL_3, DESCRIPTION, CATEGORY_ID "
-				+" )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "TYPE_LEVEL_1, TYPE_LEVEL_2, TYPE_LEVEL_3, DESCRIPTION "
+				+" )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -173,14 +169,10 @@ public abstract class Advertisement extends Savable
 		{
 			ps.setString( ++count, this.keyWords );
 		}
-		ps.setInt( ++count, this.brandId );
-		ps.setInt( ++count, this.modelId );
-		ps.setInt( ++count, this.modelYear );
 		ps.setInt( ++count, this.type_level_1 );
 		ps.setInt( ++count, this.type_level_2 );
 		ps.setInt( ++count, this.type_level_3 );
 		ps.setString( ++count, this.advDescription );
-		ps.setInt( ++count, this.categoryId );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -217,7 +209,7 @@ public abstract class Advertisement extends Savable
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
 				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ?, KEYWORDS = ?, "
-				+ "BRAND_ID= ?, MODEL_ID= ?, MODEL_YEAR= ?, TYPE_LEVEL_1= ?, TYPE_LEVEL_2= ?, TYPE_LEVEL_3= ?, DESCRIPTION = ?, CATEGORY_ID=? "
+				+ " TYPE_LEVEL_1= ?, TYPE_LEVEL_2= ?, TYPE_LEVEL_3= ?, DESCRIPTION = ? "
 				+ " WHERE "
 				+ " ADV_ID = ? ";
 
@@ -259,9 +251,6 @@ public abstract class Advertisement extends Savable
 		{
 			ps.setString( ++count, this.keyWords );
 		}
-		ps.setInt( ++count, this.brandId );
-		ps.setInt( ++count, this.modelId );
-		ps.setInt( ++count, this.modelYear );
 		ps.setInt( ++count, this.type_level_1 );
 		ps.setInt( ++count, this.type_level_2 );
 		ps.setInt( ++count, this.type_level_3 );
@@ -273,8 +262,6 @@ public abstract class Advertisement extends Savable
 		{
 			ps.setString( ++count, this.advDescription );
 		}
-		ps.setInt( ++count, this.categoryId );
-
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -323,14 +310,11 @@ public abstract class Advertisement extends Savable
 		{
 			this.keyWords = rs.getString( "KEYWORDS" );
 		}
-		this.brandId =  rs.getInt( "BRAND_ID" );
-		this.modelId =  rs.getInt( "MODEL_ID" );
-		this.modelYear =  rs.getInt( "MODEL_YEAR" );
 		this.type_level_1 =  rs.getInt( "TYPE_LEVEL_1" );
 		this.type_level_2 =  rs.getInt( "TYPE_LEVEL_2" );
 		this.type_level_3 =  rs.getInt( "TYPE_LEVEL_3" );
 		this.advDescription = rs.getString( "DESCRIPTION" );
-		this.categoryId = rs.getInt( "CATEGORY_ID" );
+
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -558,45 +542,6 @@ public abstract class Advertisement extends Savable
 		this.keyWords = keyWords;
 	}
 
-	public int getCategoryId()
-	{
-		return categoryId;
-	}
-
-	public void setCategoryId( int categoryId )
-	{
-		this.categoryId = categoryId;
-	}
-
-	public int getBrandId()
-	{
-		return brandId;
-	}
-
-	public void setBrandId( int brandId )
-	{
-		this.brandId = brandId;
-	}
-
-	public int getModelId()
-	{
-		return modelId;
-	}
-
-	public void setModelId( int modelId )
-	{
-		this.modelId = modelId;
-	}
-
-	public int getModelYear()
-	{
-		return modelYear;
-	}
-
-	public void setModelYear( int modelYear )
-	{
-		this.modelYear = modelYear;
-	}
 
 	public int getType_level_1()
 	{

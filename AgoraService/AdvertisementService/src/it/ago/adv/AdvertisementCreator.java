@@ -61,6 +61,14 @@ public class AdvertisementCreator
 		advertisement.setRent( UriInfoUtils.getBooleanValue( uriInfo, Constants.PARAM_ADV_RENT ) );
 		advertisement.setWantedToBuy( UriInfoUtils.getBooleanValue( uriInfo, Constants.PARAM_ADV_WANTED_TO_BUY ) );
 		advertisement.setKeyWords( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_ADV_KEYWORDS) );
+		advertisement.setModelId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_MODEL_ID ) );
+		advertisement.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_ADV_MODEL_YEAR ) );
+		advertisement.setBrandId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_BRAND_ID ));
+		advertisement.setCategoryId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_CATEGORY_ID) );
+		advertisement.setType_level_1( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_1) );
+		advertisement.setType_level_2( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_2) );
+		advertisement.setType_level_3( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_3) );
+		advertisement.setAdvDescription( UriInfoUtils.getStringValue(uriInfo,Constants.PARAM_ADV_DESCRIPTION));
 
 	}
 	public static VehicleAdvertisement generateVehicleAdvertisement( UriInfo uriInfo )
@@ -68,16 +76,12 @@ public class AdvertisementCreator
 		VehicleAdvertisement vehicleAdv = ( VehicleAdvertisement ) AdvertisementCreator.createAdvertisement( Constants.ADV_PROD_VEHICLE );
 		mapSuper( uriInfo, vehicleAdv  );
 		vehicleAdv.setBodyType( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_BODY_TYPE ) );
-//		vehicleAdv.setBrandId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_BRAND_ID ));
 		vehicleAdv.setCondition( UriInfoUtils.getStringValue( uriInfo,Constants.PARAM_VEHI_CONDITION ) );
 		vehicleAdv.setDescription( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_DESCRIPTION ) );
 		vehicleAdv.setEngineCapacity( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_ENGINE_CAPACITY) );
 		vehicleAdv.setFuelType( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_FUEL_TYPE ) );
 		vehicleAdv.setMilage( UriInfoUtils.getLongValue( uriInfo, Constants.PARAM_VEHI_MILLAGE ) );
-//		vehicleAdv.setModelId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_MODEL_ID ) );
-//		vehicleAdv.setModelYear( UriInfoUtils.getIntValue( uriInfo,Constants.PARAM_VEHI_MODEL_YEAR ) );
 		vehicleAdv.setTransmission( UriInfoUtils.getStringValue( uriInfo, Constants.PARAM_VEHI_TRANSMISSION ));
-//		vehicleAdv.setTypeId( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_VEHI_TYPE_ID) );
 		vehicleAdv.setStatus( UriInfoUtils.getIntValue( uriInfo, Constants.PARAM_ADV_SAVABLE_STATUS ) );
 
 		return vehicleAdv;

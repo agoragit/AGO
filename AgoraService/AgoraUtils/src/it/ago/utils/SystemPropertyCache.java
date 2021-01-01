@@ -104,7 +104,7 @@ public class SystemPropertyCache
 	{
 		PreparedStatement ps = null;
 		ResultSet rs  = null;
-		cashProductsList.clear();
+		locationDistricts.clear();
 		try
 		{
 			con = DBConnection.getConnection( DBConnection.MYSQL_CONNECTION_TYPE );

@@ -86,15 +86,17 @@ public class DBQuearies
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_MODEL_ID) )
 			sb.append( " AND AA.MODEL_ID         = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_MODEL_YEAR_FROM) )
-			sb.append( " AND VA.MODEL_YEAR      >= ? " );
+			sb.append( " AND AA.MODEL_YEAR      >= ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_MODEL_YEAR_TO) )
-			sb.append( " AND VA.MODEL_YEAR      <= ? " );
+			sb.append( " AND AA.MODEL_YEAR      <= ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_1) && UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_1))
 			sb.append( " AND AA.TYPE_LEVEL_1         = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_2) && UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_2) )
 			sb.append( " AND AA.TYPE_LEVEL_2         = ? " );
 		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_3) && UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_3))
 			sb.append( " AND AA.TYPE_LEVEL_3         = ? " );
+		if( UriInfoUtils.isNotNull( uriInfo,Constants.PARAM_ADV_CATEGORY_ID) )
+			sb.append( " AND AA.CATEGORY_ID      <= ? " );
 		// add product wise filter columns here
 		//_________________________________________________
 		if ( isAll || advTypes.contains( Constants.ADV_PROD_VEHICLE ) )
@@ -187,6 +189,8 @@ public class DBQuearies
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_2 );
 		if( UriInfoUtils.isNotZero( uriInfo,Constants.PARAM_ADV_TYPE_LEVEL_3 ) )
 		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_TYPE_LEVEL_3 );
+		count = UriInfoUtils.setPreparedValue( ps, count, Types.INTEGER, uriInfo, Constants.PARAM_ADV_CATEGORY_ID );
+
 
 		//------- vehicle adv filter data
 		if ( isAll || advTypesList.contains( Constants.ADV_PROD_VEHICLE ) )

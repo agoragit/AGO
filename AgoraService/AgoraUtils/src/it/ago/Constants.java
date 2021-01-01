@@ -38,6 +38,7 @@ public class Constants
 	public static final String PARAM_ADV_KEYWORDS = "keywords";
 	public static final String PARAM_ADV_DESCRIPTION = "advDescription";
 	public static final String PARAM_OWNER_TYPE = "ownerType";
+	public static final String PARAM_ADV_CATEGORY_ID = "categoryId";
 
 	public static final String PARAM_ADV_QUARY_OFFSET = "offset";
 	public static final String PARAM_ADV_QUARY_ROW_COUNT= "rowCount";

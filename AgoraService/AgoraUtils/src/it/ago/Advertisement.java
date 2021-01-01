@@ -42,6 +42,7 @@ public abstract class Advertisement extends Savable
 	private int type_level_2;
 	private int type_level_3;
 	private String advDescription;
+	private int categoryId;
 
 
 	public Advertisement()
@@ -130,8 +131,8 @@ public abstract class Advertisement extends Savable
 				+ "LATITUDE, "
 				+ "CITY_CODE, "
 				+ "PRICE, ADDRESS, RENT, WANTED_TO_BUY,KEYWORDS, "
-				+ "BRAND_ID, MODEL_ID, MODEL_YEAR, TYPE_LEVEL_1, TYPE_LEVEL_2, TYPE_LEVEL_3, DESCRIPTION "
-				+" )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
+				+ "BRAND_ID, MODEL_ID, MODEL_YEAR, TYPE_LEVEL_1, TYPE_LEVEL_2, TYPE_LEVEL_3, DESCRIPTION, CATEGORY_ID "
+				+" )VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 		int count = 0;
 		setNextAdvId( con );
 		PreparedStatement ps = con.prepareStatement( str );
@@ -179,6 +180,7 @@ public abstract class Advertisement extends Savable
 		ps.setInt( ++count, this.type_level_2 );
 		ps.setInt( ++count, this.type_level_3 );
 		ps.setString( ++count, this.advDescription );
+		ps.setInt( ++count, this.categoryId );
 		ps.execute();
 		DBConnection.close( ps );
 	}
@@ -215,7 +217,7 @@ public abstract class Advertisement extends Savable
 				+ "LATITUDE = ?, "
 				+ "CITY_CODE = ?, "
 				+ "PRICE = ?, ADDRESS = ?, RENT = ?, WANTED_TO_BUY= ?, KEYWORDS = ?, "
-				+ "BRAND_ID= ?, MODEL_ID= ?, MODEL_YEAR= ?, TYPE_LEVEL_1= ?, TYPE_LEVEL_2= ?, TYPE_LEVEL_3= ?, DESCRIPTION = ? "
+				+ "BRAND_ID= ?, MODEL_ID= ?, MODEL_YEAR= ?, TYPE_LEVEL_1= ?, TYPE_LEVEL_2= ?, TYPE_LEVEL_3= ?, DESCRIPTION = ?, CATEGORY_ID=? "
 				+ " WHERE "
 				+ " ADV_ID = ? ";
 
@@ -271,6 +273,8 @@ public abstract class Advertisement extends Savable
 		{
 			ps.setString( ++count, this.advDescription );
 		}
+		ps.setInt( ++count, this.categoryId );
+
 		ps.setLong( ++count, this.advId );
 		ps.execute();
 		DBConnection.close( ps );
@@ -326,7 +330,7 @@ public abstract class Advertisement extends Savable
 		this.type_level_2 =  rs.getInt( "TYPE_LEVEL_2" );
 		this.type_level_3 =  rs.getInt( "TYPE_LEVEL_3" );
 		this.advDescription = rs.getString( "DESCRIPTION" );
-
+		this.categoryId = rs.getInt( "CATEGORY_ID" );
 		this.status  =Savable.UNCHANGED;
 		loadImages(con);
 		if( level > 0 )
@@ -552,6 +556,16 @@ public abstract class Advertisement extends Savable
 	public void setKeyWords( String keyWords )
 	{
 		this.keyWords = keyWords;
+	}
+
+	public int getCategoryId()
+	{
+		return categoryId;
+	}
+
+	public void setCategoryId( int categoryId )
+	{
+		this.categoryId = categoryId;
 	}
 
 	public int getBrandId()

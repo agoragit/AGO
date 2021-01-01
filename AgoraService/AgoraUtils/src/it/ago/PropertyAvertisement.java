@@ -33,6 +33,7 @@ public class PropertyAvertisement extends Advertisement
 	 */
 	public void save( Connection con ) throws SQLException
 	{
+		super.save( con );
 		String action = "";
 		try
 		{
@@ -76,7 +77,7 @@ public class PropertyAvertisement extends Advertisement
 	 */
 	private void insert( Connection con ) throws SQLException
 	{
-		String str = "INSERT INTO ADV_PROPERTY ( " 
+		String str = "INSERT INTO property_advertisement ( "
  		 + "ADV_ID, "
 //		 + "PROPERTY_TYPE, "
 		 + "BEDS, "
@@ -149,7 +150,7 @@ public class PropertyAvertisement extends Advertisement
 	 */
 	public void delete( Connection con ) throws SQLException
 	{
-		String str = "DELETE FROM ADV_PROPERTY WHERE ADV_ID = ?";
+		String str = "DELETE FROM property_advertisement WHERE ADV_ID = ?";
 
 		int count = 0;
 		PreparedStatement ps = con.prepareStatement( str );
@@ -163,7 +164,7 @@ public class PropertyAvertisement extends Advertisement
 	 */
 	public void update( Connection con ) throws SQLException
 	{
-		String str = "UPDATE ADV_PROPERTY SET "
+		String str = "UPDATE property_advertisement SET "
 //		 + "PROPERTY_TYPE = ?, "
 		 + "BEDS = ?, "
 		 + "BATH = ?, "
@@ -236,6 +237,7 @@ public class PropertyAvertisement extends Advertisement
 	 */
 	public void load( ResultSet rs, Connection con, int level ) throws SQLException
 	{
+		super.load( rs,con,level );
 		this.status = Savable.UNCHANGED;
 
 		if( rs.getObject( "BEDS" ) == null )
@@ -376,6 +378,7 @@ public class PropertyAvertisement extends Advertisement
 	public void setStatus( int status )
 	{
 		this.status = status;
+		super.setStatus( status );
 	}
 
 }

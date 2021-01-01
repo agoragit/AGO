@@ -489,6 +489,7 @@ public class VehicleAdvertisement extends Advertisement
 	public void setStatus( int status )
 	{
 		this._status = status;
+		super.setStatus( status );
 	}
 
 	public void loadAll( ResultSet rs, ResultSet rsSuper, Connection con, int level ) throws SQLException
